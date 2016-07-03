@@ -27,3 +27,9 @@
 *.exe
 *.out
 *.app
+
+# SFML files
+SFML/
+
+# CLion files
+.idea/
