@@ -15,17 +15,17 @@ int main()
     // Create the main window
     sf::RenderWindow window(
 		sf::VideoMode(WINDOWW, WINDOWH), 
-		"Example 3"
+		"Example 4"
 	);
 	
 	int amountTilesX = WINDOWW / TILEW;
 	int amountTilesY = WINDOWH / TILEH;
 	
-	sf::Vertex vertexList[amountTilesX + 1][amountTilesY + 1];
+	sf::Vector2f vertexList[amountTilesX + 1][amountTilesY + 1];
 	
 	for (int i = 0; i < amountTilesX + 1; ++i) {
 		for (int j = 0; j < amountTilesY + 1; ++j) {
-			vertexList[i][j] = sf::Vertex(sf::Vector2f(i * TILEW, j * TILEH), sf::Color::White);
+			vertexList[i][j] = sf::Vector2f(i * TILEW, j * TILEH);
 		}
 	}
 	
@@ -33,8 +33,10 @@ int main()
     sf::Texture background;
 	
 	if (!background.loadFromFile(
-		"imgs/grass_random_grid.png"))
+		"imgs/grass-32.png"))
 		return EXIT_FAILURE;
+	
+	background.setRepeated(true);
 	
 	sf::VertexArray tiles[amountTilesY];
 	
@@ -44,11 +46,11 @@ int main()
 			(amountTilesX + 1) * 2);
 		
 		for (int i = 0, k = 0; i < amountTilesX; ++i, k += 2) {
-			tiles[j][k].position = &vertexList[i][j];
-			tiles[j][k + 1].position = &vertexList[i][j + 1];
+			tiles[j][k].position = vertexList[i][j];
+			tiles[j][k + 1].position = vertexList[i][j + 1];
 			
-			/*tiles[j][k].texCoords = vertexList[i][j];
-			tiles[j][k].texCoords = vertexList[i][j];*/
+			tiles[j][k].texCoords = vertexList[i][j];
+			tiles[j][k + 1].texCoords = vertexList[i][j + 1];
 		}
 	}
 

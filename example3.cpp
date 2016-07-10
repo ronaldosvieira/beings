@@ -32,7 +32,7 @@ int main()
 	TileMap map;
 	
 	if (!map.load(
-		"imgs/grass_random_grid.png", 
+		"imgs/grass-64.png", 
 		sf::Vector2u(64, 64), level, 10, 10))
 		return EXIT_FAILURE;
 	
