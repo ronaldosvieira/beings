@@ -33,7 +33,7 @@ int main()
     sf::Texture background;
 	
 	if (!background.loadFromFile(
-		"imgs/grass-32.png"))
+		"imgs/grass-me.png"))
 		return EXIT_FAILURE;
 	
 	background.setRepeated(true);

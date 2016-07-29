@@ -29,10 +29,10 @@ public:
                 sf::Vertex* quad = &m_vertices[(i + j * width) * 4];
 
                 // define its 4 corners
-                quad[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
-                quad[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
-                quad[2].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
-                quad[3].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
+                quad[0].position = cartToIso(sf::Vector2f(i * tileSize.x, j * tileSize.y)) + sf::Vector2f(tileSize.x * width, 0);
+                quad[1].position = cartToIso(sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y)) + sf::Vector2f(tileSize.x * width, 0);
+                quad[2].position = cartToIso(sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y)) + sf::Vector2f(tileSize.x * width, 0);
+                quad[3].position = cartToIso(sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y)) + sf::Vector2f(tileSize.x * width, 0);
 
                 // define its 4 texture coordinates
                 quad[0].texCoords = sf::Vector2f(tu * tileSize.x, tv * tileSize.y);
@@ -45,6 +45,20 @@ public:
     }
 
 private:
+
+    sf::Vector2f cartToIso(sf::Vector2f cart) {
+        return sf::Vector2f(
+            cart.x - cart.y,
+            (cart.x + cart.y) / 2.0f
+        );
+    }
+
+    sf::Vector2f isoToCart(sf::Vector2f iso) {
+        return sf::Vector2f(
+            (2.0f * iso.y + iso.x) / 2.0f,
+            (2.0f * iso.y - iso.x) / 2.0f
+        );
+    }
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {

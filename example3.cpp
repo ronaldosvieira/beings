@@ -3,10 +3,17 @@
 #include <iostream>
 #include "TileMap.cpp"
 
-#define WINDOW_WIDTH 840
+#define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 640
 
 using namespace std;
+
+sf::Vector2f cartToIso(sf::Vector2f cart) {
+	return sf::Vector2f(
+		cart.x - cart.y,
+		(cart.x + cart.y) / 2.0f
+	);
+}
 
 int main()
 {
@@ -32,18 +39,19 @@ int main()
 	TileMap map;
 	
 	if (!map.load(
-		"imgs/grass-64.png", 
+		"imgs/grass-64-black.png",
 		sf::Vector2u(64, 64), level, 10, 10))
 		return EXIT_FAILURE;
 	
-    // Load the background image
-    /*sf::Texture background;
-    if (!background.loadFromFile("imgs/natureza-13.jpg"))
+    sf::Texture cube;
+    if (!cube.loadFromFile("imgs/cube64.png"))
         return EXIT_FAILURE;
 	
-    sf::Sprite bgSprite(background);
-	bgSprite.setScale((float) WINDOW_WIDTH / background.getSize().x, 
-					  (float) WINDOW_HEIGHT / background.getSize().y);*/
+    sf::Sprite bgSprite(cube);
+    bgSprite.setOrigin(cube.getSize().x / 2, 0);
+    bgSprite.setPosition(cartToIso(sf::Vector2f(0 * 64, 1 * 64)) + sf::Vector2f(640, -16));
+	/*bgSprite.setScale((float) WINDOW_WIDTH / cube.getSize().x,
+					  (float) WINDOW_HEIGHT / cube.getSize().y);*/
 
     // Start the game loop
     while (window.isOpen())
@@ -62,6 +70,7 @@ int main()
 		
         // Draw the sprite
         window.draw(map);
+        window.draw(bgSprite);
 		
         // Update the window
         window.display();
