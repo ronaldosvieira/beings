@@ -39,17 +39,17 @@ int main()
 	TileMap map;
 	
 	if (!map.load(
-		"imgs/grass-64-black.png",
-		sf::Vector2u(64, 64), level, 10, 10))
+		"imgs/grass-32.png",
+		sf::Vector2u(32, 32), level, 10, 10))
 		return EXIT_FAILURE;
 	
     sf::Texture cube;
-    if (!cube.loadFromFile("imgs/cube64.png"))
+    if (!cube.loadFromFile("imgs/cube32.png"))
         return EXIT_FAILURE;
 	
     sf::Sprite bgSprite(cube);
     bgSprite.setOrigin(cube.getSize().x / 2, 0);
-    bgSprite.setPosition(cartToIso(sf::Vector2f(0 * 64, 1 * 64)) + sf::Vector2f(640, -16));
+    bgSprite.setPosition(cartToIso(sf::Vector2f(0 * 32, 1 * 32)) + sf::Vector2f(320, -8));
 	/*bgSprite.setScale((float) WINDOW_WIDTH / cube.getSize().x,
 					  (float) WINDOW_HEIGHT / cube.getSize().y);*/
 

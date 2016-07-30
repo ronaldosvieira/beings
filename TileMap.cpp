@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class TileMap : public sf::Drawable, public sf::Transformable
 {
