@@ -3,8 +3,8 @@
 #include <iostream>
 #include "TileMap.cpp"
 
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 640
+#define WINDOW_WIDTH 640
+#define WINDOW_HEIGHT 320
 
 using namespace std;
 
@@ -26,20 +26,20 @@ int main()
 	const int level[] = {
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+		0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+		0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+		0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
+		0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+		0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
+		0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
+		0, 0, 0, 0, 0, 1, 1, 1, 1, 1,
 	};
 	
 	TileMap map;
 	
 	if (!map.load(
-		"imgs/grass-32.png",
+		"imgs/tileset.png",
 		sf::Vector2u(32, 32), level, 10, 10))
 		return EXIT_FAILURE;
 	
@@ -49,7 +49,7 @@ int main()
 	
     sf::Sprite bgSprite(cube);
     bgSprite.setOrigin(cube.getSize().x / 2, 0);
-    bgSprite.setPosition(cartToIso(sf::Vector2f(0 * 32, 1 * 32)) + sf::Vector2f(320, -8));
+    bgSprite.setPosition(cartToIso(sf::Vector2f(3 * 32, 4 * 32)) + sf::Vector2f(320, -8));
 	/*bgSprite.setScale((float) WINDOW_WIDTH / cube.getSize().x,
 					  (float) WINDOW_HEIGHT / cube.getSize().y);*/
 
