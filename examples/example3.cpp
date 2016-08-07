@@ -3,8 +3,8 @@
 #include <iostream>
 #include "TileMap.cpp"
 
-#define WINDOW_WIDTH 640
-#define WINDOW_HEIGHT 320
+#define WINDOW_WIDTH 128
+#define WINDOW_HEIGHT 64
 
 using namespace std;
 
@@ -39,8 +39,8 @@ int main()
 	TileMap map;
 	
 	if (!map.load(
-		"imgs/tileset.png",
-		sf::Vector2u(32, 32), level, 10, 10))
+		"imgs/tileset32i.png",
+		sf::Vector2u(32, 32), level, 1, 1))
 		return EXIT_FAILURE;
 	
     sf::Texture cube;
@@ -49,9 +49,25 @@ int main()
 	
     sf::Sprite bgSprite(cube);
     bgSprite.setOrigin(cube.getSize().x / 2, 0);
-    bgSprite.setPosition(cartToIso(sf::Vector2f(3 * 32, 4 * 32)) + sf::Vector2f(320, -8));
+    bgSprite.setPosition(cartToIso(sf::Vector2f(1 * 32, 7 * 32)) + sf::Vector2f(320, -8));
 	/*bgSprite.setScale((float) WINDOW_WIDTH / cube.getSize().x,
 					  (float) WINDOW_HEIGHT / cube.getSize().y);*/
+
+    sf::Texture rabbit;
+	if (!rabbit.loadFromFile("imgs/rabbit32.png"))
+		return EXIT_FAILURE;
+
+	sf::Sprite rabbitSprite(rabbit);
+	rabbitSprite.setOrigin(rabbit.getSize().x / 2, 0);
+	rabbitSprite.setPosition(cartToIso(sf::Vector2f(3 * 32, 2 * 32)) + sf::Vector2f(320, -8));
+
+	sf::Texture tree;
+	if (!tree.loadFromFile("imgs/tree.png"))
+		return EXIT_FAILURE;
+
+	sf::Sprite treeSprite(tree);
+	treeSprite.setOrigin(tree.getSize().x / 2, tree.getSize().y - 32);
+	treeSprite.setPosition(cartToIso(sf::Vector2f(2 * 32, 5 * 32)) + sf::Vector2f(320, -8));
 
     // Start the game loop
     while (window.isOpen())
@@ -71,6 +87,8 @@ int main()
         // Draw the sprite
         window.draw(map);
         window.draw(bgSprite);
+        window.draw(rabbitSprite);
+        window.draw(treeSprite);
 		
         // Update the window
         window.display();
