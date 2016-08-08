@@ -9,10 +9,14 @@
 
 Game::Game()
 : mWindow(sf::VideoMode(640, 480), "SFML Application"),
+  mTexture(),
   mPlayer() {
-	mPlayer.setRadius(40.f);
+	if (!mTexture.loadFromFile("imgs/rabbit32.png")) {
+		// Handle loading error
+	}
+
+	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(100.f, 100.f);
-	mPlayer.setFillColor(sf::Color::Cyan);
 }
 
 void Game::run() {

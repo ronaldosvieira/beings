@@ -24,12 +24,13 @@ private:
 	void render();
 
 	sf::RenderWindow mWindow;
-	sf::CircleShape mPlayer;
-	float mIsMovingUp;
-	float mIsMovingDown;
-	float mIsMovingLeft;
-	float mIsMovingRight;
-	float playerSpeed = 50.f;
+	sf::Texture mTexture;
+	sf::Sprite mPlayer;
+	float mIsMovingUp = false;
+	float mIsMovingDown = false;
+	float mIsMovingLeft = false;
+	float mIsMovingRight = false;
+	float playerSpeed = 100.f;
 	sf::Time timePerFrame = sf::seconds(1.f / 60.f);
 };
 
