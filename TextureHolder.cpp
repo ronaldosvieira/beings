@@ -1,20 +1,20 @@
 /*
- * Animal.cpp
+ * TextureHolder.cpp
  *
- *  Created on: Aug 1, 2016
+ *  Created on: Aug 8, 2016
  *      Author: Ronaldo
  */
 
-#include "Animal.h"
+#include "TextureHolder.h"
 
 namespace Model {
 
-Animal::Animal() {
+TextureHolder::TextureHolder() {
 	// TODO Auto-generated constructor stub
 
 }
 
-Animal::~Animal() {
+TextureHolder::~TextureHolder() {
 	// TODO Auto-generated destructor stub
 }
 
