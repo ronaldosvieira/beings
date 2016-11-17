@@ -1,0 +1,109 @@
+package game;
+
+import static org.lwjgl.glfw.GLFW.glfwInit;
+import static org.lwjgl.glfw.GLFW.glfwTerminate;
+import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.glClear;
+import static org.lwjgl.opengl.GL11.glEnable;
+
+import org.lwjgl.opengl.GL;
+
+import entity.Player;
+import io.Timer;
+import io.Window;
+import render.Camera;
+import render.TileRenderer;
+import world.Map;
+import world.Tile;
+import world.World;
+
+public class Game {
+	public Game() {
+		Window.setCallbacks();
+		
+		if (!glfwInit()) {
+			System.err.println("GLFW failed to initialize.");
+			System.exit(1);
+		}
+		
+		Window window = new Window();
+		window.createWindow("Game");
+		
+		GL.createCapabilities();
+		
+		Camera camera = new Camera(window.getWidth(), window.getHeight());
+		
+		glEnable(GL_TEXTURE_2D);
+		
+		TileRenderer tr = new TileRenderer();
+
+		Shader shader = new Shader("shader");
+		
+		Map map = new Map(new int[25][25]);
+		
+		World world = new World(map);
+		
+		Player player = new Player();
+		
+		double frameCap = 1.0 / 60.0;
+		double frameTime = 0;
+		int frames = 0;
+		
+		double time = Timer.getTime();
+		double unprocessed = 0;
+		
+		while (!window.shouldClose()) {
+			boolean canRender = false;
+			
+			double time2 = Timer.getTime();
+			double passed = time2 - time;
+			unprocessed += passed;
+			
+			frameTime += passed;
+			
+			time = time2;
+			
+			while (unprocessed >= frameCap) {
+				unprocessed -= frameCap;
+				canRender = true;
+				
+				player.update((float) frameCap, window, camera, world);
+				
+				world.correctCamera(camera, window);
+				
+				window.update();
+				
+				if (frameTime >= 1.0) {
+					frameTime = 0;
+					System.out.println("FPS: " + frames);
+					
+					frames = 0;
+				}
+			}
+			
+			if (canRender) {
+				glClear(GL_COLOR_BUFFER_BIT);
+				
+//				sh0.bind();
+//				sh0.setUniform("sampler", 0);
+//				sh0.setUniform("projection", camera.getProjection().mul(target));
+//				t0.bind(0);
+//				m0.render();
+				
+				world.render(tr, shader, camera, window);
+				player.render(shader, camera);
+				
+				window.swapBuffers();
+				
+				frames++;
+			}
+		}
+		
+		glfwTerminate();
+	}
+	
+	public static void main(String[] args) {
+		new Game();
+	}
+}
