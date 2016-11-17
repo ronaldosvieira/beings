@@ -76,7 +76,9 @@ public class World {
 			
 			// todo
 			
-			entities.add(new Player(new Transform()));
+			Transform t = new Transform();
+			t.scale.set(3, 3, 1);
+			entities.add(new Player(t));
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
