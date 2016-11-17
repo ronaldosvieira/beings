@@ -1,16 +1,16 @@
 package world;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 import collision.AABB;
+import entity.Entity;
+import entity.Player;
+import entity.Transform;
 import game.Shader;
 import io.Window;
 import render.Camera;
@@ -20,6 +20,7 @@ public class World {
 	private final int view = 24;
 	private byte[] tiles;
 	private AABB[] boundingBoxes;
+	private List<Entity> entities;
 	private Map map;
 	private int width, height;
 	private Matrix4f world;
@@ -32,6 +33,8 @@ public class World {
 		
 		tiles = new byte[width * height];
 		boundingBoxes = new AABB[width * height];
+		
+		entities = new ArrayList<>();
 		
 		world = new Matrix4f().translate(0, 0, 0);
 		world.scale(scale);
@@ -54,6 +57,8 @@ public class World {
 			tiles = new byte[width * height];
 			boundingBoxes = new AABB[width * height];
 			
+			entities = new ArrayList<>();
+			
 			for (int y = 0; y < height; y++) {
 				for (int x = 0; x < width; x++) {
 					Tile tile;
@@ -68,9 +73,23 @@ public class World {
 					}
 				}
 			}
+			
+			// todo
+			
+			entities.add(new Player(new Transform()));
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
+	}
+	
+	public void update(float delta, Window window, Camera camera) {
+		for (Entity entity : entities) {
+			entity.update(delta, window, camera, this);
+		}
+		
+		for (int i = 0; i < entities.size(); i++) {
+			entities.get(i).collideWithTiles(this);
+		}
 	}
 	
 	public void render(TileRenderer renderer, Shader shader, Camera camera, Window window) {
@@ -85,6 +104,10 @@ public class World {
 					renderer.renderTile(tile, i - posX, -j - posY, shader, world, camera);
 				}
 			}
+		}
+		
+		for (Entity entity: entities) {
+			entity.render(shader, camera, this);
 		}
 	}
 	

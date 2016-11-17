@@ -49,8 +49,6 @@ public class Game {
 		
 		World world = new World(map);
 		
-		Player player = new Player(new Transform());
-		
 		double frameCap = 1.0 / 60.0;
 		double frameTime = 0;
 		int frames = 0;
@@ -77,7 +75,7 @@ public class Game {
 				unprocessed -= frameCap;
 				canRender = true;
 				
-				player.update((float) frameCap, window, camera, world);
+				world.update((float) frameCap, window, camera);
 				
 				world.correctCamera(camera, window);
 				
@@ -101,7 +99,6 @@ public class Game {
 //				m0.render();
 				
 				world.render(tr, shader, camera, window);
-				player.render(shader, camera, world);
 				
 				window.swapBuffers();
 				
