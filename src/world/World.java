@@ -88,6 +88,10 @@ public class World {
 		}
 	}
 	
+	public Matrix4f getWorldMatrix() {
+		return world;
+	}
+	
 	public void correctCamera(Camera camera, Window window) {
 		Vector3f pos = camera.getPosition();
 		

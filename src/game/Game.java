@@ -1,6 +1,8 @@
 package game;
 
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 import static org.lwjgl.glfw.GLFW.glfwInit;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.glfw.GLFW.glfwTerminate;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
@@ -9,13 +11,14 @@ import static org.lwjgl.opengl.GL11.glEnable;
 
 import org.lwjgl.opengl.GL;
 
+import entity.Entity;
 import entity.Player;
+import entity.Transform;
 import io.Timer;
 import io.Window;
 import render.Camera;
 import render.TileRenderer;
 import world.Map;
-import world.Tile;
 import world.World;
 
 public class Game {
@@ -37,6 +40,8 @@ public class Game {
 		glEnable(GL_TEXTURE_2D);
 		
 		TileRenderer tr = new TileRenderer();
+		
+		Entity.initAsset();
 
 		Shader shader = new Shader("shader");
 		
@@ -44,7 +49,7 @@ public class Game {
 		
 		World world = new World(map);
 		
-		Player player = new Player();
+		Player player = new Player(new Transform());
 		
 		double frameCap = 1.0 / 60.0;
 		double frameTime = 0;
@@ -54,6 +59,10 @@ public class Game {
 		double unprocessed = 0;
 		
 		while (!window.shouldClose()) {
+			if (window.getInput().isKeyPressed(GLFW_KEY_ESCAPE)) {
+				glfwSetWindowShouldClose(window.getWindow(), true);
+			}
+			
 			boolean canRender = false;
 			
 			double time2 = Timer.getTime();
@@ -92,13 +101,15 @@ public class Game {
 //				m0.render();
 				
 				world.render(tr, shader, camera, window);
-				player.render(shader, camera);
+				player.render(shader, camera, world);
 				
 				window.swapBuffers();
 				
 				frames++;
 			}
 		}
+		
+		Entity.deleteAsset();
 		
 		glfwTerminate();
 	}
