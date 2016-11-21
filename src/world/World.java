@@ -17,7 +17,7 @@ import render.Camera;
 import render.TileRenderer;
 
 public class World {
-	private final int view = 24;
+	private int viewX, viewY;
 	private byte[] tiles;
 	private AABB[] boundingBoxes;
 	private List<Entity> entities;
@@ -41,47 +41,40 @@ public class World {
 	}
 	
 	public World(Map map) {
-//		try {
-			this.map = map;
-			
-//			BufferedImage tileSheet = ImageIO.read(new File("./levels/" + world + "_tiles.png"));
-//			BufferedImage entitySheet = ImageIO.read(new File("./levels/" + world + "_entity.png"));
-			
-			this.width = map.getWidth();
-			this.height = map.getHeight();
-			this.scale = 16;
+		this.map = map;
 		
-			this.world = new Matrix4f().translate(0, 0, 0);
-			this.world.scale(scale);
-			
-			tiles = new byte[width * height];
-			boundingBoxes = new AABB[width * height];
-			
-			entities = new ArrayList<>();
-			
-			for (int y = 0; y < height; y++) {
-				for (int x = 0; x < width; x++) {
-					Tile tile;
-					try {
-						tile = Tile.tiles[map.getTile(x, y)];
-					} catch (ArrayIndexOutOfBoundsException e) {
-						tile = null;
-					}
-					
-					if (tile != null) {
-						setTile(tile, x, y);
-					}
+		this.width = map.getWidth();
+		this.height = map.getHeight();
+		this.scale = 16;
+	
+		this.world = new Matrix4f().translate(0, 0, 0);
+		this.world.scale(scale);
+		
+		tiles = new byte[width * height];
+		boundingBoxes = new AABB[width * height];
+		
+		entities = new ArrayList<>();
+		
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				Tile tile;
+				try {
+					tile = Tile.tiles[map.getTile(x, y)];
+				} catch (ArrayIndexOutOfBoundsException e) {
+					tile = null;
+				}
+				
+				if (tile != null) {
+					setTile(tile, x, y);
 				}
 			}
-			
-			// todo
-			
-			Transform t = new Transform();
-			t.scale.set(3, 3, 1);
-			entities.add(new Player(t));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		}
+		
+		// todo
+		
+		Transform t = new Transform();
+		t.scale.set(3, 3, 1);
+		entities.add(new Player(t));
 	}
 	
 	public void update(float delta, Window window, Camera camera) {
@@ -100,16 +93,22 @@ public class World {
 		}
 	}
 	
-	public void render(TileRenderer renderer, Shader shader, Camera camera, Window window) {
-		int posX = ((int) camera.getPosition().x + (window.getWidth() / 2)) / (scale * 2);
-		int posY = ((int) camera.getPosition().y - (window.getHeight() / 2)) / (scale * 2);
+	public void render(TileRenderer renderer, Shader shader, Camera camera) {
+		int posX = (int) camera.getPosition().x / (scale * 2);
+		int posY = (int) camera.getPosition().y / (scale * 2);
 		
-		for (int i = 0; i < view; i++) {
-			for (int j = 0; j < view; j++) {
-				Tile tile = getTile(i - posX, j + posY);
+		for (int i = 0; i < viewX; i++) {
+			for (int j = 0; j < viewY; j++) {
+				Tile tile = getTile(
+						i - posX - (viewX / 2) + 1, 
+						j + posY - (viewY / 2));
 				
 				if (tile != null) {
-					renderer.renderTile(tile, i - posX, -j - posY, shader, world, camera);
+					renderer.renderTile(
+							tile, 
+							i - posX - (viewX / 2) + 1, 
+							-j - posY + (viewY / 2), 
+							shader, world, camera);
 				}
 			}
 		}
@@ -117,6 +116,11 @@ public class World {
 		for (Entity entity: entities) {
 			entity.render(shader, camera, this);
 		}
+	}
+	
+	public void calculateView(Window window) {
+		viewX = (window.getWidth() / (scale * 2)) + 4;
+		viewY = (window.getHeight() / (scale * 2)) + 4;
 	}
 	
 	public Matrix4f getWorldMatrix() {

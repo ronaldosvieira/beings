@@ -1,8 +1,5 @@
 package entity;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
-import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
-
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -142,7 +139,6 @@ public abstract class Entity {
 		model = null;
 	}
 
-	
 	public void collideWithEntitiy(Entity entity) {
 		Collision collision = boundingBox.getCollision(entity.boundingBox);
 		

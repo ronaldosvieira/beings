@@ -43,9 +43,10 @@ public class Game {
 
 		Shader shader = new Shader("shader");
 		
-		Map map = new Map(new int[25][25]);
+		Map map = new Map(new int[50][50]);
 		
 		World world = new World(map);
+		world.calculateView(window);
 		
 		double frameCap = 1.0 / 60.0;
 		double frameTime = 0;
@@ -70,6 +71,12 @@ public class Game {
 			time = time2;
 			
 			while (unprocessed >= frameCap) {
+				if (window.hasResized()) {
+					camera.setProjection(window.getWidth(), window.getHeight());
+					world.calculateView(window);
+					glViewport(0, 0, window.getWidth(), window.getHeight());
+				}
+				
 				unprocessed -= frameCap;
 				canRender = true;
 				
@@ -96,7 +103,7 @@ public class Game {
 //				t0.bind(0);
 //				m0.render();
 				
-				world.render(tr, shader, camera, window);
+				world.render(tr, shader, camera);
 				
 				window.swapBuffers();
 				
