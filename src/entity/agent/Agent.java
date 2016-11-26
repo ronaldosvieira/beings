@@ -8,10 +8,14 @@ import render.Animation;
 
 public abstract class Agent extends Entity {
 	private AgentAnim currentAnim;
+	private Vector2f currentDirection;
 	
 	private String name;
 	private float speed;
-	private Vector2f currentDirection;
+
+	private boolean isMoving;
+	
+	protected MoveStrategy movement;
 
 	public Agent(String name, Transform transform) {
 		super(AgentAnim.AMOUNT, transform);
@@ -21,6 +25,9 @@ public abstract class Agent extends Entity {
 		this.currentAnim = AgentAnim.IDLE_E;
 		this.speed = 5.0f;
 		this.currentDirection = new Vector2f(.0f, .0f);
+		this.isMoving = false;
+		
+		this.movement = new RandomMoveStrategy(this);
 		
 		for (AgentAnim anim : AgentAnim.values()) {
 			setAnimation(anim.index(), 
@@ -30,6 +37,7 @@ public abstract class Agent extends Entity {
 	
 	public String getName() {return this.name;}
 	public float getSpeed() {return this.speed;}
+	public boolean isMoving() {return this.isMoving;}
 	
 	public void setSpeed(float speed) {this.speed = speed;}
 	
@@ -39,6 +47,8 @@ public abstract class Agent extends Entity {
 		Vector2f movement = new Vector2f();
 		movement.add(speed * delta * direction.x, 
 				speed * delta * direction.y);
+		
+		this.isMoving = movement.length() != 0? true : false;
 		
 		this.currentDirection = direction;
 		

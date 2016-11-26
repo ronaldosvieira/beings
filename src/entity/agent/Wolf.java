@@ -11,36 +11,23 @@ import world.World;
 
 public class Wolf extends Agent {
 	private float lastMove;
-	private boolean isMoving;
 	
 	public Wolf(Transform transform) {
 		super("wolf", transform);
 		
 		this.lastMove = 0.0f;
-		this.isMoving = false;
 	}
 	
 	@Override
 	public void update(float delta, Window window, Camera camera, World world) {
-		Random random = new Random();
-		
-		if (lastMove < random.nextFloat() + 1.0f) {
+		if (lastMove < 1.0f) {
 			lastMove += delta;
 			
 			move(delta);
 		} else {
 			lastMove = 0.0f;
-			
-			if (isMoving) {
-				move(delta, new Vector2f(.0f, .0f));
-				isMoving = false;
-			} else {
-				move(delta, new Vector2f(
-						random.nextFloat() * 2 - 1, 
-						random.nextFloat() * 2 - 1)
-						.normalize());
-				isMoving = true;
-			}
+
+			move(delta, this.movement.getMovement(delta));
 		}
 	}
 }
