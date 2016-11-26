@@ -31,14 +31,12 @@ public class Texture {
 			
 			ByteBuffer pixels = BufferUtils.createByteBuffer(width * height * 4);
 			
-			for (int i = 0; i < width; i++) {
-				for (int j = 0; j < height; j++) {
-					int pixel = pixelsRaw[i * width + j];
-					pixels.put((byte) ((pixel >> 16) & 0xFF)); // red
-					pixels.put((byte) ((pixel >> 8) & 0xFF)); // green
-					pixels.put((byte) (pixel & 0xFF)); // blue
-					pixels.put((byte) ((pixel >> 24) & 0xFF)); // alpha
-				}
+			for (int i = 0; i < pixelsRaw.length; i++) {
+				int pixel = pixelsRaw[i];
+				pixels.put((byte) ((pixel >> 16) & 0xFF)); // red
+				pixels.put((byte) ((pixel >> 8) & 0xFF)); // green
+				pixels.put((byte) (pixel & 0xFF)); // blue
+				pixels.put((byte) ((pixel >> 24) & 0xFF)); // alpha
 			}
 			
 			pixels.flip();
