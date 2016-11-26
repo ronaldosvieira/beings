@@ -14,9 +14,9 @@ import org.joml.Vector3f;
 
 import collision.AABB;
 import entity.Entity;
-import entity.Rabbit;
 import entity.Transform;
-import entity.Wolf;
+import entity.agent.Rabbit;
+import entity.agent.Wolf;
 import game.Shader;
 import io.Window;
 import render.Camera;
