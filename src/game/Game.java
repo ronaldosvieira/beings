@@ -1,9 +1,6 @@
 package game;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
-import static org.lwjgl.glfw.GLFW.glfwInit;
-import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
-import static org.lwjgl.glfw.GLFW.glfwTerminate;
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 import org.lwjgl.opengl.GL;
@@ -96,12 +93,6 @@ public class Game {
 			
 			if (canRender) {
 				glClear(GL_COLOR_BUFFER_BIT);
-				
-//				sh0.bind();
-//				sh0.setUniform("sampler", 0);
-//				sh0.setUniform("projection", camera.getProjection().mul(target));
-//				t0.bind(0);
-//				m0.render();
 				
 				world.render(tr, shader, camera);
 				
