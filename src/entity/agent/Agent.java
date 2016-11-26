@@ -10,9 +10,8 @@ public abstract class Agent extends Entity {
 	private AgentAnim currentAnim;
 	
 	private String name;
-	
 	protected float speed;
-	protected Vector2f direction;
+	private Vector2f currentDirection;
 
 	public Agent(String name, Transform transform) {
 		super(AgentAnim.AMOUNT, transform);
@@ -20,8 +19,8 @@ public abstract class Agent extends Entity {
 		this.name = name;
 		
 		this.currentAnim = AgentAnim.IDLE_E;
-		this.speed = 1.0f;
-		this.direction = new Vector2f(0, 0);
+		this.speed = 5.0f;
+		this.currentDirection = new Vector2f(.0f, .0f);
 		
 		for (AgentAnim anim : AgentAnim.values()) {
 			setAnimation(anim.index(), 
@@ -31,15 +30,21 @@ public abstract class Agent extends Entity {
 	
 	public String getName() {return this.name;}
 	
-	protected void move(float delta) {
+	protected void move(float delta) {move(delta, this.currentDirection);}
+	
+	protected void move(float delta, Vector2f direction) {
 		Vector2f movement = new Vector2f();
 		movement.add(speed * delta * direction.x, 
 				speed * delta * direction.y);
 		
+		this.currentDirection = direction;
+		
+		updateAnimation(direction);
+		
 		super.move(movement);
 	}
 	
-	public void updateAnimation() {
+	public void updateAnimation(Vector2f direction) {
 		if (direction.length() > 0) {
 			if (Math.abs(direction.x) > Math.abs(direction.y)) {
 				if (direction.x > 0) selectAnimation(AgentAnim.WALK_E);
