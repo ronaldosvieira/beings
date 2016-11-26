@@ -1,5 +1,10 @@
 package world;
 
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_A;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_D;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +83,24 @@ public class World {
 	}
 	
 	public void update(float delta, Window window, Camera camera) {
+		float movement = 5 * 60 * delta;
+		
+		if (window.getInput().isKeyDown(GLFW_KEY_A)) {
+			camera.addPosition(new Vector3f(movement, 0, 0));
+		}
+		
+		if (window.getInput().isKeyDown(GLFW_KEY_D)) {
+			camera.addPosition(new Vector3f(-movement, 0, 0));
+		}
+		
+		if (window.getInput().isKeyDown(GLFW_KEY_W)) {
+			camera.addPosition(new Vector3f(0, -movement, 0));
+		}
+		
+		if (window.getInput().isKeyDown(GLFW_KEY_S)) {
+			camera.addPosition(new Vector3f(0, movement, 0));
+		}
+		
 		for (Entity entity : entities) {
 			entity.update(delta, window, camera, this);
 		}
