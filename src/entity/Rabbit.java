@@ -10,7 +10,7 @@ import render.Camera;
 import world.World;
 
 public class Rabbit extends Entity {
-	private int lastAnim;
+	private EntityAnim lastAnim;
 	
 	private float speed;
 	private float lastMove;
@@ -22,6 +22,8 @@ public class Rabbit extends Entity {
 		for (EntityAnim anim : EntityAnim.values()) {
 			setAnimation(anim.index(), new Animation(anim.amount(), 8, "rabbit/" + anim.path()));
 		}
+		
+		this.lastAnim = EntityAnim.IDLE_E;
 		
 		this.speed = 2.5f;
 		this.lastMove = 0.0f;
@@ -38,14 +40,14 @@ public class Rabbit extends Entity {
 	public void updateAnimation() {
 		if (direction.length() > 0) {
 			if (Math.abs(direction.x) > Math.abs(direction.y)) {
-				if (direction.x > 0) useAnimation(EntityAnim.WALK_E.index());
-				else useAnimation(EntityAnim.WALK_W.index());
+				if (direction.x > 0) selectAnimation(EntityAnim.WALK_E);
+				else selectAnimation(EntityAnim.WALK_W);
 			} else {
-				if (direction.y > 0) useAnimation(EntityAnim.WALK_N.index());
-				else useAnimation(EntityAnim.WALK_S.index());
+				if (direction.y > 0) selectAnimation(EntityAnim.WALK_N);
+				else selectAnimation(EntityAnim.WALK_S);
 			}
 		} else {
-			if (lastAnim >= 4) useAnimation(lastAnim - 4);
+			if (lastAnim.isWalking()) selectAnimation(lastAnim.idle());
 		}
 	}
 
@@ -70,9 +72,8 @@ public class Rabbit extends Entity {
 		move(delta);
 	}
 
-	@Override
-	public void useAnimation(int index) {
-		this.lastAnim = index;
-		super.useAnimation(index);
+	public void selectAnimation(EntityAnim anim) {
+		this.lastAnim = anim;
+		super.useAnimation(anim.index());
 	}
 }

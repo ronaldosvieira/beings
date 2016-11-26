@@ -25,4 +25,26 @@ public enum EntityAnim {
     public int index() {return this.index;}
     public int amount() {return this.amount;}
     public String path() {return this.path;}
+    public boolean isIdle() {return this.index < 4;}
+    public boolean isWalking() {return this.index >= 4;}
+    
+    public EntityAnim toggle() {
+    	return EntityAnim.values()[(this.index + 4) % 4];
+    }
+    
+    public EntityAnim walk() {
+    	if (this.index < 4) {
+    		return EntityAnim.values()[this.index + 4];
+    	} else {
+    		return this;
+    	}
+    }
+    
+    public EntityAnim idle() {
+    	if (this.index < 4) {
+    		return this;
+    	} else {
+    		return EntityAnim.values()[this.index - 4];
+    	}
+    }
 }
