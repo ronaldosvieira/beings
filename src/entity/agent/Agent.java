@@ -10,7 +10,7 @@ public abstract class Agent extends Entity {
 	private AgentAnim currentAnim;
 	
 	private String name;
-	protected float speed;
+	private float speed;
 	private Vector2f currentDirection;
 
 	public Agent(String name, Transform transform) {
@@ -29,6 +29,9 @@ public abstract class Agent extends Entity {
 	}
 	
 	public String getName() {return this.name;}
+	public float getSpeed() {return this.speed;}
+	
+	public void setSpeed(float speed) {this.speed = speed;}
 	
 	protected void move(float delta) {move(delta, this.currentDirection);}
 	
