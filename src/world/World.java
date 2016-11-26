@@ -14,8 +14,9 @@ import org.joml.Vector3f;
 
 import collision.AABB;
 import entity.Entity;
-import entity.Player;
+import entity.Rabbit;
 import entity.Transform;
+import entity.Wolf;
 import game.Shader;
 import io.Window;
 import render.Camera;
@@ -79,7 +80,13 @@ public class World {
 		
 		Transform t = new Transform();
 		t.scale.set(3, 3, 1);
-		entities.add(new Player(t));
+		t.pos.add(20, -20, 0);
+		entities.add(new Rabbit(t));
+		
+		Transform t2 = new Transform();
+		t2.scale.set(3, 3, 1);
+		t2.pos.add(20, -20, 0);
+		entities.add(new Wolf(t2));
 	}
 	
 	public void update(float delta, Window window, Camera camera) {
