@@ -1,15 +1,11 @@
-package entity.agent;
-
-import java.util.Random;
-
-import org.joml.Vector2f;
+package entity.model;
 
 import entity.Transform;
 import io.Window;
 import render.Camera;
 import world.World;
 
-public class Rabbit extends Agent {
+public class Rabbit extends Mammal {
 	private float lastMove;
 	
 	public Rabbit(Transform transform) {

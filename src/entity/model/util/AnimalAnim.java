@@ -1,6 +1,6 @@
-package entity.agent;
+package entity.model.util;
 
-public enum AgentAnim {
+public enum AnimalAnim {
 	IDLE_N (0, 1, "idle_N"),
 	IDLE_S (1, 1, "idle_S"),
 	IDLE_W (2, 1, "idle_W"),
@@ -16,7 +16,7 @@ public enum AgentAnim {
     
     public static final int AMOUNT = 8;
     
-    AgentAnim(int index, int amount, String path) {
+    AnimalAnim(int index, int amount, String path) {
         this.index = index;
         this.amount = amount;
         this.path = path;
@@ -28,23 +28,23 @@ public enum AgentAnim {
     public boolean isIdle() {return this.index < 4;}
     public boolean isWalking() {return this.index >= 4;}
     
-    public AgentAnim toggle() {
-    	return AgentAnim.values()[(this.index + 4) % 4];
+    public AnimalAnim toggle() {
+    	return AnimalAnim.values()[(this.index + 4) % 4];
     }
     
-    public AgentAnim walk() {
+    public AnimalAnim walk() {
     	if (this.index < 4) {
-    		return AgentAnim.values()[this.index + 4];
+    		return AnimalAnim.values()[this.index + 4];
     	} else {
     		return this;
     	}
     }
     
-    public AgentAnim idle() {
+    public AnimalAnim idle() {
     	if (this.index < 4) {
     		return this;
     	} else {
-    		return AgentAnim.values()[this.index - 4];
+    		return AnimalAnim.values()[this.index - 4];
     	}
     }
 }

@@ -1,20 +1,22 @@
-package entity.agent;
+package entity.model.strategies;
 
 import java.util.Random;
 
 import org.joml.Vector2f;
 
+import entity.model.Animal;
+
 public class RandomMoveStrategy extends MoveStrategy {
 	
-	public RandomMoveStrategy(Agent agent) {
-		super(agent);
+	public RandomMoveStrategy(Animal animal) {
+		super(animal);
 	}
 
 	@Override
 	public Vector2f getMovement(float delta) {
 		Random random = new Random();
 		
-		if (agent.isMoving()) {
+		if (animal.isMoving()) {
 			return new Vector2f(.0f, .0f);
 		} else {
 			while (true) {

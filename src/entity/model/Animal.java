@@ -1,41 +1,44 @@
-package entity.agent;
+package entity.model;
 
 import org.joml.Vector2f;
 
-import entity.Entity;
 import entity.Transform;
+import entity.model.strategies.FeedingStrategy;
+import entity.model.strategies.MoveStrategy;
+import entity.model.strategies.RandomMoveStrategy;
+import entity.model.util.AnimalAnim;
 import render.Animation;
 
-public abstract class Agent extends Entity {
-	private AgentAnim currentAnim;
+public abstract class Animal extends LivingThing {
+	protected FeedingStrategy feeding;
+	protected MoveStrategy movement;
+	
+	private AnimalAnim currentAnim;
 	private Vector2f currentDirection;
 	
-	private String name;
+	private double hunger;
+	private double thirst;
+	
+	private boolean isMoving;
 	private float speed;
 
-	private boolean isMoving;
-	
-	protected MoveStrategy movement;
-
-	public Agent(String name, Transform transform) {
-		super(AgentAnim.AMOUNT, transform);
+	public Animal(String name, Transform transform) {
+		super(name, AnimalAnim.AMOUNT, transform);
 		
-		this.name = name;
-		
-		this.currentAnim = AgentAnim.IDLE_E;
-		this.speed = 5.0f;
+		this.currentAnim = AnimalAnim.IDLE_E;
 		this.currentDirection = new Vector2f(.0f, .0f);
+		
+		this.speed = 5.0f; // default speed
 		this.isMoving = false;
 		
 		this.movement = new RandomMoveStrategy(this);
 		
-		for (AgentAnim anim : AgentAnim.values()) {
+		for (AnimalAnim anim : AnimalAnim.values()) {
 			setAnimation(anim.index(), 
 					new Animation(anim.amount(), 8, name + "/" + anim.path()));
 		}
 	}
 	
-	public String getName() {return this.name;}
 	public float getSpeed() {return this.speed;}
 	public boolean isMoving() {return this.isMoving;}
 	
@@ -60,11 +63,11 @@ public abstract class Agent extends Entity {
 	public void updateAnimation(Vector2f direction) {
 		if (direction.length() > 0) {
 			if (Math.abs(direction.x) > Math.abs(direction.y)) {
-				if (direction.x > 0) selectAnimation(AgentAnim.WALK_E);
-				else selectAnimation(AgentAnim.WALK_W);
+				if (direction.x > 0) selectAnimation(AnimalAnim.WALK_E);
+				else selectAnimation(AnimalAnim.WALK_W);
 			} else {
-				if (direction.y > 0) selectAnimation(AgentAnim.WALK_N);
-				else selectAnimation(AgentAnim.WALK_S);
+				if (direction.y > 0) selectAnimation(AnimalAnim.WALK_N);
+				else selectAnimation(AnimalAnim.WALK_S);
 			}
 		} else {
 			if (currentAnim.isWalking()) 
@@ -72,7 +75,7 @@ public abstract class Agent extends Entity {
 		}
 	}
 	
-	public void selectAnimation(AgentAnim anim) {
+	public void selectAnimation(AnimalAnim anim) {
 		this.currentAnim = anim;
 		super.useAnimation(anim.index());
 	}
