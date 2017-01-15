@@ -1,5 +1,5 @@
 # tcc
-This work is a study on the field of emergent narrative that uses autonomous agents to simulate living organisms in order to recreate a funcional ecosystem, where each creature has its own desires and needs, and is aware of its surroundings. The current high-level goals are:
+This work is a study on the field of emergent narrative that uses autonomous agents to simulate living organisms in order to recreate a functional ecosystem, where each creature has its own desires and needs, and is aware of its surroundings. The current high-level goals are:
 - to explore the emergence of narrative from the interaction of many small self-contained units in a virtual world (i.e. a bottom-up narrative approach);
 - to provide simple yet representative implementations of many cognitive processes of animals (e.g. the *fight-or-flight* mecanism, working memory, learning, etc);
 - to create an agent framework that is generic enough so it can be used in other projects as a way to simulate the minds of living beings in a given environment;
