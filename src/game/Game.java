@@ -2,6 +2,7 @@ package game;
 
 import assets.Assets;
 import entity.Entity;
+import gui.GUI;
 import io.Timer;
 import io.Window;
 import org.lwjgl.opengl.GL;
@@ -44,6 +45,8 @@ public class Game {
 		
 		World world = new World(map);
 		world.calculateView(window);
+
+        //GUI gui = new GUI();
 		
 		double frameCap = 1.0 / 60.0;
 		double frameTime = 0;
@@ -95,7 +98,9 @@ public class Game {
 				glClear(GL_COLOR_BUFFER_BIT);
 				
 				world.render(tr, shader, camera);
-				
+
+				//gui.render(camera);
+
 				window.swapBuffers();
 				
 				frames++;
