@@ -21,11 +21,15 @@ public abstract class Entity {
 	private int useAnimation;
 	protected Transform transform;
 	
+	private boolean isSolid;
+	
 	public Entity(int maxAnimations, Transform transform) {
 		this.animations = new Animation[maxAnimations];
 		
 		this.transform = transform;
 		this.useAnimation = 0;
+		
+		this.isSolid = false;
 		
 		boundingBox = new AABB(
 				new Vector2f(transform.pos.x, transform.pos.y),
@@ -143,14 +147,30 @@ public abstract class Entity {
 		Collision collision = boundingBox.getCollision(entity.boundingBox);
 		
 		if (collision.isIntersecting) {
-			collision.distance.x /= 2;
-			collision.distance.y /= 2;
+			if (entity.isSolid()) {
+				boundingBox.correctPosition(entity.boundingBox, collision);
+				transform.pos.set(boundingBox.getCenter().x, boundingBox.getCenter().y, 0);
+				
+				entity.transform.pos.set(entity.boundingBox.getCenter().x, 
+						entity.boundingBox.getCenter().y, 0);
+			} else {
+				collision.distance.x /= 2;
+				collision.distance.y /= 2;
+				
+				boundingBox.correctPosition(entity.boundingBox, collision);
+				transform.pos.set(boundingBox.getCenter().x, boundingBox.getCenter().y, 0);
 			
-			boundingBox.correctPosition(entity.boundingBox, collision);
-			transform.pos.set(boundingBox.getCenter().x, boundingBox.getCenter().y, 0);
-			
-			entity.boundingBox.correctPosition(boundingBox, collision);
-			entity.transform.pos.set(entity.boundingBox.getCenter().x, entity.boundingBox.getCenter().y, 0);
+				entity.boundingBox.correctPosition(boundingBox, collision);
+				entity.transform.pos.set(entity.boundingBox.getCenter().x, 
+						entity.boundingBox.getCenter().y, 0);
+			}
 		}
+	}
+	
+	public boolean isSolid() {return this.isSolid;}
+	
+	public Entity setSolid(boolean isSolid) {
+		this.isSolid = isSolid;
+		return this;
 	}
 }

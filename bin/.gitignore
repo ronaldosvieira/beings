@@ -1,7 +1,2 @@
-/collision/
-/entity/
-/game/
-/io/
-/render/
 /world/
-/agent/
+/entity/
