@@ -4,8 +4,8 @@ public class Tile {
 	public static Tile tiles[] = new Tile[16];
 	public static byte amount = 0;
 	
-	public static final Tile testTile = new Tile("grass-32");
-	public static final Tile testTile2 = new Tile("sand-32").setSolid();
+	public static final Tile testTile = new Tile("tiles/grass/0");
+	public static final Tile testTile2 = new Tile("tiles/sand/0");
 	
 	private byte id;
 	private boolean solid;

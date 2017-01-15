@@ -29,7 +29,8 @@ public class GenericPlant extends Plant {
 	private void updateAnimation() {
 		String fruit = this.hasFruit? "fruit" : "no-fruit";
 
-		setAnimation(0, new Animation(1, 1, getName() + "/fruit"));
+		setAnimation(0, new Animation(1, 1,
+				"entities/" + getName() + "/fruit"));
 	}
 
 }

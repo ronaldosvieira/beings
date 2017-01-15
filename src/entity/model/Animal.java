@@ -35,7 +35,8 @@ public abstract class Animal extends LivingThing {
 		
 		for (AnimalAnim anim : AnimalAnim.values()) {
 			setAnimation(anim.index(), 
-					new Animation(anim.amount(), 8, name + "/" + anim.path()));
+					new Animation(anim.amount(), 8,
+                            "entities/" + name + "/" + anim.path()));
 		}
 	}
 	
