@@ -1,5 +1,6 @@
 package entity;
 
+import assets.Assets;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -14,7 +15,6 @@ import render.Model;
 import world.World;
 
 public abstract class Entity {
-	protected static Model model;
 	protected AABB boundingBox;
 	//private Texture texture;
 	protected Animation[] animations;
@@ -63,29 +63,8 @@ public abstract class Entity {
 		shader.setUniform("sampler", 0);
 		shader.setUniform("projection", transform.getProjection(target));
 		animations[useAnimation].bind(0);
-		
-		model.render();
-	}
-	
-	public static void initAsset() {
-		float[] vertices = new float[] {
-				-1f, 1f, 0, // 0
-				1f, 1f, 0,  // 1
-				1f, -1f, 0, // 2
-				-1f, -1f, 0,// 3
-			};
-			
-		float[] texture = new float[] {0,0, 1,0, 1,1, 0,1};
-		int[] indexes = new int[] {
-			0, 1, 2,
-			2, 3, 0
-		};
-		
-		model = new Model(vertices, texture, indexes);
-	}
-	
-	public static void deleteAsset() {
-		model = null;
+
+        Assets.getModel().render();
 	}
 
 	public void collideWithTiles(World world) {

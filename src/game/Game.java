@@ -1,17 +1,17 @@
 package game;
 
-import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
-
-import org.lwjgl.opengl.GL;
-
+import assets.Assets;
 import entity.Entity;
 import io.Timer;
 import io.Window;
+import org.lwjgl.opengl.GL;
 import render.Camera;
 import render.TileRenderer;
 import world.Map;
 import world.World;
+
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11.*;
 
 public class Game {
 	public Game() {
@@ -36,7 +36,7 @@ public class Game {
 		
 		TileRenderer tr = new TileRenderer();
 		
-		Entity.initAsset();
+		Assets.initAsset();
 
 		Shader shader = new Shader("shader");
 		
@@ -102,7 +102,7 @@ public class Game {
 			}
 		}
 		
-		Entity.deleteAsset();
+		Assets.deleteAsset();
 		
 		glfwTerminate();
 	}
