@@ -33,10 +33,11 @@ public abstract class Entity {
         this.transform.scale.set(transform.scale.x, transform.scale.y, transform.scale.z);
 
 		this.isSolid = false;
-		
+		System.out.println(transform.pos.y);
 		boundingBox = new AABB(
-				new Vector2f(transform.pos.x, transform.pos.y),
-				new Vector2f(transform.scale.x, transform.scale.y));
+				// TODO: find a better box placement
+				new Vector2f(transform.pos.x, transform.pos.y + 1/4),
+				new Vector2f(transform.scale.x, transform.scale.y / 2));
 	}
 	
 	protected void setAnimation(int index, Animation animation) {

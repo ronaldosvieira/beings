@@ -80,7 +80,7 @@ public class World {
 		// todo
 		
 		Transform t = new Transform();
-		t.scale.set(3, 3, 1);
+		t.scale.set(2, 2, 1);
 		t.pos.add(20, -20, 0);
 		entities.add(new Rabbit(t));
 		
