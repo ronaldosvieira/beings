@@ -22,6 +22,7 @@ public abstract class Entity {
 	protected Transform transform;
 	
 	private boolean isSolid;
+	private boolean isWalkable;
 	
 	public Entity(int maxAnimations, Transform transform) {
 		this.animations = new Animation[maxAnimations];
@@ -33,7 +34,7 @@ public abstract class Entity {
         this.transform.scale.set(transform.scale.x, transform.scale.y, transform.scale.z);
 
 		this.isSolid = false;
-		System.out.println(transform.pos.y);
+		
 		boundingBox = new AABB(
 				// TODO: find a better box placement
 				new Vector2f(transform.pos.x, transform.pos.y + 1/4),
@@ -129,6 +130,8 @@ public abstract class Entity {
 	public void collideWithEntitiy(Entity entity) {
 		Collision collision = boundingBox.getCollision(entity.boundingBox);
 		
+		if (this.isWalkable() || entity.isWalkable()) return;
+		
 		if (collision.isIntersecting) {
 			if (entity.isSolid()) {
 				boundingBox.correctPosition(entity.boundingBox, collision);
@@ -148,9 +151,15 @@ public abstract class Entity {
 	}
 	
 	public boolean isSolid() {return this.isSolid;}
+	public boolean isWalkable() {return this.isWalkable;}
 	
 	public Entity setSolid(boolean isSolid) {
 		this.isSolid = isSolid;
+		return this;
+	}
+	
+	public Entity setWalkable(boolean isWalkable) {
+		this.isWalkable = isWalkable;
 		return this;
 	}
 }

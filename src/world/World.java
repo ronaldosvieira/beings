@@ -6,6 +6,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.joml.Matrix4f;
@@ -148,6 +149,17 @@ public class World {
 				}
 			}
 		}
+		
+		// TODO: melhora melhora
+		entities.sort(new Comparator<Entity>() {
+			@Override
+			public int compare(Entity o1, Entity o2) {
+				int v1 = o1.isWalkable()? 1 : 0;
+				int v2 = o2.isWalkable()? 1 : 0;
+				
+				return v2 - v1;
+			}
+		});
 		
 		for (Entity entity: entities) {
 			entity.render(shader, camera, this);
