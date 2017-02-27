@@ -16,7 +16,7 @@ import org.joml.Vector3f;
 import collision.AABB;
 import entity.Entity;
 import entity.Transform;
-import entity.model.GenericPlant;
+import entity.model.Grass;
 import entity.model.Rabbit;
 import entity.model.Wolf;
 import game.Shader;
@@ -91,9 +91,9 @@ public class World {
 		entities.add(new Wolf(t2));
 		
 		Transform t3 = new Transform();
-		t3.scale.set(2, 3, 1);
+		t3.scale.set(2, 2, 1);
 		t3.pos.set(16, -16, 1);
-		entities.add(new GenericPlant(t3));
+		entities.add(new Grass(t3));
 	}
 	
 	public void update(float delta, Window window, Camera camera) {
