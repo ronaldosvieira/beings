@@ -61,8 +61,6 @@ public class World {
 		tiles = new byte[width * height];
 		boundingBoxes = new AABB[width * height];
 		
-		entities = new ArrayList<>();
-		
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				Tile tile;
@@ -77,11 +75,8 @@ public class World {
 				}
 			}
 		}
-		
-		// todo: move the entity placement to somewhere better
-		entities.add(new Rabbit(new Vector2f(20, -20)));
-		entities.add(new Wolf(new Vector2f(20, -20)));
-		entities.add(new Grass(new Vector2f(16, -16)));
+
+		entities = map.getEntities();
 	}
 	
 	public void update(float delta, Window window, Camera camera) {

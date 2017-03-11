@@ -151,7 +151,17 @@ public abstract class Entity {
 			}
 		}
 	}
-	
+
+	public Vector2f getScale() {
+	    return new Vector2f(this.transform.scale.x,
+                this.transform.scale.y);
+	}
+
+	public Vector2f getPosition() {
+	    return new Vector2f(this.transform.pos.x,
+                this.transform.pos.y);
+    }
+
 	public boolean isSolid() {return this.isSolid;}
 	public boolean isWalkable() {return this.isWalkable;}
 	

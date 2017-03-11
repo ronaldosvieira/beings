@@ -2,14 +2,20 @@ package game;
 
 import assets.Assets;
 import entity.Entity;
-import gui.GUI;
+import entity.model.Grass;
+import entity.model.Rabbit;
+import entity.model.Wolf;
 import io.Timer;
 import io.Window;
+import org.joml.Vector2f;
 import org.lwjgl.opengl.GL;
 import render.Camera;
 import render.TileRenderer;
 import world.Map;
 import world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -24,7 +30,7 @@ public class Game {
 		}
 		
 		Window window = new Window();
-		window.createWindow("Game");
+		window.createWindow("tcc");
 		
 		GL.createCapabilities();
 		
@@ -40,8 +46,14 @@ public class Game {
 		Assets.initAsset();
 
 		Shader shader = new Shader("shader");
-		
-		Map map = new Map(new int[50][50]);
+
+        List<Entity> entities = new ArrayList<>();
+
+        entities.add(new Rabbit(new Vector2f(20, -20)));
+        entities.add(new Wolf(new Vector2f(20, -20)));
+        entities.add(new Grass(new Vector2f(16, -16)));
+
+		Map map = new Map(new int[50][50], entities);
 		
 		World world = new World(map);
 		world.calculateView(window);
