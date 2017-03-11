@@ -29,7 +29,6 @@ public class World {
 	private byte[] tiles;
 	private AABB[] boundingBoxes;
 	private List<Entity> entities;
-	private Map map;
 	private int width, height;
 	private Matrix4f world;
 	private int scale;
@@ -49,8 +48,6 @@ public class World {
 	}
 	
 	public World(Map map) {
-		this.map = map;
-		
 		this.width = map.getWidth();
 		this.height = map.getHeight();
 		this.scale = 16;
@@ -199,4 +196,6 @@ public class World {
 	public int getScale() {
 		return scale;
 	}
+
+	public List<Entity> getEntities() {return this.entities;}
 }
