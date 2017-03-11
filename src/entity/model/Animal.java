@@ -18,7 +18,7 @@ public abstract class Animal extends LivingThing {
 	private double thirst;
 	
 	private boolean isMoving;
-	private float speed;
+	private float movementSpeed;
 
 	public Animal(String name, Vector2f scale, Vector2f position) {
 		super(name, AnimalAnim.AMOUNT, scale, position);
@@ -26,7 +26,7 @@ public abstract class Animal extends LivingThing {
 		this.currentAnim = AnimalAnim.IDLE_E;
 		this.currentDirection = new Vector2f(.0f, .0f);
 		
-		this.speed = 5.0f; // default speed
+		this.movementSpeed = 5.0f; // default movement speed
 		this.isMoving = false;
 		
 		this.movement = new RandomMoveStrategy(this);
@@ -38,17 +38,17 @@ public abstract class Animal extends LivingThing {
 		}
 	}
 	
-	public float getSpeed() {return this.speed;}
+	public float getMovementSpeed() {return this.movementSpeed;}
 	public boolean isMoving() {return this.isMoving;}
 	
-	public void setSpeed(float speed) {this.speed = speed;}
+	public void setMovementSpeed(float movementSpeed) {this.movementSpeed = movementSpeed;}
 	
 	protected void move(float delta) {move(delta, this.currentDirection);}
 	
 	protected void move(float delta, Vector2f direction) {
 		Vector2f movement = new Vector2f();
-		movement.add(speed * delta * direction.x,
-				speed * delta * direction.y);
+		movement.add(movementSpeed * delta * direction.x,
+				movementSpeed * delta * direction.y);
 		
 		this.isMoving = movement.length() != 0;
 		

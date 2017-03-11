@@ -23,7 +23,7 @@ public class RandomMoveStrategy extends MoveStrategy {
 	public Vector2f getMovement(float delta) {
 		lastMove += delta;
 		
-		animal.setSpeed(getRandomSpeed());
+		animal.setMovementSpeed(getRandomSpeed());
 		
 		if (lastMove >= 0.5f) {
 			lastMove = 0.0f;
