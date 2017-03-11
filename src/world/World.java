@@ -196,4 +196,6 @@ public class World {
 	public int getScale() {
 		return scale;
 	}
+
+	public List<Entity> getEntities() {return this.entities;}
 }
