@@ -1,7 +1,7 @@
 package entity.model.mind;
 
 import entity.model.LivingThing;
-import entity.model.mind.memory.MemoryFragment;
+import entity.model.Thing;
 
 import java.util.List;
 
@@ -12,5 +12,7 @@ public abstract class Sense {
         this.being = being;
     }
 
-    abstract public List<MemoryFragment> perceive();
+    abstract public List<Thing> perceive();
+
+    public LivingThing getBeing() {return this.being;}
 }

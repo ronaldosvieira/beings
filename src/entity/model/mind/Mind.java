@@ -1,8 +1,9 @@
 package entity.model.mind;
 
 import entity.model.LivingThing;
-import entity.model.mind.memory.MemoryFragment;
+import entity.model.Thing;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Mind {
@@ -13,10 +14,11 @@ public class Mind {
     }
 
     public void update() {
+        List<Thing> perceptions = new ArrayList<>();
         for (Sense sense : this.being.getSenses()) {
-            List<MemoryFragment> perceptions = sense.perceive();
-
-            // todo: do stuff
+            perceptions.addAll(sense.perceive());
         }
+
+        // todo: do stuff
     }
 }
