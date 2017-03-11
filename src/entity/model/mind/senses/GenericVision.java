@@ -9,6 +9,7 @@ import org.joml.Vector2f;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GenericVision extends Sense {
     public GenericVision(LivingThing being) {
@@ -19,7 +20,12 @@ public class GenericVision extends Sense {
     public List<Thing> perceive() {
         List<Thing> perceptions = new ArrayList<>();
         Vector2f position = this.getBeing().getPosition();
-        List<Entity> entities = Game.getInstance().getWorld().getEntities();
+        List<Entity> entities = Game.getInstance()
+                .getWorld()
+                .getEntities()
+                .stream()
+                .filter(entity -> !entity.equals(this.getBeing()))
+                .collect(Collectors.toList());
 
         // todo: implement a less naive version
         for (Entity entity : entities) {
