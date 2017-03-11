@@ -39,13 +39,13 @@ public class World {
 		this.height = 64;
 		this.scale = 16;
 		
-		tiles = new byte[width * height];
-		boundingBoxes = new AABB[width * height];
+		this.tiles = new byte[width * height];
+		this.boundingBoxes = new AABB[width * height];
 		
-		entities = new ArrayList<>();
+		this.entities = new ArrayList<>();
 		
-		world = new Matrix4f().translate(0, 0, 0);
-		world.scale(scale);
+		this.world = new Matrix4f().translate(0, 0, 0);
+		this.world.scale(scale);
 	}
 	
 	public World(Map map) {
@@ -58,25 +58,17 @@ public class World {
 		this.world = new Matrix4f().translate(0, 0, 0);
 		this.world.scale(scale);
 		
-		tiles = new byte[width * height];
-		boundingBoxes = new AABB[width * height];
+		this.tiles = new byte[width * height];
+		this.boundingBoxes = new AABB[width * height];
 		
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				Tile tile;
-				try {
-					tile = Tile.tiles[map.getTile(x, y)];
-				} catch (ArrayIndexOutOfBoundsException e) {
-					tile = null;
-				}
-				
-				if (tile != null) {
-					setTile(tile, x, y);
-				}
+				Tile tile = Tile.tiles[map.getTile(x, y)];
+                setTile(tile, x, y);
 			}
 		}
 
-		entities = map.getEntities();
+		this.entities = map.getEntities();
 	}
 	
 	public void update(float delta, Window window, Camera camera) {
