@@ -21,7 +21,20 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Game {
-	public Game() {
+	private static Game instance;
+	private World world;
+
+	private Game() {}
+
+	public static Game getInstance() {
+	    if (instance == null) instance = new Game();
+
+	    return instance;
+    }
+
+    public World getWorld() {return this.world;}
+
+	public void start() {
 		Window.setCallbacks();
 		
 		if (!glfwInit()) {
@@ -55,8 +68,8 @@ public class Game {
 
 		Map map = new Map(new int[50][50], entities);
 		
-		World world = new World(map);
-		world.calculateView(window);
+		this.world = new World(map);
+		this.world.calculateView(window);
 
         //GUI gui = new GUI();
 		
@@ -85,16 +98,16 @@ public class Game {
 			while (unprocessed >= frameCap) {
 				if (window.hasResized()) {
 					camera.setProjection(window.getWidth(), window.getHeight());
-					world.calculateView(window);
+					this.world.calculateView(window);
 					glViewport(0, 0, window.getWidth(), window.getHeight());
 				}
 				
 				unprocessed -= frameCap;
 				canRender = true;
 				
-				world.update((float) frameCap, window, camera);
+				this.world.update((float) frameCap, window, camera);
 				
-				world.correctCamera(camera, window);
+				this.world.correctCamera(camera, window);
 				
 				window.update();
 				
@@ -109,7 +122,7 @@ public class Game {
 			if (canRender) {
 				glClear(GL_COLOR_BUFFER_BIT);
 				
-				world.render(tr, shader, camera);
+				this.world.render(tr, shader, camera);
 
 				//gui.render(camera);
 
@@ -125,6 +138,6 @@ public class Game {
 	}
 	
 	public static void main(String[] args) {
-		new Game();
+		Game.getInstance().start();
 	}
 }
