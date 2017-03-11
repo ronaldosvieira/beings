@@ -1,12 +1,11 @@
 package entity.model;
 
-import entity.Transform;
+import org.joml.Vector2f;
 
 public abstract class Mammal extends Animal {
 
-	public Mammal(String name, Transform transform) {
-		super(name, transform);
-		// TODO Auto-generated constructor stub
+	public Mammal(String name, Vector2f scale, Vector2f position) {
+		super(name, scale, position);
 	}
 
 }

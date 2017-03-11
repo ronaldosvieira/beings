@@ -14,6 +14,8 @@ import render.Camera;
 import render.Model;
 import world.World;
 
+import java.util.Vector;
+
 public abstract class Entity {
 	protected AABB boundingBox;
 	//private Texture texture;
@@ -24,14 +26,14 @@ public abstract class Entity {
 	private boolean isSolid;
 	private boolean isWalkable;
 	
-	public Entity(int maxAnimations, Transform transform) {
+	public Entity(int maxAnimations, Vector2f scale, Vector2f position) {
 		this.animations = new Animation[maxAnimations];
         this.useAnimation = 0;
 
         this.transform = new Transform();
-        this.transform.pos.set(transform.pos.x,
-                transform.pos.y, 0);
-        this.transform.scale.set(transform.scale.x, transform.scale.y, transform.scale.z);
+        this.transform.pos.set(position.x,
+                position.y, 0);
+        this.transform.scale.set(scale.x, scale.y, 1);
 
 		this.isSolid = false;
 		

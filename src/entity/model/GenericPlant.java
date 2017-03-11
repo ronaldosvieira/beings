@@ -1,15 +1,13 @@
 package entity.model;
 
-import java.nio.file.Paths;
-
-import entity.Transform;
+import org.joml.Vector2f;
 import render.Animation;
 
 public class GenericPlant extends Plant {
 	private boolean hasFruit;
 
-	public GenericPlant(Transform transform) {
-		super("generic-plant", transform);
+	public GenericPlant(Vector2f position) {
+		super("generic-plant", new Vector2f(2, 3), position);
 		
 		this.hasFruit = true;
 

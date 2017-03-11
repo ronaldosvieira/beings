@@ -2,13 +2,16 @@ package entity.model;
 
 import entity.Transform;
 import io.Window;
+import org.joml.Vector2f;
 import render.Camera;
 import world.World;
 
 public class Wolf extends Mammal {
 	
-	public Wolf(Transform transform) {
-		super("wolf", transform);
+	public Wolf(Vector2f position) {
+		super("wolf",
+                new Vector2f(3, 3),
+                position);
 	}
 	
 	@Override

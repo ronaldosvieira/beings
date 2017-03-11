@@ -78,22 +78,10 @@ public class World {
 			}
 		}
 		
-		// todo
-		
-		Transform t = new Transform();
-		t.scale.set(2, 2, 1);
-		t.pos.add(20, -20, 0);
-		entities.add(new Rabbit(t));
-		
-		Transform t2 = new Transform();
-		t2.scale.set(3, 3, 1);
-		t2.pos.add(20, -20, 0);
-		entities.add(new Wolf(t2));
-		
-		Transform t3 = new Transform();
-		t3.scale.set(2, 2, 1);
-		t3.pos.set(16, -16, 1);
-		entities.add(new Grass(t3));
+		// todo: move the entity placement to somewhere better
+		entities.add(new Rabbit(new Vector2f(20, -20)));
+		entities.add(new Wolf(new Vector2f(20, -20)));
+		entities.add(new Grass(new Vector2f(16, -16)));
 	}
 	
 	public void update(float delta, Window window, Camera camera) {

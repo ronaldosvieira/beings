@@ -1,12 +1,10 @@
 package entity.model;
 
-import org.joml.Vector2f;
-
-import entity.Transform;
 import entity.model.strategies.FeedingStrategy;
 import entity.model.strategies.MoveStrategy;
 import entity.model.strategies.RandomMoveStrategy;
 import entity.model.util.AnimalAnim;
+import org.joml.Vector2f;
 import render.Animation;
 
 public abstract class Animal extends LivingThing {
@@ -22,8 +20,8 @@ public abstract class Animal extends LivingThing {
 	private boolean isMoving;
 	private float speed;
 
-	public Animal(String name, Transform transform) {
-		super(name, AnimalAnim.AMOUNT, transform);
+	public Animal(String name, Vector2f scale, Vector2f position) {
+		super(name, AnimalAnim.AMOUNT, scale, position);
 		
 		this.currentAnim = AnimalAnim.IDLE_E;
 		this.currentDirection = new Vector2f(.0f, .0f);
@@ -49,10 +47,10 @@ public abstract class Animal extends LivingThing {
 	
 	protected void move(float delta, Vector2f direction) {
 		Vector2f movement = new Vector2f();
-		movement.add(speed * delta * direction.x, 
+		movement.add(speed * delta * direction.x,
 				speed * delta * direction.y);
 		
-		this.isMoving = movement.length() != 0? true : false;
+		this.isMoving = movement.length() != 0;
 		
 		this.currentDirection = direction;
 		
