@@ -1,7 +1,7 @@
 package entity.model;
 
 import entity.model.mind.Mind;
-import entity.model.mind.Sense;
+import entity.model.mind.senses.Sense;
 import io.Window;
 import org.joml.Vector2f;
 import render.Camera;

@@ -2,6 +2,7 @@ package entity.model.mind;
 
 import entity.model.LivingThing;
 import entity.model.Thing;
+import entity.model.mind.senses.Sense;
 
 import java.util.ArrayList;
 import java.util.List;

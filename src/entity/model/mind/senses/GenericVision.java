@@ -3,7 +3,6 @@ package entity.model.mind.senses;
 import entity.Entity;
 import entity.model.LivingThing;
 import entity.model.Thing;
-import entity.model.mind.Sense;
 import game.Game;
 import org.joml.Vector2f;
 
