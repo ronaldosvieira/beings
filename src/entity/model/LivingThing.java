@@ -7,6 +7,7 @@ import org.joml.Vector2f;
 import render.Camera;
 import world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class LivingThing extends Thing {	
@@ -19,7 +20,7 @@ public abstract class LivingThing extends Thing {
 
 		this.isAlive = true;
 		this.mind = new Mind(this);
-		this.senses = senses;
+		this.senses = new ArrayList<>();
 	}
 
     @Override
@@ -29,4 +30,8 @@ public abstract class LivingThing extends Thing {
 
     public List<Sense> getSenses() {return this.senses;}
 	public boolean isAlive() {return this.isAlive;}
+
+	protected void addSense(Sense sense) {
+	    if (!this.senses.contains(sense)) this.senses.add(sense);
+    }
 }
