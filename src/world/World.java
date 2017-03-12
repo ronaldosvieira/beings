@@ -198,4 +198,7 @@ public class World {
 	}
 
 	public List<Entity> getEntities() {return this.entities;}
+
+	public int getWidth() {return this.width;}
+	public int getHeight() {return this.height;}
 }
