@@ -6,7 +6,6 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import org.joml.Matrix4f;
@@ -15,10 +14,6 @@ import org.joml.Vector3f;
 
 import collision.AABB;
 import entity.Entity;
-import entity.Transform;
-import entity.model.Grass;
-import entity.model.Rabbit;
-import entity.model.Wolf;
 import game.Shader;
 import io.Window;
 import render.Camera;
@@ -95,7 +90,7 @@ public class World {
 			entities.get(i).collideWithTiles(this);
 			
 			for (int j = i + 1; j < entities.size(); j++) {
-				entities.get(i).collideWithEntitiy(entities.get(j));
+				entities.get(i).collideWithEntities(entities.get(j));
 			}
 			
 			entities.get(i).collideWithTiles(this);
