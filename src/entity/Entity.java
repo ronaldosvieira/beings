@@ -171,6 +171,8 @@ public abstract class Entity {
                 this.transform.pos.y);
     }
 
+    public AABB getBoundingBox() {return this.boundingBox;}
+
 	public boolean isSolid() {return this.isSolid;}
 	public boolean isWalkable() {return this.isWalkable;}
 	
