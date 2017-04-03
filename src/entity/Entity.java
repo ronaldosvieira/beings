@@ -146,7 +146,8 @@ public abstract class Entity {
 	
 	public void collideWithEntities(Entity entity) {
 		Collision collision = boundingBox.getCollision(entity.boundingBox);
-		
+
+		if (this == entity) return;
 		if (this.isWalkable() || entity.isWalkable()) return;
 		
 		if (collision.isIntersecting) {
