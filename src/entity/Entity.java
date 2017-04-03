@@ -16,8 +16,12 @@ import render.Model;
 import world.World;
 
 import java.util.Vector;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Entity {
+    static AtomicInteger nextId = new AtomicInteger();
+
+    private int id;
 	protected AABB boundingBox;
 	//private Texture texture;
 	protected Animation[] animations;
@@ -28,6 +32,8 @@ public abstract class Entity {
 	private boolean isWalkable;
 	
 	public Entity(int maxAnimations, Vector2f scale, Vector2f position) {
+	    this.id = nextId.incrementAndGet();
+
 		this.animations = new Animation[maxAnimations];
         this.useAnimation = 0;
 
@@ -160,6 +166,8 @@ public abstract class Entity {
 			}
 		}
 	}
+
+	public int getId() {return this.id;}
 
 	public Vector2f getScale() {
 	    return new Vector2f(this.transform.scale.x,
