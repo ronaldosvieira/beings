@@ -61,7 +61,7 @@ public class QuadTree {
         // Object can completely fit within the top quadrants
         boolean topQuadrant = topLeft.y < bounds.getCenter().y
                 && topLeft.y + (2 * rect.getHalfExtent().y) < bounds.getCenter().y;
-        // Object can completely fit within thebottom quadrants
+        // Object can completely fit within the bottom quadrants
         boolean bottomQuadrant = topLeft.y > bounds.getCenter().y;
 
         // Object can completely fit within the left quadrants
