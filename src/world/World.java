@@ -118,14 +118,16 @@ public class World {
 		}
 		
 		// TODO: melhora melhora
-		entities.sort((Entity o1, Entity o2) -> {
+        List<Entity> sortedEntities = new ArrayList<>(entities);
+
+		sortedEntities.sort((Entity o1, Entity o2) -> {
 			int v1 = o1.isWalkable()? 1 : 0;
 			int v2 = o2.isWalkable()? 1 : 0;
 
 			return v2 - v1;
 		});
 		
-		for (Entity entity: entities) {
+		for (Entity entity: sortedEntities) {
 			entity.render(shader, camera, this);
 		}
 	}
