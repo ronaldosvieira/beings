@@ -25,8 +25,8 @@ public class Mind {
             if (!workingMemory.contains(perception)) {
                 workingMemory.add(perception);
 
-                System.out.println("Living thing '" + this.being.getName()
-                        + "' just saw '" + perception.getName() + "'.");
+                /*System.out.println("Living thing '" + this.being.getName()
+                        + "' just saw '" + perception.getName() + "'.");*/
 
                 while (workingMemory.size() > 4) {
                     workingMemory.remove(0);

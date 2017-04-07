@@ -1,21 +1,18 @@
 package entity;
 
 import assets.Assets;
+import collision.AABB;
+import collision.Collision;
 import game.Game;
+import game.Shader;
+import io.Window;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
-
-import collision.AABB;
-import collision.Collision;
-import game.Shader;
-import io.Window;
 import render.Animation;
 import render.Camera;
-import render.Model;
 import world.World;
 
-import java.util.Vector;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Entity {
