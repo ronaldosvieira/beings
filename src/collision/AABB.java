@@ -13,8 +13,8 @@ public class AABB {
 	
 	public Collision getCollision(AABB box2) {
 		Vector2f distance = box2.center.sub(center, new Vector2f());
-		distance.x = (float) Math.abs(distance.x);
-		distance.y = (float) Math.abs(distance.y);
+		distance.x = Math.abs(distance.x);
+		distance.y = Math.abs(distance.y);
 		
 		distance.sub(halfExtent.add(box2.getHalfExtent(), new Vector2f()));
 		

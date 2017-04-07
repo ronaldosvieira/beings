@@ -16,6 +16,7 @@ import world.World;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -62,9 +63,19 @@ public class Game {
 
         List<Entity> entities = new ArrayList<>();
 
-        entities.add(new Rabbit(new Vector2f(20, -20)));
-        entities.add(new Wolf(new Vector2f(20, -20)));
-        entities.add(new Grass(new Vector2f(16, -16)));
+        Random random = new Random();
+
+        for (int i = 0; i < 15; i++) {
+            entities.add(new Rabbit(new Vector2f(
+                    random.nextFloat() * 50,
+                    -random.nextFloat() * 50)));
+            entities.add(new Wolf(new Vector2f(
+                    random.nextFloat() * 50,
+                    -random.nextFloat() * 50)));
+            entities.add(new Grass(new Vector2f(
+                    random.nextFloat() * 50,
+                    -random.nextFloat() * 50)));
+        }
 
 		Map map = new Map(new int[50][50], entities);
 		

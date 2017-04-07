@@ -1,23 +1,24 @@
 package entity;
 
 import assets.Assets;
+import collision.AABB;
+import collision.Collision;
 import game.Game;
+import game.Shader;
+import io.Window;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
-
-import collision.AABB;
-import collision.Collision;
-import game.Shader;
-import io.Window;
 import render.Animation;
 import render.Camera;
-import render.Model;
 import world.World;
 
-import java.util.Vector;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Entity {
+    static AtomicInteger nextId = new AtomicInteger();
+
+    private int id;
 	protected AABB boundingBox;
 	//private Texture texture;
 	protected Animation[] animations;
@@ -28,6 +29,8 @@ public abstract class Entity {
 	private boolean isWalkable;
 	
 	public Entity(int maxAnimations, Vector2f scale, Vector2f position) {
+	    this.id = nextId.incrementAndGet();
+
 		this.animations = new Animation[maxAnimations];
         this.useAnimation = 0;
 
@@ -140,7 +143,8 @@ public abstract class Entity {
 	
 	public void collideWithEntities(Entity entity) {
 		Collision collision = boundingBox.getCollision(entity.boundingBox);
-		
+
+		if (this == entity) return;
 		if (this.isWalkable() || entity.isWalkable()) return;
 		
 		if (collision.isIntersecting) {
@@ -161,6 +165,8 @@ public abstract class Entity {
 		}
 	}
 
+	public int getId() {return this.id;}
+
 	public Vector2f getScale() {
 	    return new Vector2f(this.transform.scale.x,
                 this.transform.scale.y);
@@ -170,6 +176,8 @@ public abstract class Entity {
 	    return new Vector2f(this.transform.pos.x,
                 this.transform.pos.y);
     }
+
+    public AABB getBoundingBox() {return this.boundingBox;}
 
 	public boolean isSolid() {return this.isSolid;}
 	public boolean isWalkable() {return this.isWalkable;}
@@ -183,4 +191,19 @@ public abstract class Entity {
 		this.isWalkable = isWalkable;
 		return this;
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Entity)) return false;
+
+        Entity entity = (Entity) o;
+
+        return id == entity.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }

@@ -1,23 +1,22 @@
 package world;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_A;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_D;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.joml.Matrix4f;
-import org.joml.Vector2f;
-import org.joml.Vector3f;
-
 import collision.AABB;
+import collision.QuadTree;
 import entity.Entity;
 import game.Shader;
 import io.Window;
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
 import render.Camera;
 import render.TileRenderer;
+import util.Pair;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 public class World {
 	private int viewX, viewY;
@@ -27,6 +26,9 @@ public class World {
 	private int width, height;
 	private Matrix4f world;
 	private int scale;
+
+	private QuadTree quad;
+	private HashSet<Pair<Integer, Integer>> collisions;
 	
 	public World() {
 		this.width = 64;
@@ -37,6 +39,10 @@ public class World {
 		this.boundingBoxes = new AABB[width * height];
 		
 		this.entities = new ArrayList<>();
+		this.collisions = new HashSet<>();
+		this.quad = new QuadTree(0,
+                new AABB(new Vector2f(this.width / 2, this.height / 2),
+                        new Vector2f(this.width / 2, this.height / 2)));
 		
 		this.world = new Matrix4f().translate(0, 0, 0);
 		this.world.scale(scale);
@@ -61,6 +67,10 @@ public class World {
 		}
 
 		this.entities = map.getEntities();
+		this.collisions = new HashSet<>();
+        this.quad = new QuadTree(0,
+                new AABB(new Vector2f(this.width / 2, this.height / 2),
+                        new Vector2f(this.width / 2, this.height / 2)));
 	}
 	
 	public void update(float delta, Window window, Camera camera) {
@@ -81,20 +91,35 @@ public class World {
 		if (window.getInput().isKeyDown(GLFW_KEY_S)) {
 			camera.addPosition(new Vector3f(0, movement, 0));
 		}
-		
-		for (Entity entity : entities) {
+
+        quad.clear();
+		collisions.clear();
+
+        for (Entity entity : entities) {
 			entity.update(delta, window, camera, this);
+
+			quad.insert(entity);
 		}
-		
-		for (int i = 0; i < entities.size(); i++) {
-			entities.get(i).collideWithTiles(this);
-			
-			for (int j = i + 1; j < entities.size(); j++) {
-				entities.get(i).collideWithEntities(entities.get(j));
-			}
-			
-			entities.get(i).collideWithTiles(this);
-		}
+
+        for (Entity entity : entities) {
+            entity.collideWithTiles(this);
+
+            for (Entity nearEntity : quad.retrieve(entity)) {
+                if (entity.equals(nearEntity)) continue;
+
+                Pair<Integer, Integer> pair =
+                        new Pair<>(entity.getId(), nearEntity.getId());
+                boolean checked = collisions.contains(pair)
+                        || collisions.contains(pair.reverse());
+
+                if (!checked) {
+                    entity.collideWithEntities(nearEntity);
+                    collisions.add(pair);
+                }
+            }
+
+            entity.collideWithTiles(this);
+        }
 	}
 	
 	public void render(TileRenderer renderer, Shader shader, Camera camera) {
