@@ -56,7 +56,7 @@ public class QuadTree {
     private int getIndex(Entity entity) {
         int index = -1;
         AABB rect = entity.getBoundingBox();
-        Vector2f topLeft = rect.getCenter().sub(rect.getHalfExtent());
+        Vector2f topLeft = rect.getCenter().sub(rect.getHalfExtent(), new Vector2f());
 
         // Object can completely fit within the top quadrants
         boolean topQuadrant = topLeft.y < bounds.getCenter().y
