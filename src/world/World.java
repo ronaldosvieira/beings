@@ -105,6 +105,8 @@ public class World {
             entity.collideWithTiles(this);
 
             for (Entity nearEntity : quad.retrieve(entity)) {
+                if (entity.equals(nearEntity)) continue;
+
                 Pair<Integer, Integer> pair =
                         new Pair<>(entity.getId(), nearEntity.getId());
                 boolean checked = collisions.contains(pair)
