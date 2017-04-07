@@ -121,4 +121,25 @@ public class QuadTree {
 
         return nearEntities;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder out = new StringBuilder();
+
+        out.append("level: ").append(level).append("\n");
+        out.append("entities: ").append(entities).append("\n");
+        out.append("nodes: ").append("\n");
+
+        if (nodes[0] != null) {
+            for (QuadTree node : nodes) {
+                out.append(node);
+            }
+        } else {
+            out.append("none");
+        }
+
+        out.append("\n");
+
+        return out.toString();
+    }
 }
