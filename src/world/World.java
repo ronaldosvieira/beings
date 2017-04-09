@@ -93,11 +93,15 @@ public class World {
 		}
 
 		if (window.getInput().isMouseButtonDown(GLFW_MOUSE_BUTTON_LEFT)) {
-            camera.zoomIn();
-        }
+		    double zoom = camera.getWidth() / window.getWidth();
+
+		    if (zoom > .25) camera.zoomIn();
+		}
 
         if (window.getInput().isMouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT)) {
-		    camera.zoomOut();
+            double zoom = camera.getWidth() / window.getWidth();
+
+		    if (zoom < 3) camera.zoomOut();
         }
 
         quad.clear();
