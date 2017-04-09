@@ -4,7 +4,7 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 public class Camera {
-    private int width, height;
+    private double width, height;
 	private Vector3f position;
 	private Matrix4f projection;
 	
@@ -31,22 +31,23 @@ public class Camera {
 	}
 
 	public void zoomIn() {
-		setCameraBounds(getWidth() - 5, getHeight() - 5);
+		setCameraBounds(getWidth() * .99, getHeight() * .99);
 	}
 
 	public void zoomOut() {
-	    setCameraBounds(getWidth() + 5, getHeight() + 5);
+	    setCameraBounds(getWidth() * 1.01, getHeight() * 1.01);
     }
 
-    private void setCameraBounds(int width, int height) {
+    private void setCameraBounds(double width, double height) {
 	    this.width = width;
 	    this.height = height;
 
-	    this.projection.setOrtho2D(-width / 2, width / 2, -height / 2, height / 2);
+	    this.projection.setOrtho2D((int) (-width / 2), (int) (width / 2),
+				(int) (-height / 2), (int) (height / 2));
     }
 
-	public int getWidth() {return this.width;}
-	public int getHeight() {return this.height;}
+	public double getWidth() {return this.width;}
+	public double getHeight() {return this.height;}
 	public Vector3f getPosition() {return this.position;}
 	public Matrix4f getUntransformedProjection() {return this.projection;}
 	public Matrix4f getProjection() {return projection.translate(position, new Matrix4f());}
