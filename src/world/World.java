@@ -106,6 +106,16 @@ public class World {
 		    if (zoom < 3) camera.zoomOut();
         }
 
+        if (window.getInput().getJoystickAxes(GLFW_JOYSTICK_1) != 0) {
+            camera.addPosition(new Vector3f(
+                    -movement * window.getInput().getJoystickAxes(GLFW_JOYSTICK_1), 0, 0));
+        }
+
+        if (window.getInput().getJoystickAxes(GLFW_JOYSTICK_2) != 0) {
+            camera.addPosition(new Vector3f(
+                    0, -movement * window.getInput().getJoystickAxes(GLFW_JOYSTICK_2), 0));
+        }
+
         quad.clear();
 		collisions.clear();
 
