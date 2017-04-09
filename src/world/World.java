@@ -92,13 +92,15 @@ public class World {
 			camera.addPosition(new Vector3f(0, movement, 0));
 		}
 
-		if (window.getInput().isMouseButtonDown(GLFW_MOUSE_BUTTON_LEFT)) {
+        if (window.getInput().isMouseButtonDown(GLFW_MOUSE_BUTTON_LEFT) ||
+                window.getInput().getJoystickAxes(GLFW_JOYSTICK_6) > 0) {
 		    double zoom = camera.getWidth() / window.getWidth();
 
 		    if (zoom > .25) camera.zoomIn();
 		}
 
-        if (window.getInput().isMouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT)) {
+        if (window.getInput().isMouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT) ||
+                window.getInput().getJoystickAxes(GLFW_JOYSTICK_5) > 0) {
             double zoom = camera.getWidth() / window.getWidth();
 
 		    if (zoom < 3) camera.zoomOut();
