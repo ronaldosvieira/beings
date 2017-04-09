@@ -32,7 +32,15 @@ public class Input {
 	public boolean isKeyReleased(int key) {
 		return !isKeyDown(key) && keys[key];
 	}
-	
+
+	public boolean isJoystickButtonDown(int button) {
+	    return glfwGetJoystickButtons(GLFW_JOYSTICK_1).get(button) == 1;
+    }
+
+    public float getJoystickAxes(int button) {
+	    return glfwGetJoystickAxes(GLFW_JOYSTICK_1).get(button);
+    }
+
 	public void update() {
 		for (int i = GLFW_KEY_FIRST; i < GLFW_KEY_LAST; i++) {
 			keys[i] = isKeyDown(i);
