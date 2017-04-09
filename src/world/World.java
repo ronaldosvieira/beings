@@ -92,6 +92,14 @@ public class World {
 			camera.addPosition(new Vector3f(0, movement, 0));
 		}
 
+		if (window.getInput().isMouseButtonDown(GLFW_MOUSE_BUTTON_LEFT)) {
+            camera.zoomIn();
+        }
+
+        if (window.getInput().isMouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT)) {
+		    camera.zoomOut();
+        }
+
         quad.clear();
 		collisions.clear();
 
