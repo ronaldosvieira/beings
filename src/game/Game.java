@@ -62,22 +62,23 @@ public class Game {
 		Shader shader = new Shader("shader");
 
         List<Entity> entities = new ArrayList<>();
-
         Random random = new Random();
+
+        int worldSize = 50;
 
         for (int i = 0; i < 15; i++) {
             entities.add(new Rabbit(new Vector2f(
-                    random.nextFloat() * 50,
-                    -random.nextFloat() * 50)));
+                    random.nextFloat() * worldSize,
+                    -random.nextFloat() * worldSize)));
             entities.add(new Wolf(new Vector2f(
-                    random.nextFloat() * 50,
-                    -random.nextFloat() * 50)));
+                    random.nextFloat() * worldSize,
+                    -random.nextFloat() * worldSize)));
             entities.add(new Grass(new Vector2f(
-                    random.nextFloat() * 50,
-                    -random.nextFloat() * 50)));
+                    random.nextFloat() * worldSize,
+                    -random.nextFloat() * worldSize)));
         }
 
-		Map map = new Map(new int[50][50], entities);
+		Map map = new Map(new int[worldSize][worldSize], entities);
 		
 		this.world = new World(map);
 		this.world.calculateView(window);
