@@ -81,7 +81,7 @@ public class Game {
 		Map map = new Map(new int[worldSize][worldSize], entities);
 		
 		this.world = new World(map);
-		this.world.calculateView(window);
+		this.world.calculateView(camera);
 
         //GUI gui = new GUI();
 		
@@ -110,7 +110,7 @@ public class Game {
 			while (unprocessed >= frameCap) {
 				if (window.hasResized()) {
 					camera.setProjection(window.getWidth(), window.getHeight());
-					this.world.calculateView(window);
+					this.world.calculateView(camera);
 					glViewport(0, 0, window.getWidth(), window.getHeight());
 				}
 				
