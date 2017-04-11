@@ -151,12 +151,19 @@ public class World {
 	public void render(TileRenderer renderer, Shader shader, Camera camera) {
 		int posX = (int) camera.getPosition().x / (scale * 2);
 		int posY = (int) camera.getPosition().y / (scale * 2);
-		
-		for (int i = 0; i < viewX; i++) {
+
+        for (int i = 0; i < viewX; i++) {
 			for (int j = 0; j < viewY; j++) {
-				Tile tile = getTile(
-						i - posX - (viewX / 2) + 1, 
-						j + posY - (viewY / 2));
+			    int tileX = i - posX - (viewX / 2) + 1;
+			    int tileY = j + posY - (viewY / 2);
+
+			    tileX = Math.max(0, tileX);
+			    tileX = Math.min(tileX, width);
+
+			    tileY = Math.max(0, tileY);
+			    tileY = Math.min(tileY, height);
+
+			    Tile tile = getTile(tileX, tileY);
 				
 				if (tile != null) {
 					renderer.renderTile(

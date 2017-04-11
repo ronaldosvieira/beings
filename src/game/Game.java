@@ -78,7 +78,10 @@ public class Game {
                     -random.nextFloat() * worldSize)));
         }
 
-		Map map = new Map(new int[worldSize][worldSize], entities);
+        int[][] tiles = new int[worldSize][worldSize];
+        tiles[0][0] = 1;
+
+		Map map = new Map(tiles, entities);
 		
 		this.world = new World(map);
 		this.world.calculateView(camera);
