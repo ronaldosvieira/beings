@@ -94,9 +94,7 @@ public class World {
 
         if (window.getInput().isMouseButtonDown(GLFW_MOUSE_BUTTON_LEFT) ||
                 window.getInput().getJoystickAxes(GLFW_JOYSTICK_6) > 0) {
-		    double zoom = camera.getWidth() / window.getWidth();
-
-		    if (zoom > .25) {
+		    if (camera.getZoom() > .25) {
 		        camera.zoomIn();
 		        calculateView(camera);
             }
@@ -104,9 +102,7 @@ public class World {
 
         if (window.getInput().isMouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT) ||
                 window.getInput().getJoystickAxes(GLFW_JOYSTICK_5) > 0) {
-            double zoom = camera.getWidth() / window.getWidth();
-
-		    if (zoom < 3) {
+		    if (camera.getZoom() < 3) {
 		        camera.zoomOut();
 		        calculateView(camera);
             }
@@ -188,8 +184,8 @@ public class World {
 	}
 	
 	public void calculateView(Camera camera) {
-		viewX = (int) (camera.getWidth() / (scale * 2)) + 4;
-		viewY = (int) (camera.getHeight() / (scale * 2)) + 4;
+		viewX = (int) ((camera.getWidth() * camera.getZoom()) / (scale * 2)) + 4;
+		viewY = (int) ((camera.getHeight() * camera.getZoom()) / (scale * 2)) + 4;
 	}
 	
 	public Matrix4f getWorldMatrix() {

@@ -109,7 +109,7 @@ public class Game {
 			
 			while (unprocessed >= frameCap) {
 				if (window.hasResized()) {
-					camera.setProjection(window.getWidth(), window.getHeight());
+					camera.setSize(window.getWidth(), window.getHeight());
 					this.world.calculateView(camera);
 					glViewport(0, 0, window.getWidth(), window.getHeight());
 				}

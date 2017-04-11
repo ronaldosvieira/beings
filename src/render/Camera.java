@@ -1,10 +1,12 @@
 package render;
 
 import org.joml.Matrix4f;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 public class Camera {
     private double width, height;
+    private double zoom;
 	private Vector3f position;
 	private Matrix4f projection;
 	
@@ -12,14 +14,15 @@ public class Camera {
 		this.position = new Vector3f(0, 0, 0);
 		this.width = width;
 		this.height = height;
+		this.zoom = 1;
 
-		setProjection(width, height);
+		setProjection();
 	}
 	
-	public void setProjection(int width, int height) {
+	public void setProjection() {
 		this.projection = new Matrix4f();
 
-		setCameraBounds(width, height);
+		updateCameraBounds();
 	}
 	
 	public void setPosition(Vector3f position) {
@@ -31,23 +34,36 @@ public class Camera {
 	}
 
 	public void zoomIn() {
-		setCameraBounds(getWidth() * .99, getHeight() * .99);
+	    this.zoom *= 0.99;
+		updateCameraBounds();
 	}
 
 	public void zoomOut() {
-	    setCameraBounds(getWidth() * 1.01, getHeight() * 1.01);
+	    this.zoom *= 1.01;
+	    updateCameraBounds();
     }
 
-    private void setCameraBounds(double width, double height) {
+    private void updateCameraBounds() {
+	    this.projection.setOrtho2D((int) ((-width * zoom) / 2), (int) ((width * zoom) / 2),
+				(int) ((-height * zoom) / 2), (int) ((height * zoom) / 2));
+    }
+
+    public void setSize(double width, double height) {
 	    this.width = width;
 	    this.height = height;
 
-	    this.projection.setOrtho2D((int) (-width / 2), (int) (width / 2),
-				(int) (-height / 2), (int) (height / 2));
+	    updateCameraBounds();
+    }
+
+    public void setZoom(double zoom) {
+	    this.zoom = zoom;
+
+	    updateCameraBounds();
     }
 
 	public double getWidth() {return this.width;}
 	public double getHeight() {return this.height;}
+	public double getZoom() {return this.zoom;}
 	public Vector3f getPosition() {return this.position;}
 	public Matrix4f getUntransformedProjection() {return this.projection;}
 	public Matrix4f getProjection() {return projection.translate(position, new Matrix4f());}
