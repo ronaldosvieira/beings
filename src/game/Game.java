@@ -62,25 +62,29 @@ public class Game {
 		Shader shader = new Shader("shader");
 
         List<Entity> entities = new ArrayList<>();
-
         Random random = new Random();
+
+        int worldSize = 50;
 
         for (int i = 0; i < 15; i++) {
             entities.add(new Rabbit(new Vector2f(
-                    random.nextFloat() * 50,
-                    -random.nextFloat() * 50)));
+                    random.nextFloat() * worldSize,
+                    -random.nextFloat() * worldSize)));
             entities.add(new Wolf(new Vector2f(
-                    random.nextFloat() * 50,
-                    -random.nextFloat() * 50)));
+                    random.nextFloat() * worldSize,
+                    -random.nextFloat() * worldSize)));
             entities.add(new Grass(new Vector2f(
-                    random.nextFloat() * 50,
-                    -random.nextFloat() * 50)));
+                    random.nextFloat() * worldSize,
+                    -random.nextFloat() * worldSize)));
         }
 
-		Map map = new Map(new int[50][50], entities);
+        int[][] tiles = new int[worldSize][worldSize];
+        tiles[0][0] = 1;
+
+		Map map = new Map(tiles, entities);
 		
 		this.world = new World(map);
-		this.world.calculateView(window);
+		this.world.calculateView(camera);
 
         //GUI gui = new GUI();
 		
@@ -108,8 +112,8 @@ public class Game {
 			
 			while (unprocessed >= frameCap) {
 				if (window.hasResized()) {
-					camera.setProjection(window.getWidth(), window.getHeight());
-					this.world.calculateView(window);
+					camera.setSize(window.getWidth(), window.getHeight());
+					this.world.calculateView(camera);
 					glViewport(0, 0, window.getWidth(), window.getHeight());
 				}
 				

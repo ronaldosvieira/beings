@@ -1,5 +1,8 @@
 package io;
 
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
+
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Input {
@@ -32,7 +35,19 @@ public class Input {
 	public boolean isKeyReleased(int key) {
 		return !isKeyDown(key) && keys[key];
 	}
-	
+
+	public boolean isJoystickButtonDown(int button) {
+	    ByteBuffer buttons = glfwGetJoystickButtons(GLFW_JOYSTICK_1);
+
+	    return buttons != null && buttons.get(button) == 1;
+    }
+
+    public float getJoystickAxes(int button) {
+	    FloatBuffer axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1);
+
+	    return axes != null? axes.get(button) : 0.0f;
+    }
+
 	public void update() {
 		for (int i = GLFW_KEY_FIRST; i < GLFW_KEY_LAST; i++) {
 			keys[i] = isKeyDown(i);
