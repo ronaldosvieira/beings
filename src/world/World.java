@@ -15,6 +15,7 @@ import util.Pair;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -174,20 +175,28 @@ public class World {
 				}
 			}
 		}
-		
-		// TODO: melhora melhora
+
         List<Entity> sortedEntities = new ArrayList<>(entities);
 
-		sortedEntities.sort((Entity o1, Entity o2) -> {
-			int v1 = o1.isWalkable()? 1 : 0;
-			int v2 = o2.isWalkable()? 1 : 0;
+        sortedEntities.sort((Entity o1, Entity o2) ->
+                (int) (o2.getPosition().y - o1.getPosition().y));
 
-			return v2 - v1;
-		});
-		
-		for (Entity entity: sortedEntities) {
+		List<Entity> walkableEntities = new ArrayList<>(sortedEntities)
+                .parallelStream()
+                .filter(entity -> entity.isWalkable())
+                .collect(Collectors.toList());
+        List<Entity> nonWalkableEntities = new ArrayList<>(sortedEntities)
+                .parallelStream()
+                .filter(entity -> !entity.isWalkable())
+                .collect(Collectors.toList());
+
+		for (Entity entity: walkableEntities) {
 			entity.render(shader, camera, this);
 		}
+
+		for (Entity entity: nonWalkableEntities) {
+		    entity.render(shader, camera, this);
+        }
 	}
 	
 	public void calculateView(Camera camera) {
