@@ -159,10 +159,10 @@ public class World {
 			    int tileY = j + posY - (viewY / 2);
 
 			    tileX = Math.max(0, tileX);
-			    tileX = Math.min(tileX, width);
+			    tileX = Math.min(tileX, width - 1);
 
 			    tileY = Math.max(0, tileY);
-			    tileY = Math.min(tileY, height);
+			    tileY = Math.min(tileY, height - 1);
 
 			    Tile tile = getTile(tileX, tileY);
 				
