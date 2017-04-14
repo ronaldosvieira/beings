@@ -1,5 +1,6 @@
 package entity.model.mind.senses;
 
+import collision.AABB;
 import entity.Entity;
 import entity.model.LivingThing;
 import entity.model.Thing;
@@ -22,7 +23,7 @@ public class GenericVision extends Sense {
         Vector2f position = this.getBeing().getPosition();
         List<Entity> entities = Game.getInstance()
                 .getWorld()
-                .getEntities()
+                .getNearEntities(new AABB(position, new Vector2f(10, 10)))
                 .stream()
                 .filter(entity -> !entity.equals(this.getBeing()))
                 .collect(Collectors.toList());

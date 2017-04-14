@@ -264,6 +264,10 @@ public class World {
 
 	public List<Entity> getEntities() {return this.entities;}
 
+	public List<Entity> getNearEntities(Entity entity) {return this.quad.retrieve(entity);}
+
+	public List<Entity> getNearEntities(AABB box) {return this.quad.retrieve(box);}
+
 	public int getWidth() {return this.width;}
 	public int getHeight() {return this.height;}
 }
