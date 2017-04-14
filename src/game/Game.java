@@ -66,20 +66,24 @@ public class Game {
 
         int worldSize = 50;
 
+		entities.add(new Wolf(new Vector2f(
+				25,
+				-25)));
+
         for (int i = 0; i < 15; i++) {
-            entities.add(new Rabbit(new Vector2f(
-                    random.nextFloat() * worldSize,
-                    -random.nextFloat() * worldSize)));
-            entities.add(new Wolf(new Vector2f(
-                    random.nextFloat() * worldSize,
-                    -random.nextFloat() * worldSize)));
             entities.add(new Grass(new Vector2f(
                     random.nextFloat() * worldSize,
                     -random.nextFloat() * worldSize)));
         }
 
+        for (int i = 0; i < 50; i++) {
+            entities.add(new Rabbit(new Vector2f(
+                    random.nextFloat() * worldSize,
+                    -random.nextFloat() * worldSize)));
+        }
+
         int[][] tiles = new int[worldSize][worldSize];
-        tiles[0][0] = 1;
+//        tiles[0][0] = 1;
 
 		Map map = new Map(tiles, entities);
 		

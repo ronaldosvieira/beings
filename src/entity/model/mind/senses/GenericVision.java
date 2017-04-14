@@ -31,7 +31,7 @@ public class GenericVision extends Sense {
         for (Entity entity : entities) {
             float dist = entity.getPosition().distance(position);
 
-            if (dist <= 10) perceptions.add((Thing) entity);
+            if (dist <= 20) perceptions.add((Thing) entity);
         }
 
         return perceptions;

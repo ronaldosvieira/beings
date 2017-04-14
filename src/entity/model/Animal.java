@@ -7,7 +7,7 @@ import entity.model.util.AnimalAnim;
 import org.joml.Vector2f;
 import render.Animation;
 
-public abstract class Animal extends LivingThing {
+public abstract class Animal extends LivingThing implements Moveable {
 	protected FeedingStrategy feeding;
 	protected MoveStrategy movement;
 	
@@ -78,4 +78,16 @@ public abstract class Animal extends LivingThing {
 		this.currentAnim = anim;
 		super.useAnimation(anim.index());
 	}
+
+    public MoveStrategy getMoveStrategy() {
+	    return this.movement;
+    }
+    public void setMoveStrategy(MoveStrategy strat) {
+	    if (this.movement instanceof RandomMoveStrategy &&
+                strat instanceof RandomMoveStrategy) {
+	        return;
+        } else {
+	        this.movement = strat;
+        }
+    }
 }
