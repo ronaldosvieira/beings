@@ -4,8 +4,11 @@ import entity.model.strategies.FeedingStrategy;
 import entity.model.strategies.MoveStrategy;
 import entity.model.strategies.RandomMoveStrategy;
 import entity.model.util.AnimalAnim;
+import io.Window;
 import org.joml.Vector2f;
 import render.Animation;
+import render.Camera;
+import world.World;
 
 public abstract class Animal extends LivingThing {
 	protected FeedingStrategy feeding;
@@ -77,5 +80,10 @@ public abstract class Animal extends LivingThing {
 	public void selectAnimation(AnimalAnim anim) {
 		this.currentAnim = anim;
 		super.useAnimation(anim.index());
+	}
+
+	@Override
+	public void update(float delta, Window window, Camera camera, World world) {
+		move(delta, this.movement.getMovement(delta));
 	}
 }

@@ -13,11 +13,4 @@ public class Wolf extends Mammal {
 
 		this.addSense(new GenericVision(this));
 	}
-	
-	@Override
-	public void update(float delta, Window window, Camera camera, World world) {
-        super.update(delta, window, camera, world);
-
-		move(delta, this.movement.getMovement(delta));
-	}
 }
