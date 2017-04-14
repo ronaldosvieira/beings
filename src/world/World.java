@@ -128,6 +128,10 @@ public class World {
 			quad.insert(entity);
 		}
 
+		for (Entity entity : entities) {
+            entity.cycle();
+        }
+
         for (Entity entity : entities) {
             entity.collideWithTiles(this);
 

@@ -24,7 +24,7 @@ public abstract class LivingThing extends Thing {
 	}
 
     @Override
-    public void update(float delta, Window window, Camera camera, World world) {
+    public void cycle() {
         this.mind.update();
     }
 
