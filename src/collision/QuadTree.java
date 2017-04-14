@@ -53,20 +53,19 @@ public class QuadTree {
                         new Vector2f(hW, hH)));
     }
 
-    private int getIndex(Entity entity) {
+    private int getIndex(AABB box) {
         int index = -1;
-        AABB rect = entity.getBoundingBox();
-        Vector2f topLeft = rect.getCenter().sub(rect.getHalfExtent(), new Vector2f());
+        Vector2f topLeft = box.getCenter().sub(box.getHalfExtent(), new Vector2f());
 
         // Object can completely fit within the top quadrants
         boolean topQuadrant = topLeft.y < bounds.getCenter().y
-                && topLeft.y + (2 * rect.getHalfExtent().y) < bounds.getCenter().y;
+                && topLeft.y + (2 * box.getHalfExtent().y) < bounds.getCenter().y;
         // Object can completely fit within the bottom quadrants
         boolean bottomQuadrant = topLeft.y > bounds.getCenter().y;
 
         // Object can completely fit within the left quadrants
         if (topLeft.x < bounds.getCenter().x
-                && topLeft.x + (2 * rect.getHalfExtent().x) < bounds.getCenter().x) {
+                && topLeft.x + (2 * box.getHalfExtent().x) < bounds.getCenter().x) {
             if (topQuadrant) index = 1;
             else if (bottomQuadrant) index = 2;
         }
@@ -81,7 +80,7 @@ public class QuadTree {
 
     public void insert(Entity entity) {
         if (nodes[0] != null) {
-            int index = getIndex(entity);
+            int index = getIndex(entity.getBoundingBox());
 
             if (index != -1) {
                 nodes[index].insert(entity);
@@ -97,7 +96,7 @@ public class QuadTree {
 
             int i = 0;
             while (i < entities.size()) {
-                int index = getIndex(entities.get(i));
+                int index = getIndex(entities.get(i).getBoundingBox());
 
                 if (index != -1) {
                     nodes[index].insert(entities.remove(i));
@@ -109,12 +108,16 @@ public class QuadTree {
     }
 
     public List<Entity> retrieve(Entity entity) {
+        return retrieve(entity.getBoundingBox());
+    }
+
+    public List<Entity> retrieve(AABB box) {
         List<Entity> nearEntities = new ArrayList<>();
 
-        int index = getIndex(entity);
+        int index = getIndex(box);
 
         if (index != -1 && nodes[0] != null) {
-            nearEntities.addAll(nodes[index].retrieve(entity));
+            nearEntities.addAll(nodes[index].retrieve(box));
         }
 
         nearEntities.addAll(entities);
