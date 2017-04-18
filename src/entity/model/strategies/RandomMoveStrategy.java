@@ -7,10 +7,10 @@ import org.joml.Vector2f;
 import entity.model.Animal;
 
 public class RandomMoveStrategy extends MoveStrategy {
-	Vector2f direction;
-	float lastMove;
-	float moveTime;
-	boolean isMoving;
+	private Vector2f direction;
+    private float lastMove;
+    private float moveTime;
+    private boolean isMoving;
 	
 	public RandomMoveStrategy(Animal animal) {
 		super(animal);
@@ -32,8 +32,10 @@ public class RandomMoveStrategy extends MoveStrategy {
 			direction = getRandomDirection();
 		}
 		
-		if (isMoving) return direction;
-		else return new Vector2f(0, 0);
+		if (isMoving) animal.setMovementSpeed(0);
+        else animal.setMovementSpeed(5);
+
+        return direction;
 	}
 	
 	private Vector2f getRandomDirection() {

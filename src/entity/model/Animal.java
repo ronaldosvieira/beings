@@ -53,8 +53,7 @@ public abstract class Animal extends LivingThing {
 		movement.add(movementSpeed * delta * direction.x,
 				movementSpeed * delta * direction.y);
 		
-		this.isMoving = movement.length() != 0;
-		
+		this.isMoving = movementSpeed != 0;
 		this.currentDirection = direction;
 		
 		updateAnimation(direction);
@@ -63,7 +62,7 @@ public abstract class Animal extends LivingThing {
 	}
 	
 	public void updateAnimation(Vector2f direction) {
-		if (direction.length() > 0) {
+		if (movementSpeed > 0) {
 			if (Math.abs(direction.x) > Math.abs(direction.y)) {
 				if (direction.x > 0) selectAnimation(AnimalAnim.WALK_E);
 				else selectAnimation(AnimalAnim.WALK_W);
