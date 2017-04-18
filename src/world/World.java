@@ -75,50 +75,6 @@ public class World {
 	}
 	
 	public void update(float delta, Window window, Camera camera) {
-		float movement = 5 * 60 * delta;
-		
-		if (window.getInput().isKeyDown(GLFW_KEY_A)) {
-			camera.addPosition(new Vector3f(movement, 0, 0));
-		}
-		
-		if (window.getInput().isKeyDown(GLFW_KEY_D)) {
-			camera.addPosition(new Vector3f(-movement, 0, 0));
-		}
-		
-		if (window.getInput().isKeyDown(GLFW_KEY_W)) {
-			camera.addPosition(new Vector3f(0, -movement, 0));
-		}
-		
-		if (window.getInput().isKeyDown(GLFW_KEY_S)) {
-			camera.addPosition(new Vector3f(0, movement, 0));
-		}
-
-        if (window.getInput().isMouseButtonDown(GLFW_MOUSE_BUTTON_LEFT) ||
-                window.getInput().getJoystickAxes(GLFW_JOYSTICK_6) > 0) {
-		    if (camera.getZoom() > .25) {
-		        camera.zoomIn();
-		        calculateView(camera);
-            }
-		}
-
-        if (window.getInput().isMouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT) ||
-                window.getInput().getJoystickAxes(GLFW_JOYSTICK_5) > 0) {
-		    if (camera.getZoom() < 3) {
-		        camera.zoomOut();
-		        calculateView(camera);
-            }
-        }
-
-        if (window.getInput().getJoystickAxes(GLFW_JOYSTICK_1) != 0) {
-            camera.addPosition(new Vector3f(
-                    -movement * window.getInput().getJoystickAxes(GLFW_JOYSTICK_1), 0, 0));
-        }
-
-        if (window.getInput().getJoystickAxes(GLFW_JOYSTICK_2) != 0) {
-            camera.addPosition(new Vector3f(
-                    0, -movement * window.getInput().getJoystickAxes(GLFW_JOYSTICK_2), 0));
-        }
-
         quad.clear();
 		collisions.clear();
 

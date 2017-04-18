@@ -8,6 +8,7 @@ import entity.model.Wolf;
 import io.Timer;
 import io.Window;
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.lwjgl.opengl.GL;
 import render.Camera;
 import render.TileRenderer;
@@ -34,6 +35,52 @@ public class Game {
     }
 
     public World getWorld() {return this.world;}
+
+    public void handleInput(float delta, Window window, Camera camera, World world) {
+        float movement = 5 * 60 * delta;
+
+        if (window.getInput().isKeyDown(GLFW_KEY_A)) {
+            camera.addPosition(new Vector3f(movement, 0, 0));
+        }
+
+        if (window.getInput().isKeyDown(GLFW_KEY_D)) {
+            camera.addPosition(new Vector3f(-movement, 0, 0));
+        }
+
+        if (window.getInput().isKeyDown(GLFW_KEY_W)) {
+            camera.addPosition(new Vector3f(0, -movement, 0));
+        }
+
+        if (window.getInput().isKeyDown(GLFW_KEY_S)) {
+            camera.addPosition(new Vector3f(0, movement, 0));
+        }
+
+        if (window.getInput().isMouseButtonDown(GLFW_MOUSE_BUTTON_LEFT) ||
+                window.getInput().getJoystickAxes(GLFW_JOYSTICK_6) > 0) {
+            if (camera.getZoom() > .25) {
+                camera.zoomIn();
+                world.calculateView(camera);
+            }
+        }
+
+        if (window.getInput().isMouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT) ||
+                window.getInput().getJoystickAxes(GLFW_JOYSTICK_5) > 0) {
+            if (camera.getZoom() < 3) {
+                camera.zoomOut();
+                world.calculateView(camera);
+            }
+        }
+
+        if (window.getInput().getJoystickAxes(GLFW_JOYSTICK_1) != 0) {
+            camera.addPosition(new Vector3f(
+                    -movement * window.getInput().getJoystickAxes(GLFW_JOYSTICK_1), 0, 0));
+        }
+
+        if (window.getInput().getJoystickAxes(GLFW_JOYSTICK_2) != 0) {
+            camera.addPosition(new Vector3f(
+                    0, -movement * window.getInput().getJoystickAxes(GLFW_JOYSTICK_2), 0));
+        }
+    }
 
 	public void start() {
 		Window.setCallbacks();
@@ -119,6 +166,8 @@ public class Game {
 				
 				unprocessed -= frameCap;
 				canRender = true;
+
+				handleInput((float) frameCap, window, camera, this.world);
 				
 				this.world.update((float) frameCap, window, camera);
 				
@@ -151,7 +200,7 @@ public class Game {
 		
 		glfwTerminate();
 	}
-	
+
 	public static void main(String[] args) {
 		Game.getInstance().start();
 	}
