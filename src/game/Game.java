@@ -141,11 +141,17 @@ public class Game {
 		
 		double time = Timer.getTime();
 		double unprocessed = 0;
-		
+
+		boolean paused = false;
+
 		while (!window.shouldClose()) {
 			if (window.getInput().isKeyPressed(GLFW_KEY_ESCAPE)) {
 				glfwSetWindowShouldClose(window.getWindow(), true);
 			}
+
+			if (window.getInput().isKeyPressed(GLFW_KEY_P)) {
+			    paused = !paused;
+            }
 			
 			boolean canRender = false;
 			
@@ -169,7 +175,7 @@ public class Game {
 
 				handleInput((float) frameCap, window, camera, this.world);
 				
-				this.world.update((float) frameCap, window, camera);
+				if (!paused) this.world.update((float) frameCap, window, camera);
 				
 				this.world.correctCamera(camera, window);
 				
