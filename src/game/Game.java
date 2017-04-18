@@ -5,6 +5,7 @@ import entity.Entity;
 import entity.model.Grass;
 import entity.model.Rabbit;
 import entity.model.Wolf;
+import gui.GUI;
 import io.Timer;
 import io.Window;
 import org.joml.Vector2f;
@@ -133,7 +134,7 @@ public class Game {
 		this.world = new World(map);
 		this.world.calculateView(camera);
 
-        //GUI gui = new GUI();
+        GUI gui = new GUI();
 		
 		double frameCap = 1.0 / 60.0;
 		double frameTime = 0;
@@ -194,7 +195,7 @@ public class Game {
 				
 				this.world.render(tr, shader, camera);
 
-				//gui.render(camera);
+				if (paused) gui.render(camera);
 
 				window.swapBuffers();
 				
