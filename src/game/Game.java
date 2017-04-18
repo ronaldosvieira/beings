@@ -149,10 +149,6 @@ public class Game {
 			if (window.getInput().isKeyPressed(GLFW_KEY_ESCAPE)) {
 				glfwSetWindowShouldClose(window.getWindow(), true);
 			}
-
-			if (window.getInput().isKeyPressed(GLFW_KEY_P)) {
-			    paused = !paused;
-            }
 			
 			boolean canRender = false;
 			
@@ -173,6 +169,10 @@ public class Game {
 				
 				unprocessed -= frameCap;
 				canRender = true;
+
+                if (window.getInput().isKeyPressed(GLFW_KEY_P)) {
+                    paused = !paused;
+                }
 
 				handleInput((float) frameCap, window, camera, this.world);
 				
