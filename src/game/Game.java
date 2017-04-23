@@ -112,7 +112,8 @@ public class Game {
         List<Entity> entities = new ArrayList<>();
         Random random = new Random();
 
-        int worldSize = 50;
+        int worldSize = 25;
+        int worldScale = 16;
 
         for (int i = 0; i < 15; i++) {
             entities.add(new Rabbit(new Vector2f(
@@ -129,7 +130,7 @@ public class Game {
         int[][] tiles = new int[worldSize][worldSize];
         tiles[0][0] = 1;
 
-		Map map = new Map(tiles, entities);
+		Map map = new Map(tiles, entities, worldScale);
 		
 		this.world = new World(map);
 		this.world.calculateView(camera);

@@ -52,7 +52,7 @@ public class World {
 	public World(Map map) {
 		this.width = map.getWidth();
 		this.height = map.getHeight();
-		this.scale = 16;
+		this.scale = map.getScale();
 	
 		this.world = new Matrix4f().translate(0, 0, 0);
 		this.world.scale(scale);

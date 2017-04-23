@@ -44,8 +44,10 @@ public class Camera {
     }
 
     private void updateCameraBounds() {
-	    this.projection.setOrtho2D((int) ((-width * zoom) / 2), (int) ((width * zoom) / 2),
-				(int) ((-height * zoom) / 2), (int) ((height * zoom) / 2));
+	    this.projection.setOrtho2D((int) (-width / 2), (int) (width / 2),
+				(int) (-height / 2), (int) (height / 2));
+
+	    this.projection.scale((float) (1.0 / this.zoom));
     }
 
     public void setSize(double width, double height) {

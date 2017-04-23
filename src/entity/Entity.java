@@ -35,8 +35,7 @@ public abstract class Entity {
         this.useAnimation = 0;
 
         this.transform = new Transform();
-        this.transform.pos.set(position.x,
-                position.y, 0);
+        this.transform.pos.set(position.x, position.y, 0).mul(2);
         this.transform.scale.set(scale.x, scale.y, 1);
 
 		this.isSolid = false;
@@ -61,10 +60,10 @@ public abstract class Entity {
 		transform.pos.add(new Vector3f(direction, 0));
 
 		transform.pos.x = Math.max(0, transform.pos.x);
-		transform.pos.x = Math.min(transform.pos.x, world.getWidth());
+		transform.pos.x = Math.min(transform.pos.x, world.getWidth() * 2);
 
 		transform.pos.y = Math.min(0, transform.pos.y);
-		transform.pos.y = Math.max(transform.pos.y, -world.getHeight());
+		transform.pos.y = Math.max(transform.pos.y, -world.getHeight() * 2);
 
 		boundingBox.getCenter().set(transform.pos.x, transform.pos.y);
 	}
@@ -175,7 +174,7 @@ public abstract class Entity {
 
 	public Vector2f getPosition() {
 	    return new Vector2f(this.transform.pos.x,
-                this.transform.pos.y);
+                this.transform.pos.y).mul(.5f);
     }
 
     public AABB getBoundingBox() {return this.boundingBox;}
