@@ -4,7 +4,7 @@ import assets.Assets;
 import entity.Entity;
 import entity.model.Grass;
 import entity.model.Rabbit;
-import entity.model.Wolf;
+import entity.model.Fox;
 import gui.GUI;
 import io.Timer;
 import io.Window;
@@ -119,7 +119,7 @@ public class Game {
             entities.add(new Rabbit(new Vector2f(
                     random.nextFloat() * worldSize,
                     -random.nextFloat() * worldSize)));
-            entities.add(new Wolf(new Vector2f(
+            entities.add(new Fox(new Vector2f(
                     random.nextFloat() * worldSize,
                     -random.nextFloat() * worldSize)));
             entities.add(new Grass(new Vector2f(
