@@ -84,10 +84,6 @@ public class World {
 			quad.insert(entity);
 		}
 
-		for (Entity entity : entities) {
-            entity.cycle();
-        }
-
         for (Entity entity : entities) {
             entity.collideWithTiles(this);
 
@@ -107,6 +103,10 @@ public class World {
 
             entity.collideWithTiles(this);
         }
+
+		for (Entity entity : entities) {
+			entity.cycle();
+		}
 	}
 	
 	public void render(TileRenderer renderer, Shader shader, Camera camera) {
