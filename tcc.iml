@@ -10,5 +10,6 @@
     <orderEntry type="library" name="joml-1.8.6" level="project" />
     <orderEntry type="library" name="lwjgl" level="project" />
     <orderEntry type="library" name="javaframes" level="project" />
+    <orderEntry type="library" name="minimal-json" level="project" />
   </component>
 </module>
