@@ -1,0 +1,6 @@
+{
+  "name": "living-thing",
+  "type": "generic",
+  "parent": "thing",
+  "slots": {}
+}

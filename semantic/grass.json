@@ -1,0 +1,8 @@
+{
+  "name": "grass",
+  "type": "instance",
+  "parent": "plant",
+  "slots": {
+    "size": "0.5"
+  }
+}

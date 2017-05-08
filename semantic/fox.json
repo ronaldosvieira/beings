@@ -1,0 +1,21 @@
+{
+  "name": "fox",
+  "type": "instance",
+  "parent": "mammal",
+  "slots": {
+    "size": {
+      "type": "distrib",
+      "value": "2 +- 0.5"
+    },
+    "diet": "carnivorous",
+    "senses": [
+      "sight",
+      "hearing",
+      "smell",
+      "touch"
+    ],
+    "traits": [
+      "loner"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "rabbit",
+  "type": "instance",
+  "parent": "mammal",
+  "slots": {
+    "size": {
+      "type": "distrib",
+      "value": "1 +- 0.2"
+    },
+    "diet": "herbivorous",
+    "senses": [
+      "sight",
+      "hearing",
+      "smell",
+      "touch"
+    ],
+    "traits": [
+      "group"
+    ]
+  }
+}
