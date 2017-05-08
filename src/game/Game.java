@@ -8,6 +8,7 @@ import entity.model.Fox;
 import gui.GUI;
 import io.Timer;
 import io.Window;
+import knowledge.KnowledgeBase;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.opengl.GL;
@@ -16,6 +17,7 @@ import render.TileRenderer;
 import world.Map;
 import world.World;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -26,6 +28,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class Game {
 	private static Game instance;
 	private World world;
+	private KnowledgeBase knowledgeBase;
 
 	private Game() {}
 
@@ -108,6 +111,16 @@ public class Game {
 		Assets.initAsset();
 
 		Shader shader = new Shader("shader");
+
+		this.knowledgeBase = new KnowledgeBase();
+
+        try {
+            this.knowledgeBase.load("semantic");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+            System.exit(1);
+        }
 
         List<Entity> entities = new ArrayList<>();
         Random random = new Random();
