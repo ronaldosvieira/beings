@@ -55,15 +55,7 @@ public abstract class Entity {
 	}
 	
 	public void move(Vector2f direction) {
-	    World world = Game.getInstance().getWorld();
-
 		transform.pos.add(new Vector3f(direction, 0));
-
-		transform.pos.x = Math.max(0, transform.pos.x);
-		transform.pos.x = Math.min(transform.pos.x, world.getWidth() * 2);
-
-		transform.pos.y = Math.min(0, transform.pos.y);
-		transform.pos.y = Math.max(transform.pos.y, -world.getHeight() * 2);
 
 		boundingBox.getCenter().set(transform.pos.x, transform.pos.y);
 	}
@@ -176,6 +168,10 @@ public abstract class Entity {
 	    return new Vector2f(this.transform.pos.x,
                 this.transform.pos.y).mul(.5f);
     }
+
+    public void setPosition(Vector2f position) {
+		this.transform.pos = new Vector3f(position, 0).mul(2);
+	}
 
     public AABB getBoundingBox() {return this.boundingBox;}
 

@@ -81,6 +81,16 @@ public class World {
         for (Entity entity : entities) {
 			entity.update(delta, window, camera, this);
 
+			Vector2f position = entity.getPosition();
+
+			position.x = Math.max(0, position.x);
+			position.x = Math.min(position.x, getWidth());
+
+			position.y = Math.min(0, position.y);
+			position.y = Math.max(position.y, -getHeight());
+
+			entity.setPosition(position);
+
 			quad.insert(entity);
 		}
 
