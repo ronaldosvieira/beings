@@ -42,8 +42,8 @@ public class World {
 		this.entities = new ArrayList<>();
 		this.collisions = new HashSet<>();
 		this.quad = new QuadTree(0,
-                new AABB(new Vector2f(this.width / 2, this.height / 2),
-                        new Vector2f(this.width / 2, this.height / 2)));
+                new AABB(new Vector2f(this.width / 2f, this.height / 2f),
+                        new Vector2f(this.width / 2f, this.height / 2f)));
 		
 		this.world = new Matrix4f().translate(0, 0, 0);
 		this.world.scale(scale);
