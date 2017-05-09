@@ -125,6 +125,10 @@ public class QuadTree {
         return nearEntities;
     }
 
+    public int getLevel() {return this.level;}
+    public AABB getBounds() {return this.bounds;}
+    public QuadTree[] getNodes() {return this.nodes;}
+
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder();
