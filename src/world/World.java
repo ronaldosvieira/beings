@@ -84,10 +84,10 @@ public class World {
 			Vector2f position = entity.getPosition();
 
 			position.x = Math.max(0, position.x);
-			position.x = Math.min(position.x, getWidth());
+			position.x = Math.min(position.x, getWidth() - 1);
 
 			position.y = Math.min(0, position.y);
-			position.y = Math.max(position.y, -getHeight());
+			position.y = Math.max(position.y, -(getHeight() - 1));
 
 			entity.setPosition(position);
 
