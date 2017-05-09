@@ -6,6 +6,7 @@ import entity.model.Grass;
 import entity.model.Rabbit;
 import entity.model.Fox;
 import gui.GUI;
+import gui.PauseButton;
 import io.Timer;
 import io.Window;
 import knowledge.KnowledgeBase;
@@ -151,7 +152,7 @@ public class Game {
                             -random.nextFloat() * worldSize)));
 		}
 
-        GUI gui = new GUI();
+        GUI pauseButton = new PauseButton();
 		
 		double frameCap = 1.0 / 60.0;
 		double frameTime = 0;
@@ -212,7 +213,7 @@ public class Game {
 				
 				this.world.render(tr, shader, camera);
 
-				if (paused) gui.render(camera);
+				if (paused) pauseButton.render(camera);
 
 				window.swapBuffers();
 				
