@@ -16,7 +16,7 @@ import world.World;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Entity {
-    static AtomicInteger nextId = new AtomicInteger();
+    private static AtomicInteger nextId = new AtomicInteger();
 
     private int id;
 	protected AABB boundingBox;
