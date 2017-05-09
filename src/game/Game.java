@@ -7,6 +7,7 @@ import entity.model.Rabbit;
 import entity.model.Fox;
 import gui.GUI;
 import gui.PauseButton;
+import gui.QuadTreeViz;
 import io.Timer;
 import io.Window;
 import knowledge.KnowledgeBase;
@@ -153,6 +154,7 @@ public class Game {
 		}
 
         GUI pauseButton = new PauseButton();
+		GUI quadTreeViz = new QuadTreeViz(this.world);
 		
 		double frameCap = 1.0 / 60.0;
 		double frameTime = 0;
@@ -162,6 +164,7 @@ public class Game {
 		double unprocessed = 0;
 
 		boolean paused = false;
+		boolean showQuadTree = false;
 
 		while (!window.shouldClose()) {
 			if (window.getInput().isKeyPressed(GLFW_KEY_ESCAPE)) {
@@ -192,6 +195,10 @@ public class Game {
                     paused = !paused;
                 }
 
+                if (window.getInput().isKeyPressed(GLFW_KEY_Q)) {
+                    showQuadTree = !showQuadTree;
+                }
+
 				handleInput((float) frameCap, window, camera, this.world);
 				
 				if (!paused) this.world.update((float) frameCap, window, camera);
@@ -214,6 +221,7 @@ public class Game {
 				this.world.render(tr, shader, camera);
 
 				if (paused) pauseButton.render(camera);
+				if (showQuadTree) quadTreeViz.render(camera);
 
 				window.swapBuffers();
 				

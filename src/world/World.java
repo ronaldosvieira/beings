@@ -253,6 +253,8 @@ public class World {
 	    this.entities.add(entity);
     }
 
+    public QuadTree getQuadTree() {return this.quad;}
+
 	public int getWidth() {return this.width;}
 	public int getHeight() {return this.height;}
 }
