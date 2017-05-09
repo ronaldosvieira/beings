@@ -67,7 +67,7 @@ public class World {
 			}
 		}
 
-		this.entities = map.getEntities();
+		this.entities = new ArrayList<>();
 		this.collisions = new HashSet<>();
         this.quad = new QuadTree(0,
                 new AABB(new Vector2f(this.width / 2, this.height / 2),
@@ -79,7 +79,7 @@ public class World {
 		collisions.clear();
 
         for (Entity entity : entities) {
-			entity.update(delta, window, camera, this);
+			entity.update(delta, window, camera);
 
 			Vector2f position = entity.getPosition();
 
@@ -95,7 +95,7 @@ public class World {
 		}
 
         for (Entity entity : entities) {
-            entity.collideWithTiles(this);
+            entity.collideWithTiles();
 
             for (Entity nearEntity : quad.retrieve(entity)) {
                 if (entity.equals(nearEntity)) continue;
@@ -111,7 +111,7 @@ public class World {
                 }
             }
 
-            entity.collideWithTiles(this);
+            entity.collideWithTiles();
         }
 
 		for (Entity entity : entities) {
@@ -167,11 +167,11 @@ public class World {
                 .collect(Collectors.toList());
 
 		for (Entity entity: walkableEntities) {
-			entity.render(shader, camera, this);
+			entity.render(shader, camera);
 		}
 
 		for (Entity entity: nonWalkableEntities) {
-		    entity.render(shader, camera, this);
+		    entity.render(shader, camera);
         }
 	}
 	
@@ -239,6 +239,19 @@ public class World {
 	public List<Entity> getNearEntities(Entity entity) {return this.quad.retrieve(entity);}
 
 	public List<Entity> getNearEntities(AABB box) {return this.quad.retrieve(box);}
+
+	public void addEntity(Entity entity) {
+	    if (this.entities.contains(entity)) return;
+
+        float x = entity.getPosition().x;
+        float y = -entity.getPosition().y;
+
+        if (x < 0 || x >= this.width * this.scale || y < 0 || y >= this.height * this.scale) {
+            throw new IllegalArgumentException("Entity placement out of bounds.");
+        }
+
+	    this.entities.add(entity);
+    }
 
 	public int getWidth() {return this.width;}
 	public int getHeight() {return this.height;}

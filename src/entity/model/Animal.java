@@ -23,8 +23,8 @@ public abstract class Animal extends LivingThing {
 	private boolean isMoving;
 	private float movementSpeed;
 
-	public Animal(String name, Vector2f scale, Vector2f position) {
-		super(name, AnimalAnim.AMOUNT, scale, position);
+	public Animal(String name, World world, Vector2f scale, Vector2f position) {
+		super(name, world, AnimalAnim.AMOUNT, scale, position);
 		
 		this.currentAnim = AnimalAnim.IDLE_E;
 		this.currentDirection = new Vector2f(.0f, .0f);
@@ -82,7 +82,7 @@ public abstract class Animal extends LivingThing {
 	}
 
 	@Override
-	public void update(float delta, Window window, Camera camera, World world) {
+	public void update(float delta, Window window, Camera camera) {
 		move(delta, this.movement.getMovement(delta));
 	}
 }

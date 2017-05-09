@@ -3,10 +3,11 @@ package entity.model;
 import entity.Transform;
 import org.joml.Vector2f;
 import render.Animation;
+import world.World;
 
 public class Grass extends Plant {
-	public Grass(Vector2f position) {
-		super("grass", new Vector2f(2, 2), position);
+	public Grass(World world, Vector2f position) {
+		super("grass", world, new Vector2f(2, 2), position);
 		
 		this.setWalkable(true);
 		

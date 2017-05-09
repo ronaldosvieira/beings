@@ -15,8 +15,8 @@ public abstract class LivingThing extends Thing {
 	private Mind mind;
 	private List<Sense> senses;
 	
-	public LivingThing(String name, int amountAnim, Vector2f scale, Vector2f position) {
-		super(name, amountAnim, scale, position);
+	public LivingThing(String name, World world, int amountAnim, Vector2f scale, Vector2f position) {
+		super(name, world, amountAnim, scale, position);
 
 		this.isAlive = true;
 		this.mind = new Mind(this);

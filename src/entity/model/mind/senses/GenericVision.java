@@ -21,7 +21,7 @@ public class GenericVision extends Sense {
     public List<Thing> perceive() {
         List<Thing> perceptions = new ArrayList<>();
         Vector2f position = this.getBeing().getPosition();
-        List<Entity> entities = Game.getInstance()
+        List<Entity> entities = this.getBeing()
                 .getWorld()
                 .getNearEntities(new AABB(position, new Vector2f(10, 10)))
                 .stream()

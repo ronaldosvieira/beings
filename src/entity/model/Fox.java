@@ -8,8 +8,8 @@ import world.World;
 
 public class Fox extends Mammal {
 	
-	public Fox(Vector2f position) {
-		super("fox", new Vector2f(3, 3), position);
+	public Fox(World world, Vector2f position) {
+		super("fox", world, new Vector2f(3, 3), position);
 
 		this.addSense(new GenericVision(this));
 	}

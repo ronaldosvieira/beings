@@ -24,11 +24,12 @@ public abstract class Entity {
 	protected Animation[] animations;
 	private int useAnimation;
 	protected Transform transform;
+	private World world;
 	
 	private boolean isSolid;
 	private boolean isWalkable;
 	
-	public Entity(int maxAnimations, Vector2f scale, Vector2f position) {
+	public Entity(World world, int maxAnimations, Vector2f scale, Vector2f position) {
 	    this.id = nextId.incrementAndGet();
 
 		this.animations = new Animation[maxAnimations];
@@ -37,6 +38,8 @@ public abstract class Entity {
         this.transform = new Transform();
         this.transform.pos.set(position.x, position.y, 0).mul(2);
         this.transform.scale.set(scale.x, scale.y, 1);
+
+        this.world = world;
 
 		this.isSolid = false;
 		
@@ -60,10 +63,10 @@ public abstract class Entity {
 		boundingBox.getCenter().set(transform.pos.x, transform.pos.y);
 	}
 	
-	public abstract void update(float delta, Window window, Camera camera, World world);
+	public abstract void update(float delta, Window window, Camera camera);
 	public abstract void cycle();
 	
-	public void render(Shader shader, Camera camera, World world) {
+	public void render(Shader shader, Camera camera) {
 		Matrix4f target = camera.getProjection();
 		target.mul(world.getWorldMatrix());
 		
@@ -75,7 +78,7 @@ public abstract class Entity {
         Assets.getModel().render();
 	}
 
-	public void collideWithTiles(World world) {
+	public void collideWithTiles() {
 		AABB[] boxes = new AABB[25];
 		
 		for (int i = 0; i < 5; i++) {
@@ -158,6 +161,8 @@ public abstract class Entity {
 	}
 
 	public int getId() {return this.id;}
+
+	public World getWorld() {return this.world;}
 
 	public Vector2f getScale() {
 	    return new Vector2f(this.transform.scale.x,

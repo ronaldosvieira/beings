@@ -128,25 +128,28 @@ public class Game {
         int worldSize = 25;
         int worldScale = 16;
 
-        for (int i = 0; i < 15; i++) {
-            entities.add(new Rabbit(new Vector2f(
-                    random.nextFloat() * worldSize,
-                    -random.nextFloat() * worldSize)));
-            entities.add(new Fox(new Vector2f(
-                    random.nextFloat() * worldSize,
-                    -random.nextFloat() * worldSize)));
-            entities.add(new Grass(new Vector2f(
-                    random.nextFloat() * worldSize,
-                    -random.nextFloat() * worldSize)));
-        }
-
         int[][] tiles = new int[worldSize][worldSize];
-        tiles[0][0] = 1;
+        tiles[1][1] = 1;
 
-		Map map = new Map(tiles, entities, worldScale);
+		Map map = new Map(tiles, worldScale);
 		
 		this.world = new World(map);
 		this.world.calculateView(camera);
+
+		for (int i = 0; i < 45; i++) {
+			this.world.addEntity(new Rabbit(this.world,
+                    new Vector2f(
+                            random.nextFloat() * worldSize,
+                            -random.nextFloat() * worldSize)));
+            this.world.addEntity(new Fox(this.world,
+                    new Vector2f(
+                            random.nextFloat() * worldSize,
+                            -random.nextFloat() * worldSize)));
+            this.world.addEntity(new Grass(this.world,
+                    new Vector2f(
+                            random.nextFloat() * worldSize,
+                            -random.nextFloat() * worldSize)));
+		}
 
         GUI gui = new GUI();
 		

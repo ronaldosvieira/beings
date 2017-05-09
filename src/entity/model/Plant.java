@@ -9,14 +9,14 @@ import world.World;
 
 public class Plant extends LivingThing {
 
-	public Plant(String name, Vector2f scale, Vector2f position) {
-		super(name, 1, scale, position);
+	public Plant(String name, World world, Vector2f scale, Vector2f position) {
+		super(name, world, 1, scale, position);
 		
 		this.setSolid(true);
 	}
 
 	@Override
-	public void update(float delta, Window window, Camera camera, World world) {
+	public void update(float delta, Window window, Camera camera) {
 		// TODO Auto-generated method stub
 
 	}

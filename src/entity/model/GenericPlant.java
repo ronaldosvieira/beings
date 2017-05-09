@@ -2,12 +2,13 @@ package entity.model;
 
 import org.joml.Vector2f;
 import render.Animation;
+import world.World;
 
 public class GenericPlant extends Plant {
 	private boolean hasFruit;
 
-	public GenericPlant(Vector2f position) {
-		super("generic-plant", new Vector2f(2, 3), position);
+	public GenericPlant(World world, Vector2f position) {
+		super("generic-plant", world, new Vector2f(2, 3), position);
 		
 		this.hasFruit = true;
 
