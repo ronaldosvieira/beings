@@ -27,17 +27,10 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Game {
-	private static Game instance;
 	private World world;
 	private KnowledgeBase knowledgeBase;
 
-	private Game() {}
-
-	public static Game getInstance() {
-	    if (instance == null) instance = new Game();
-
-	    return instance;
-    }
+	public Game() {}
 
     public World getWorld() {return this.world;}
 
@@ -227,6 +220,8 @@ public class Game {
 	}
 
 	public static void main(String[] args) {
-		Game.getInstance().start();
+		Game game = new Game();
+
+		game.start();
 	}
 }
