@@ -6,8 +6,8 @@ import model.InstanceFrame;
 
 import java.util.List;
 
-public class GenericVision extends Sense {
-    public GenericVision(LivingThing being) {
+public class GenericSight extends Sense {
+    public GenericSight(LivingThing being) {
         super(being);
     }
 
