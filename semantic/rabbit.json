@@ -1,6 +1,6 @@
 {
   "name": "rabbit",
-  "type": "instance",
+  "type": "generic",
   "parent": "mammal",
   "slots": {
     "size": {

@@ -1,6 +1,6 @@
 {
   "name": "fox",
-  "type": "instance",
+  "type": "generic",
   "parent": "mammal",
   "slots": {
     "size": {

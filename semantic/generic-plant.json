@@ -1,6 +1,6 @@
 {
   "name": "generic-plant",
-  "type": "instance",
+  "type": "generic",
   "parent": "plant",
   "slots": {}
 }
