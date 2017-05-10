@@ -2,13 +2,14 @@ package entity.model.mind;
 
 import entity.model.LivingThing;
 import entity.model.Thing;
+import model.InstanceFrame;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Mind {
     private LivingThing being;
-    private List<Thing> workingMemory;
+    private List<InstanceFrame> workingMemory;
 
     public Mind(LivingThing being) {
         this.being = being;
@@ -16,12 +17,15 @@ public class Mind {
     }
 
     public void update() {
-        List<Thing> perceptions = new ArrayList<>();
+        List<InstanceFrame> perceptions = new ArrayList<>();
+
         for (Sense sense : this.being.getSenses()) {
             perceptions.addAll(sense.perceive());
         }
 
-        for (Thing perception : perceptions) {
+        // todo: try to merge perceptions
+
+        for (InstanceFrame perception : perceptions) {
             if (!workingMemory.contains(perception)) {
                 workingMemory.add(perception);
 

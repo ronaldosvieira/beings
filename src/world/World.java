@@ -3,9 +3,11 @@ package world;
 import collision.AABB;
 import collision.QuadTree;
 import entity.Entity;
+import entity.model.Thing;
 import game.Shader;
 import io.Window;
 import knowledge.KnowledgeBase;
+import model.InstanceFrame;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -13,12 +15,11 @@ import render.Camera;
 import render.TileRenderer;
 import util.Pair;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.lwjgl.glfw.GLFW.*;
 
 public class World {
 	private int viewX, viewY;
@@ -259,9 +260,28 @@ public class World {
 
 	public List<Entity> getEntities() {return this.entities;}
 
-	public List<Entity> getNearEntities(Entity entity) {return this.quad.retrieve(entity);}
+	public List<InstanceFrame> getNearEntities(Entity entity, float range) {
+	    AABB box = new AABB(entity.getPosition(), new Vector2f(range));
 
-	public List<Entity> getNearEntities(AABB box) {return this.quad.retrieve(box);}
+	    return this.quad
+                .retrieve(box)
+                .stream()
+                .filter(entity2 -> !entity.equals(entity2))
+                .filter(entity2 -> entity.getPosition()
+                        .distance(entity2.getPosition()) <= range)
+                .map(entity1 -> (Thing) entity)
+                .map(thing -> {
+                    InstanceFrame semantic = thing.getSemantic();
+                    Vector2f pos1 = thing.getPosition();
+                    Vector2f pos2 = entity.getPosition();
+
+                    semantic.set("distance",
+                            pos1.sub(pos2, new Vector2f()));
+
+                    return semantic;
+                })
+                .collect(Collectors.toList());
+	}
 
 	public void addEntity(Entity entity) {
 	    if (this.entities.contains(entity)) return;
