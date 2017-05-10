@@ -1,0 +1,6 @@
+{
+  "name": "mammal",
+  "type": "generic",
+  "parent": "animal",
+  "slots": {}
+}
