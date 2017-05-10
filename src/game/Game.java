@@ -28,7 +28,6 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Game {
 	private World world;
-	private KnowledgeBase knowledgeBase;
 
 	public Game() {}
 
@@ -105,16 +104,6 @@ public class Game {
 		Assets.initAsset();
 
 		Shader shader = new Shader("shader");
-
-		this.knowledgeBase = new KnowledgeBase();
-
-        try {
-            this.knowledgeBase.load("semantic");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-
-            System.exit(1);
-        }
 
         List<Entity> entities = new ArrayList<>();
         Random random = new Random();

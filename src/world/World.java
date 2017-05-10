@@ -5,6 +5,7 @@ import collision.QuadTree;
 import entity.Entity;
 import game.Shader;
 import io.Window;
+import knowledge.KnowledgeBase;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -28,6 +29,8 @@ public class World {
 	private Matrix4f world;
 	private int scale;
 
+	private KnowledgeBase knowledgeBase;
+
 	private QuadTree quad;
 	private HashSet<Pair<Integer, Integer>> collisions;
 	
@@ -44,7 +47,17 @@ public class World {
 		this.quad = new QuadTree(0,
                 new AABB(new Vector2f(this.width / 2f, this.height / 2f),
                         new Vector2f(this.width / 2f, this.height / 2f)));
-		
+
+        this.knowledgeBase = new KnowledgeBase();
+
+        try {
+            this.knowledgeBase.load("semantic");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+            System.exit(1);
+        }
+
 		this.world = new Matrix4f().translate(0, 0, 0);
 		this.world.scale(scale);
 	}
@@ -66,6 +79,16 @@ public class World {
                 setTile(tile, x, y);
 			}
 		}
+
+        this.knowledgeBase = new KnowledgeBase();
+
+        try {
+            this.knowledgeBase.load("semantic");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+            System.exit(1);
+        }
 
 		this.entities = new ArrayList<>();
 		this.collisions = new HashSet<>();
@@ -255,4 +278,5 @@ public class World {
 
 	public int getWidth() {return this.width;}
 	public int getHeight() {return this.height;}
+	public KnowledgeBase getKnowledgeBase() {return this.knowledgeBase;}
 }

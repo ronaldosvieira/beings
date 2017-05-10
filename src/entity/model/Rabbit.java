@@ -1,9 +1,7 @@
 package entity.model;
 
 import entity.model.mind.senses.GenericVision;
-import io.Window;
 import org.joml.Vector2f;
-import render.Camera;
 import world.World;
 
 public class Rabbit extends Mammal {
