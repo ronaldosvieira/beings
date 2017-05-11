@@ -144,6 +144,7 @@ public class Game {
 		double unprocessed = 0;
 
 		boolean paused = false;
+		boolean showFPS = false;
 
 		while (!window.shouldClose()) {
 			if (window.getInput().isKeyPressed(GLFW_KEY_ESCAPE)) {
@@ -170,9 +171,8 @@ public class Game {
 				unprocessed -= frameCap;
 				canRender = true;
 
-                if (window.getInput().isKeyPressed(GLFW_KEY_P)) {
-                    paused = !paused;
-                }
+                if (window.getInput().isKeyPressed(GLFW_KEY_P)) paused = !paused;
+                if (window.getInput().isKeyPressed(GLFW_KEY_F)) showFPS = !showFPS;
 
 				handleInput((float) frameCap, window, camera, this.world);
 				
@@ -184,7 +184,7 @@ public class Game {
 				
 				if (frameTime >= 1.0) {
 					frameTime = 0;
-					System.out.println("FPS: " + frames);
+					if (showFPS) System.out.println("FPS: " + frames);
 					
 					frames = 0;
 				}
