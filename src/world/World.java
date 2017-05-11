@@ -269,7 +269,7 @@ public class World {
                 .filter(entity2 -> !entity.equals(entity2))
                 .filter(entity2 -> entity.getPosition()
                         .distance(entity2.getPosition()) <= range)
-                .map(entity1 -> (Thing) entity)
+                .map(entity1 -> (Thing) entity1)
                 .map(thing -> {
                     InstanceFrame semantic = thing.getSemantic();
                     Vector2f pos1 = thing.getPosition();
