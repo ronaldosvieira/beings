@@ -40,7 +40,14 @@ public abstract class Animal extends LivingThing {
                             "entities/" + name + "/" + anim.path()));
 		}
 	}
-	
+
+	public Vector2f getCurrentDirection() {return this.currentDirection;}
+
+	public void setCurrentDirection(Vector2f direction) {
+	    this.currentDirection = direction.normalize();
+	    updateAnimation(currentDirection);
+	}
+
 	public float getMovementSpeed() {return this.movementSpeed;}
 	public boolean isMoving() {return this.isMoving;}
 	
