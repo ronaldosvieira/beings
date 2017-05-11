@@ -14,8 +14,8 @@ public abstract class Thing extends Entity {
 		super(world, amountAnim, scale, position);
 		
 		this.name = name;
-		this.semantic = new InstanceFrame(name + getId(),
-                (GenericFrame) getWorld().getKnowledgeBase().retrieve(name));
+		this.semantic = new InstanceFrame(name,
+				(GenericFrame) getWorld().getKnowledgeBase().retrieve(name));
 	}
 
 	public String getName() {return this.name;}
