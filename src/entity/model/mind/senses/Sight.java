@@ -8,11 +8,11 @@ import org.joml.Vector2f;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GenericSight extends Sense {
+public class Sight extends Sense {
     private float range;
     private float angle;
 
-    public GenericSight(Animal being, float range, float angle) {
+    public Sight(Animal being, float range, float angle) {
         super(being);
 
         this.range = range;
@@ -54,8 +54,8 @@ public class GenericSight extends Sense {
             return this;
         }
 
-        public GenericSight build() {
-            return new GenericSight(animal, range, angle);
+        public Sight build() {
+            return new Sight(animal, range, angle);
         }
     }
 }
