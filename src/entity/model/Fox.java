@@ -9,6 +9,6 @@ public class Fox extends Mammal {
 	public Fox(World world, Vector2f position) {
 		super("fox", world, new Vector2f(3, 3), position);
 
-		this.addSense(new GenericSight(this));
+		this.addSense(new GenericSight(this, 90));
 	}
 }
