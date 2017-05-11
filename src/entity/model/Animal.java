@@ -25,9 +25,10 @@ public abstract class Animal extends LivingThing {
 
 	public Animal(String name, World world, Vector2f scale, Vector2f position) {
 		super(name, world, AnimalAnim.AMOUNT, scale, position);
-		
-		this.currentAnim = AnimalAnim.IDLE_E;
-		this.currentDirection = new Vector2f(.0f, .0f);
+
+		this.currentAnim = AnimalAnim.IDLE_N;
+		this.currentDirection = new Vector2f(.0f, .1f);
+		updateAnimation(this.currentDirection);
 		
 		this.movementSpeed = 5.0f; // default movement speed
 		this.isMoving = false;
