@@ -1,6 +1,7 @@
 package entity.model.mind;
 
 import entity.model.Animal;
+import entity.model.mind.sense.Sense;
 import model.InstanceFrame;
 
 import java.util.ArrayList;

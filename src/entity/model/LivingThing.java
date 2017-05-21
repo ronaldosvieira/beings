@@ -1,6 +1,6 @@
 package entity.model;
 
-import entity.model.mind.Sense;
+import entity.model.mind.sense.Sense;
 import org.joml.Vector2f;
 import world.World;
 

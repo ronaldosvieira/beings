@@ -1,7 +1,6 @@
-package entity.model.mind.senses;
+package entity.model.mind.sense;
 
 import entity.model.Animal;
-import entity.model.mind.Sense;
 import model.InstanceFrame;
 import org.joml.Vector2f;
 

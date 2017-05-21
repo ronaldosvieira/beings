@@ -1,4 +1,4 @@
-package entity.model.mind;
+package entity.model.mind.sense;
 
 import entity.model.LivingThing;
 import model.InstanceFrame;
