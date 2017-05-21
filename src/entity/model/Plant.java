@@ -1,9 +1,7 @@
 package entity.model;
 
-import entity.Transform;
 import io.Window;
 import org.joml.Vector2f;
-import render.Animation;
 import render.Camera;
 import world.World;
 
@@ -14,6 +12,9 @@ public class Plant extends LivingThing {
 		
 		this.setSolid(true);
 	}
+
+	@Override
+	public void cycle() {}
 
 	@Override
 	public void update(float delta, Window window, Camera camera) {

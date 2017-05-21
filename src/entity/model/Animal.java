@@ -1,5 +1,6 @@
 package entity.model;
 
+import entity.model.mind.Mind;
 import entity.model.strategies.FeedingStrategy;
 import entity.model.strategies.MoveStrategy;
 import entity.model.strategies.RandomMoveStrategy;
@@ -19,7 +20,9 @@ public abstract class Animal extends LivingThing {
 	
 	private double hunger;
 	private double thirst;
-	
+
+	private Mind mind;
+
 	private boolean isMoving;
 	private float movementSpeed;
 
@@ -29,6 +32,8 @@ public abstract class Animal extends LivingThing {
 		this.currentAnim = AnimalAnim.IDLE_N;
 		this.currentDirection = new Vector2f(.0f, .1f);
 		updateAnimation(this.currentDirection);
+
+        this.mind = new Mind(this);
 		
 		this.movementSpeed = 5.0f; // default movement speed
 		this.isMoving = false;
@@ -88,6 +93,11 @@ public abstract class Animal extends LivingThing {
 		this.currentAnim = anim;
 		super.useAnimation(anim.index());
 	}
+
+    @Override
+    public void cycle() {
+        this.mind.update();
+    }
 
 	@Override
 	public void update(float delta, Window window, Camera camera) {

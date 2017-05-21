@@ -1,17 +1,16 @@
 package entity.model.mind;
 
-import entity.model.LivingThing;
-import entity.model.Thing;
+import entity.model.Animal;
 import model.InstanceFrame;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Mind {
-    private LivingThing being;
+    private Animal being;
     private List<InstanceFrame> workingMemory;
 
-    public Mind(LivingThing being) {
+    public Mind(Animal being) {
         this.being = being;
         this.workingMemory = new ArrayList<>();
     }
