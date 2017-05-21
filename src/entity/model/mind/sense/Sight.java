@@ -26,7 +26,7 @@ public class Sight extends Sense {
                 .getNearEntities(getBeing(), range)
                 .stream()
                 .filter(perception -> {
-                    Vector2f distance = (Vector2f) perception.get("distance");
+                    Vector2f distance = perception.get("distance", Vector2f.class);
                     double angle = Math.acos(direction.dot(distance.normalize(new Vector2f())));
 
                     return angle <= this.angle;
