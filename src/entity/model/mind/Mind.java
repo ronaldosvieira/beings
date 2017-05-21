@@ -23,6 +23,7 @@ public class Mind {
         }
 
         // todo: try to merge perceptions
+        // todo: weigh perceptions relevance
 
         for (InstanceFrame perception : perceptions) {
             if (!workingMemory.contains(perception)) {
@@ -37,6 +38,6 @@ public class Mind {
             }
         }
 
-        // todo: do stuff
+        // todo: do stuff based on current working memory
     }
 }
