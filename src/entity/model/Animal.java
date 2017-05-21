@@ -1,7 +1,6 @@
 package entity.model;
 
 import entity.model.mind.Mind;
-import entity.model.strategies.FeedingStrategy;
 import entity.model.strategies.MoveStrategy;
 import entity.model.strategies.RandomMoveStrategy;
 import entity.model.util.AnimalAnim;
@@ -12,14 +11,10 @@ import render.Camera;
 import world.World;
 
 public abstract class Animal extends LivingThing {
-	protected FeedingStrategy feeding;
 	protected MoveStrategy movement;
 	
 	private AnimalAnim currentAnim;
 	private Vector2f currentDirection;
-	
-	private double hunger;
-	private double thirst;
 
 	private Mind mind;
 
