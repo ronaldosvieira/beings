@@ -1,8 +1,8 @@
 package entity.model;
 
 import entity.model.mind.Mind;
-import entity.model.strategies.MoveStrategy;
-import entity.model.strategies.RandomMoveStrategy;
+import entity.model.mind.goal.Goal;
+import entity.model.mind.goal.MoveRandomly;
 import entity.model.util.AnimalAnim;
 import io.Window;
 import org.joml.Vector2f;
@@ -11,7 +11,7 @@ import render.Camera;
 import world.World;
 
 public abstract class Animal extends LivingThing {
-	protected MoveStrategy movement;
+    private Goal currentGoal;
 	
 	private AnimalAnim currentAnim;
 	private Vector2f currentDirection;
@@ -33,7 +33,7 @@ public abstract class Animal extends LivingThing {
 		this.movementSpeed = 5.0f; // default movement speed
 		this.isMoving = false;
 		
-		this.movement = new RandomMoveStrategy(this);
+		this.currentGoal = new MoveRandomly(this);
 		
 		for (AnimalAnim anim : AnimalAnim.values()) {
 			setAnimation(anim.index(), 
@@ -96,6 +96,6 @@ public abstract class Animal extends LivingThing {
 
 	@Override
 	public void update(float delta, Window window, Camera camera) {
-		move(delta, this.movement.getMovement(delta));
+		move(delta, this.currentGoal.getMovement(delta));
 	}
 }

@@ -1,4 +1,4 @@
-package entity.model.strategies;
+package entity.model.mind.goal;
 
 import java.util.Random;
 
@@ -6,13 +6,13 @@ import org.joml.Vector2f;
 
 import entity.model.Animal;
 
-public class RandomMoveStrategy extends MoveStrategy {
+public class MoveRandomly extends Goal {
 	private Vector2f direction;
     private float lastMove;
     private float moveTime;
     private boolean isMoving;
 	
-	public RandomMoveStrategy(Animal animal) {
+	public MoveRandomly(Animal animal) {
 		super(animal);
 		
 		this.direction = getRandomDirection();
@@ -32,8 +32,8 @@ public class RandomMoveStrategy extends MoveStrategy {
 			direction = getRandomDirection();
 		}
 		
-		if (isMoving) animal.setMovementSpeed(0);
-        else animal.setMovementSpeed(5);
+		if (isMoving) getAnimal().setMovementSpeed(0);
+        else getAnimal().setMovementSpeed(5);
 
         return direction;
 	}

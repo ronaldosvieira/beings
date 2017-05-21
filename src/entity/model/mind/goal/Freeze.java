@@ -1,12 +1,12 @@
-package entity.model.strategies;
+package entity.model.mind.goal;
 
 import entity.model.Animal;
 import org.joml.Vector2f;
 
 import java.util.Random;
 
-public class DontMoveStrategy extends MoveStrategy {
-	public DontMoveStrategy(Animal animal) {
+public class Freeze extends Goal {
+	public Freeze(Animal animal) {
 		super(animal);
 
 		animal.setMovementSpeed(0);
@@ -14,6 +14,6 @@ public class DontMoveStrategy extends MoveStrategy {
 
 	@Override
 	public Vector2f getMovement(float delta) {
-        return animal.getCurrentDirection();
+        return getAnimal().getCurrentDirection();
 	}
 }
