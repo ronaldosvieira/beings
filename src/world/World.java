@@ -271,7 +271,7 @@ public class World {
                         .distance(entity2.getPosition()) <= range)
                 .map(entity1 -> (Thing) entity1)
                 .map(thing -> {
-                    InstanceFrame semantic = thing.getSemantic();
+                    InstanceFrame semantic = thing.getSemantic().clone();
                     Vector2f pos1 = thing.getPosition();
                     Vector2f pos2 = entity.getPosition();
 
