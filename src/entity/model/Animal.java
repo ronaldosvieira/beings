@@ -3,12 +3,16 @@ package entity.model;
 import entity.model.mind.Mind;
 import entity.model.mind.goal.Goal;
 import entity.model.mind.goal.MoveRandomly;
+import entity.model.mind.sense.Sense;
 import entity.model.util.AnimalAnim;
 import io.Window;
 import org.joml.Vector2f;
 import render.Animation;
 import render.Camera;
 import world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Animal extends LivingThing {
     private Goal currentGoal;
@@ -17,6 +21,7 @@ public abstract class Animal extends LivingThing {
 	private Vector2f currentDirection;
 
 	private Mind mind;
+	private List<Sense> senses = new ArrayList<>();
 
 	private boolean isMoving;
 	private float movementSpeed;
@@ -98,4 +103,10 @@ public abstract class Animal extends LivingThing {
 	public void update(float delta, Window window, Camera camera) {
 		move(delta, this.currentGoal.getMovement(delta));
 	}
+
+	public List<Sense> getSenses() {return this.senses;}
+
+	protected void addSense(Sense sense) {
+	    if (!this.senses.contains(sense)) this.senses.add(sense);
+    }
 }

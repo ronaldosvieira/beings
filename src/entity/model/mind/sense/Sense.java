@@ -1,6 +1,6 @@
 package entity.model.mind.sense;
 
-import entity.model.LivingThing;
+import entity.model.Animal;
 import entity.model.Thing;
 import org.joml.Vector2f;
 
@@ -8,15 +8,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class Sense {
-    private LivingThing being;
+    private Animal being;
 
-    public Sense(LivingThing being) {
+    public Sense(Animal being) {
         this.being = being;
     }
 
     abstract public List<Perception> perceive();
 
-    public LivingThing getBeing() {return this.being;}
+    public Animal getBeing() {return this.being;}
 
     public List<Perception> getNearPerceptions(float range) {
         return getBeing().getWorld().getNearEntities(getBeing(), range)
