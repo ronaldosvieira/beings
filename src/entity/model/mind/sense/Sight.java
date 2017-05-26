@@ -1,7 +1,6 @@
 package entity.model.mind.sense;
 
 import entity.model.Animal;
-import model.InstanceFrame;
 import org.joml.Vector2f;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public class Sight extends Sense {
     }
 
     @Override
-    public List<InstanceFrame> perceive() {
+    public List<Perception> perceive() {
         Vector2f direction = ((Animal) getBeing()).getCurrentDirection();
 
         return getBeing().getWorld()

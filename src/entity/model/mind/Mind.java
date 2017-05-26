@@ -1,15 +1,15 @@
 package entity.model.mind;
 
 import entity.model.Animal;
+import entity.model.mind.sense.Perception;
 import entity.model.mind.sense.Sense;
-import model.InstanceFrame;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Mind {
     private Animal being;
-    private List<InstanceFrame> workingMemory;
+    private List<Perception> workingMemory;
 
     public Mind(Animal being) {
         this.being = being;
@@ -17,16 +17,18 @@ public class Mind {
     }
 
     public void update() {
-        List<InstanceFrame> perceptions = new ArrayList<>();
+        List<Perception> perceptions = new ArrayList<>();
 
         for (Sense sense : this.being.getSenses()) {
             perceptions.addAll(sense.perceive());
         }
 
         // todo: try to merge perceptions
+        //      if many of same type then merge all with distance = centroid
+        //      if distance and type == those of an old perception then merge
         // todo: weigh perceptions relevance
 
-        for (InstanceFrame perception : perceptions) {
+        for (Perception perception : perceptions) {
             if (!workingMemory.contains(perception)) {
                 workingMemory.add(perception);
 

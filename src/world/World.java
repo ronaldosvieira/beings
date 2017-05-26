@@ -4,10 +4,10 @@ import collision.AABB;
 import collision.QuadTree;
 import entity.Entity;
 import entity.model.Thing;
+import entity.model.mind.sense.Perception;
 import game.Shader;
 import io.Window;
 import knowledge.KnowledgeBase;
-import model.InstanceFrame;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -260,7 +260,7 @@ public class World {
 
 	public List<Entity> getEntities() {return this.entities;}
 
-	public List<InstanceFrame> getNearEntities(Entity entity, float range) {
+	public List<Perception> getNearEntities(Entity entity, float range) {
 	    AABB box = new AABB(entity.getPosition(), new Vector2f(range));
 
 	    return this.quad
@@ -271,14 +271,14 @@ public class World {
                         .distance(entity2.getPosition()) <= range)
                 .map(entity1 -> (Thing) entity1)
                 .map(thing -> {
-                    InstanceFrame semantic = thing.getSemantic().clone();
+                    Perception perception = new Perception(thing.getSemantic());
                     Vector2f pos1 = thing.getPosition();
                     Vector2f pos2 = entity.getPosition();
 
-                    semantic.set("distance",
+					perception.set("distance",
                             pos1.sub(pos2, new Vector2f()));
 
-                    return semantic;
+                    return perception;
                 })
                 .collect(Collectors.toList());
 	}

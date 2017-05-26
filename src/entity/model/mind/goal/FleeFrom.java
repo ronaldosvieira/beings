@@ -1,20 +1,20 @@
 package entity.model.mind.goal;
 
 import entity.model.Animal;
-import model.InstanceFrame;
+import entity.model.mind.sense.Perception;
 import org.joml.Vector2f;
 
 public class FleeFrom extends Goal {
-    private InstanceFrame perception;
+    private Perception perception;
     private double distance = 10;
 
-    public FleeFrom(Animal animal, InstanceFrame perception) {
+    public FleeFrom(Animal animal, Perception perception) {
         super(animal);
 
         this.perception = perception;
     }
 
-    public FleeFrom(Animal animal, InstanceFrame perception, double distance) {
+    public FleeFrom(Animal animal, Perception perception, double distance) {
         this(animal, perception);
 
         this.distance = distance;
