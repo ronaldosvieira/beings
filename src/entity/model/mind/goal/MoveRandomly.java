@@ -37,7 +37,10 @@ public class MoveRandomly extends Goal {
 
         return direction;
 	}
-	
+
+	@Override
+	public boolean isCompleted() {return true;}
+
 	private Vector2f getRandomDirection() {
 		Random random = new Random();
 		Vector2f dir = new Vector2f(

@@ -16,4 +16,7 @@ public class Freeze extends Goal {
 	public Vector2f getMovement(float delta) {
         return getAnimal().getCurrentDirection();
 	}
+
+	@Override
+	public boolean isCompleted() {return true;}
 }

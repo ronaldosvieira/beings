@@ -13,4 +13,6 @@ public abstract class Goal {
     public Animal getAnimal() {return this.animal;}
 
     public abstract Vector2f getMovement(float delta);
+
+    public abstract boolean isCompleted();
 }
