@@ -3,8 +3,6 @@ package world;
 import collision.AABB;
 import collision.QuadTree;
 import entity.Entity;
-import entity.model.Thing;
-import entity.model.mind.sense.Perception;
 import game.Shader;
 import io.Window;
 import knowledge.KnowledgeBase;
@@ -260,7 +258,7 @@ public class World {
 
 	public List<Entity> getEntities() {return this.entities;}
 
-	public List<Perception> getNearEntities(Entity entity, float range) {
+	public List<Entity> getNearEntities(Entity entity, float range) {
 	    AABB box = new AABB(entity.getPosition(), new Vector2f(range));
 
 	    return this.quad
@@ -269,17 +267,6 @@ public class World {
                 .filter(entity2 -> !entity.equals(entity2))
                 .filter(entity2 -> entity.getPosition()
                         .distance(entity2.getPosition()) <= range)
-                .map(entity1 -> (Thing) entity1)
-                .map(thing -> {
-                    Perception perception = new Perception(thing.getSemantic());
-                    Vector2f pos1 = thing.getPosition();
-                    Vector2f pos2 = entity.getPosition();
-
-					perception.set("distance",
-                            pos1.sub(pos2, new Vector2f()));
-
-                    return perception;
-                })
                 .collect(Collectors.toList());
 	}
 

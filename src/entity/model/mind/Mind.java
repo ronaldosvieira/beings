@@ -33,7 +33,7 @@ public class Mind {
                 workingMemory.add(perception);
 
                 /*System.out.println("Living thing '" + this.being.getName()
-                        + "' just saw '" + perception.getName() + "'.");*/
+                        + "' just saw '" + perception.name() + "'.");*/
 
                 while (workingMemory.size() > 4) {
                     workingMemory.remove(0);

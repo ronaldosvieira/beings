@@ -21,8 +21,7 @@ public class Sight extends Sense {
     public List<Perception> perceive() {
         Vector2f direction = ((Animal) getBeing()).getCurrentDirection();
 
-        return getBeing().getWorld()
-                .getNearEntities(getBeing(), range)
+        return getNearPerceptions(range)
                 .stream()
                 .filter(perception -> {
                     Vector2f distance = perception.get("distance", Vector2f.class);
