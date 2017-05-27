@@ -3,6 +3,7 @@ package entity.model;
 import entity.model.mind.Mind;
 import entity.model.mind.goal.Goal;
 import entity.model.mind.goal.MoveRandomly;
+import entity.model.mind.need.Need;
 import entity.model.mind.sense.Sense;
 import entity.model.util.AnimalAnim;
 import io.Window;
@@ -22,6 +23,7 @@ public abstract class Animal extends LivingThing {
 
 	private Mind mind;
 	private List<Sense> senses = new ArrayList<>();
+	private List<Need> needs = new ArrayList<>();
 
 	private boolean isMoving;
 	private float movementSpeed;
@@ -96,6 +98,7 @@ public abstract class Animal extends LivingThing {
 
     @Override
     public void cycle(float delta) {
+		this.needs.forEach(need -> need.decay(delta));
         this.mind.update();
     }
 
@@ -105,8 +108,12 @@ public abstract class Animal extends LivingThing {
 	}
 
 	public List<Sense> getSenses() {return this.senses;}
+	public List<Need> getNeeds() {return this.needs;}
 
 	protected void addSense(Sense sense) {
 	    if (!this.senses.contains(sense)) this.senses.add(sense);
+    }
+	protected void addNeed(Need need) {
+	    if (!this.needs.contains(need)) this.needs.add(need);
     }
 }
