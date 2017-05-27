@@ -18,7 +18,7 @@ public class Plant extends LivingThing {
 	}
 
 	@Override
-	public void cycle() {}
+	public void cycle(float delta) {}
 
 	@Override
 	public void update(float delta, Window window, Camera camera) {

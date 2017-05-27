@@ -137,7 +137,7 @@ public class World {
         }
 
 		for (Entity entity : entities) {
-			entity.cycle();
+			entity.cycle(delta);
 		}
 	}
 	

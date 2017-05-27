@@ -95,7 +95,7 @@ public abstract class Animal extends LivingThing {
 	}
 
     @Override
-    public void cycle() {
+    public void cycle(float delta) {
         this.mind.update();
     }
 

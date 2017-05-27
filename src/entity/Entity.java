@@ -64,7 +64,7 @@ public abstract class Entity {
 	}
 	
 	public abstract void update(float delta, Window window, Camera camera);
-	public abstract void cycle();
+	public abstract void cycle(float delta);
 	
 	public void render(Shader shader, Camera camera) {
 		Matrix4f target = camera.getProjection();
