@@ -3,13 +3,14 @@ package entity.model.mind;
 import entity.model.Animal;
 import entity.model.mind.sense.Perception;
 import entity.model.mind.sense.Sense;
+import entity.model.mind.sense.TemporalPerception;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Mind {
     private Animal being;
-    private List<Perception> workingMemory;
+    private List<TemporalPerception> workingMemory;
 
     public Mind(Animal being) {
         this.being = being;
@@ -30,7 +31,7 @@ public class Mind {
 
         for (Perception perception : perceptions) {
             if (!workingMemory.contains(perception)) {
-                workingMemory.add(perception);
+                workingMemory.add(new TemporalPerception(perception));
 
                 /*System.out.println("Living thing '" + this.being.getName()
                         + "' just saw '" + perception.name() + "'.");*/
