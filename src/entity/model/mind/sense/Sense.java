@@ -22,16 +22,7 @@ public abstract class Sense {
         return getBeing().getWorld().getNearEntities(getBeing(), range)
                 .stream()
                 .map(entity1 -> (Thing) entity1)
-                .map(thing -> {
-                    Perception perception = new Perception(thing.getSemantic());
-                    Vector2f pos1 = thing.getPosition();
-                    Vector2f pos2 = getBeing().getPosition();
-
-                    perception.set("distance",
-                            pos1.sub(pos2, new Vector2f()));
-
-                    return perception;
-                })
+                .map(thing -> new Perception(getBeing(), thing))
                 .collect(Collectors.toList());
     }
 }

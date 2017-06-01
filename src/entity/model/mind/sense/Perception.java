@@ -1,7 +1,31 @@
 package entity.model.mind.sense;
 
-import model.InstanceFrame;
+import entity.model.Animal;
+import entity.model.Thing;
+import frames.InstanceFrame;
+import org.joml.Vector2f;
 
 public class Perception extends InstanceFrame {
-    public Perception(InstanceFrame frame) {super(frame);}
+    private Thing source;
+
+    public Perception(Animal subject, Thing source) {
+        super(source.getSemantic());
+
+        this.source = source;
+
+        Vector2f pos1 = source.getPosition();
+        Vector2f pos2 = subject.getPosition();
+
+        this.set("distance", pos1.sub(pos2, new Vector2f()));
+        this.set("timestamp", System.currentTimeMillis());
+    }
+
+    public Thing getSource() {return this.source;}
+
+    public Perception(Perception perception) {super(perception);}
+
+    public boolean isSameSource(Perception perception) {
+        // todo: calc precisely (use mind frequency?)
+        return this.get("distance", Vector2f.class).length() < 1;
+    }
 }
