@@ -1,29 +1,37 @@
-package entity.model.mind.goal
+package entity.model.mind.goal;
 
-import entity.model.Animal
-import org.joml.Vector2f
-import java.util.function.Function
-import java.util.function.Predicate
-import java.util.stream.Collectors
+import entity.model.Animal;
+import org.joml.Vector2f;
 
-abstract class Goal(val animal: Animal) {
-    private val preReqs: List<Goal>? = null
-    private var next: Goal? = null
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
-    abstract fun getMovement(delta: Float): Vector2f
+public abstract class Goal {
+    private Animal animal;
+    private List<Goal> preReqs = new ArrayList<>();
+    private Goal next;
 
-    fun preReqs(): List<Goal> {
-        return this.preReqs!!
-                .filter { goal -> !goal.isCompleted }
+    public Goal(Animal animal) {
+        this.animal = animal;
     }
 
-    abstract val isCompleted: Boolean
+    public Animal getAnimal() {return this.animal;}
 
-    fun next(next: Goal) {
-        this.next = next
+    public abstract Vector2f getMovement(float delta);
+
+    public List<Goal> preReqs() {
+        return this.preReqs.stream()
+                .filter(goal -> !goal.isCompleted())
+                .collect(Collectors.toList());
     }
 
-    operator fun next(): Goal {
-        return this.next!!
-    }
+    protected void addPreReq(Goal preReq) {this.preReqs.add(preReq);}
+
+    public abstract boolean isCompleted();
+
+    public void next(Goal next) {this.next = next;}
+    public Goal next() {return this.next;}
 }
