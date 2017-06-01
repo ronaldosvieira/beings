@@ -1,6 +1,6 @@
 {
   "name": "living-thing",
   "type": "generic",
-  "parent": "thing",
+  "parent": {"ref": "thing"},
   "slots": {}
 }

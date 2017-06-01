@@ -1,21 +1,36 @@
 {
   "name": "rabbit",
   "type": "generic",
-  "parent": "mammal",
+  "parent": {"ref": "mammal"},
   "slots": {
     "size": {
-      "type": "distrib",
-      "value": "1 +- 0.2"
+      "value": 1.0,
+      "if_added": null,
+      "if_needed": null,
+      "constraints": []
     },
-    "diet": "herbivorous",
-    "senses": [
-      "sight",
-      "hearing",
-      "smell",
-      "touch"
-    ],
-    "traits": [
-      "group"
-    ]
+    "diet": {
+      "value": "herbivorous",
+      "if_added": null,
+      "if_needed": null,
+      "constraints": []
+    },
+    "senses": {
+      "value": [
+        "sight",
+        "hearing",
+        "smell",
+        "touch"
+      ],
+      "if_added": null,
+      "if_needed": null,
+      "constraints": []
+    },
+    "traits": {
+      "value": ["group"],
+      "if_added": null,
+      "if_needed": null,
+      "constraints": []
+    }
   }
 }

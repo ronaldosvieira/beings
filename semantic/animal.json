@@ -1,6 +1,6 @@
 {
   "name": "animal",
   "type": "generic",
-  "parent": "living-thing",
+  "parent": {"ref": "living-thing"},
   "slots": {}
 }

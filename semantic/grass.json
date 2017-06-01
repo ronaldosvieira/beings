@@ -1,8 +1,13 @@
 {
   "name": "grass",
   "type": "instance",
-  "parent": "plant",
+  "parent": {"ref:": "plant"},
   "slots": {
-    "size": "0.5"
+    "size": {
+      "value": 0.5,
+      "if_added": null,
+      "if_needed": null,
+      "constraints": []
+    }
   }
 }

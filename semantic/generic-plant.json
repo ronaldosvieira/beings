@@ -1,6 +1,6 @@
 {
   "name": "generic-plant",
   "type": "generic",
-  "parent": "plant",
+  "parent": {"ref": "plant"},
   "slots": {}
 }
