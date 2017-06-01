@@ -1,7 +1,6 @@
-package model;
+package frames;
 
 import java.util.HashMap;
-import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 

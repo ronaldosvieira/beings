@@ -1,4 +1,4 @@
-package model;
+package frames;
 
 public class GenericFrame extends Frame {
 	public GenericFrame(String name) {

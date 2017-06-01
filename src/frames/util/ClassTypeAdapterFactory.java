@@ -1,4 +1,4 @@
-package model.util;
+package frames.util;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;

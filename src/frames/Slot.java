@@ -1,6 +1,6 @@
-package model;
+package frames;
 
-import model.constraint.Constraint;
+import frames.constraint.Constraint;
 
 import java.util.ArrayList;
 import java.util.List;

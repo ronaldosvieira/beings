@@ -1,4 +1,4 @@
-package model;
+package frames;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

@@ -1,8 +1,9 @@
 package entity.model;
 
 import entity.Entity;
-import model.GenericFrame;
-import model.InstanceFrame;
+import frames.GenericFrame;
+import frames.InstanceFrame;
+import frames.KnowledgeBase;
 import org.joml.Vector2f;
 import world.World;
 

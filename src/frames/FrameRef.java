@@ -1,4 +1,4 @@
-package model;
+package frames;
 
 import org.jetbrains.annotations.NotNull;
 

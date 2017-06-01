@@ -1,12 +1,11 @@
-package model;
+package frames;
 
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
-import model.constraint.Constraint;
-import model.constraint.ContainsConstraint;
-import model.constraint.RangeConstraint;
-import model.constraint.TypeConstraint;
-import model.util.ClassTypeAdapterFactory;
+import frames.constraint.Constraint;
+import frames.constraint.ContainsConstraint;
+import frames.constraint.RangeConstraint;
+import frames.constraint.TypeConstraint;
+import frames.util.ClassTypeAdapterFactory;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -28,9 +27,13 @@ public abstract class Frame implements Cloneable {
     }
 
     public Frame(Frame frame) {
-	    this.name = frame.name;
-	    this.parent = frame.parent;
-	    this.slots = new HashMap<>();
+	    this.copy(frame);
+    }
+
+    protected void copy(Frame frame) {
+        this.name = frame.name;
+        this.parent = frame.parent;
+        this.slots = new HashMap<>();
 
         for (String slot : frame.slots.keySet()) {
             this.slots.put(slot, new Slot(frame.slots.get(slot)));
@@ -41,7 +44,19 @@ public abstract class Frame implements Cloneable {
 	public GenericFrame parent() {
 	    return this.parent != null && this.parent.retrieve() != null? (GenericFrame) this.parent.retrieve() : null;
 	}
-	public Set<String> slots() {return this.slots.keySet();}
+
+	public Set<String> slots() {
+	    Set<String> slots = new HashSet<>();
+	    GenericFrame parent = this.parent();
+
+	    slots.addAll(this.slots.keySet());
+
+	    if (parent != null) {
+	        slots.addAll(parent.slots());
+        }
+
+        return slots;
+	}
 
 	public void setName(String name) {this.name = name;}
     public void setParent(GenericFrame parent) {this.parent = parent.ref();}
@@ -60,7 +75,7 @@ public abstract class Frame implements Cloneable {
     protected Slot find(String key) throws NoSuchElementException {
 	    if (this.contains(key))
 	        return slots.get(key);
-	    else if (parent != null && parent.retrieve().contains(key))
+	    else if (parent != null && parent.retrieve() != null && parent.retrieve().contains(key))
 	        return parent.retrieve().find(key);
 	    else
 	        throw new NoSuchElementException("Slot '" + key
