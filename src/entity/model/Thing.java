@@ -16,7 +16,7 @@ public abstract class Thing extends Entity {
 		
 		this.name = name;
 		this.semantic = new InstanceFrame(name,
-				(GenericFrame) getWorld().getKnowledgeBase().retrieve(name));
+				(GenericFrame) KnowledgeBase.retrieveFrame(name));
 	}
 
 	public String getName() {return this.name;}

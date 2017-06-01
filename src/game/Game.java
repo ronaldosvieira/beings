@@ -9,7 +9,7 @@ import gui.GUI;
 import gui.PauseButton;
 import io.Timer;
 import io.Window;
-import knowledge.KnowledgeBase;
+import knowledge.FrameLoader;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.opengl.GL;
@@ -107,6 +107,14 @@ public class Game {
 
         List<Entity> entities = new ArrayList<>();
         Random random = new Random();
+
+        try {
+            FrameLoader.load("semantic");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+            System.exit(1);
+        }
 
         int worldSize = 25;
         int worldScale = 16;
