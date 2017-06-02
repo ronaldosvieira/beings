@@ -1,6 +1,7 @@
 package frames;
 
 import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 import frames.constraint.Constraint;
 import frames.constraint.ContainsConstraint;
 import frames.constraint.RangeConstraint;
@@ -9,6 +10,7 @@ import frames.util.ClassTypeAdapterFactory;
 
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public abstract class Frame implements Cloneable {
@@ -97,7 +99,7 @@ public abstract class Frame implements Cloneable {
                     + type.getSimpleName() + " given.");
         }
 	}
-	
+
 	public <T> void set(String key, T value) {
 	    try {
 	        Slot slot = this.find(key);
@@ -173,23 +175,28 @@ public abstract class Frame implements Cloneable {
         JsonObject slots = frameJson.get("slots").getAsJsonObject();
         for (Map.Entry<String, JsonElement> slot : slots.entrySet()) {
             String key = slot.getKey();
-            JsonObject value = slot.getValue().getAsJsonObject();
+            JsonObject filler = slot.getValue().getAsJsonObject();
 
-            if (!value.get("value").isJsonNull())
-                frame.set(key, gson.fromJson(value.get("value"), Object.class));
+            Predicate<JsonElement> exists = el -> el != null && !el.isJsonNull();
 
-            /*
-            if (!value.get("if_added").isJsonNull())
-                frame.ifAdded(key, gson.fromJson(value.get("if_added"),
+            JsonElement value = filler.get("value");
+            JsonElement if_added = filler.get("if_added");
+            JsonElement if_needed = filler.get("if_needed");
+            JsonElement constraints = filler.get("constraints");
+
+            if (exists.test(value))
+                frame.set(key, gson.fromJson(filler.get("value"), Object.class));
+
+            if (exists.test(if_added))
+                frame.ifAdded(key, gson.fromJson(filler.get("if_added"),
                         new TypeToken<Consumer<Object>>(){}.getType()));
 
-            if (!value.get("if_needed").isJsonNull())
-                frame.ifNeeded(key, gson.fromJson(value.get("if_needed"),
+            if (exists.test(if_needed))
+                frame.ifNeeded(key, gson.fromJson(filler.get("if_needed"),
                         new TypeToken<Supplier<Object>>(){}.getType()));
-            */
 
-            if (!value.get("constraints").isJsonNull()) {
-                for (JsonElement constraint : value.get("constraints").getAsJsonArray()) {
+            if (exists.test(constraints)) {
+                for (JsonElement constraint : filler.get("constraints").getAsJsonArray()) {
                     JsonObject constraintObj = constraint.getAsJsonObject();
                     String constrType = constraintObj.get("type").getAsString();
                     Constraint constr;
