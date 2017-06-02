@@ -88,6 +88,15 @@ public abstract class Animal extends LivingThing {
 		} else {
 			if (currentAnim.isWalking()) 
 				selectAnimation(currentAnim.idle());
+			else {
+                if (Math.abs(direction.x) > Math.abs(direction.y)) {
+                    if (direction.x > 0) selectAnimation(AnimalAnim.IDLE_E);
+                    else selectAnimation(AnimalAnim.IDLE_W);
+                } else {
+                    if (direction.y > 0) selectAnimation(AnimalAnim.IDLE_N);
+                    else selectAnimation(AnimalAnim.IDLE_S);
+                }
+            }
 		}
 	}
 	

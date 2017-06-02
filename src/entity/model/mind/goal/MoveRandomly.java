@@ -28,8 +28,10 @@ public class MoveRandomly extends Goal {
         if (lastMove >= moveTime) {
 			lastMove = 0.0f;
             moveTime = getRandomMoveTime();
-			isMoving = !isMoving;
-			direction = getRandomDirection();
+
+            if (isMoving) direction = getRandomDirection();
+
+            isMoving = !isMoving;
 		}
 		
 		if (isMoving) getAnimal().setMovementSpeed(0);
