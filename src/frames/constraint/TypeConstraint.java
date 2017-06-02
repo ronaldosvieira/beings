@@ -3,19 +3,19 @@ package frames.constraint;
 import com.sun.istack.internal.NotNull;
 
 public class TypeConstraint implements Constraint {
-    private final String constraint = "type";
-    private Class<?> type;
+    private final String type = "type";
+    private Class<?> className;
 
-    public TypeConstraint(@NotNull Class<?> type) {
-        if (type == null)
+    public TypeConstraint(@NotNull Class<?> className) {
+        if (className == null)
             throw new IllegalArgumentException("TypeConstraint with null class");
 
-        this.type = type;
+        this.className = className;
     }
 
     @Override
     public boolean check(Object value) {
-        return type.isAssignableFrom(value.getClass());
+        return className.isAssignableFrom(value.getClass());
     }
 
     @Override
@@ -25,11 +25,11 @@ public class TypeConstraint implements Constraint {
 
         TypeConstraint that = (TypeConstraint) o;
 
-        return type.equals(that.type);
+        return className.equals(that.className);
     }
 
     @Override
     public int hashCode() {
-        return type.hashCode();
+        return className.hashCode();
     }
 }

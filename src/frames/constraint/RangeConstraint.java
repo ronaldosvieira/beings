@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.function.BiPredicate;
 
 public class RangeConstraint implements Constraint {
-    private final String constraint = "range";
+    private final String type = "range";
     private Comparable lo, hi;
     private char[] bounds = {'[', ')'};
 

@@ -191,12 +191,12 @@ public abstract class Frame implements Cloneable {
             if (!value.get("constraints").isJsonNull()) {
                 for (JsonElement constraint : value.get("constraints").getAsJsonArray()) {
                     JsonObject constraintObj = constraint.getAsJsonObject();
-                    String constrType = constraintObj.get("constraint").getAsString();
+                    String constrType = constraintObj.get("type").getAsString();
                     Constraint constr;
                     try {
                         switch (constrType) {
                             case "type":
-                                String className = constraintObj.get("type").getAsString();
+                                String className = constraintObj.get("value").getAsString();
                                 constr = new TypeConstraint(Class.forName(className));
                                 break;
 
