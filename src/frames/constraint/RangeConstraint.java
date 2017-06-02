@@ -52,13 +52,13 @@ public class RangeConstraint implements Constraint {
         if (!(value instanceof Comparable)) return false;
 
         try {
-            lo.getClass().cast(value);
-            hi.getClass().cast(value);
+            if (lo != null) lo.getClass().cast(value);
+            if (hi != null) hi.getClass().cast(value);
         } catch (ClassCastException e) {
             return false;
         }
 
-        return operators.get(bounds[0]).test((Comparable) value, lo)
-                && operators.get(bounds[1]).test((Comparable)value, hi);
+        return (lo == null || operators.get(bounds[0]).test((Comparable) value, lo))
+                && (hi == null || operators.get(bounds[1]).test((Comparable)value, hi));
     }
 }
