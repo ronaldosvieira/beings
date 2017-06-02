@@ -24,6 +24,17 @@ public class Mind {
             perceptions.addAll(sense.perceive());
         }
 
+        for (int i = 0; i < workingMemory.size(); i++) {
+            TemporalPerception tempPerception = workingMemory.get(i);
+
+            perceptions.stream()
+                    .filter(perception -> perception.getSource().getId() == tempPerception.getSource().getId())
+                    .findFirst()
+                    .ifPresent(tempPerception::update);
+
+            // workingMemory.set(i, tempPerception);
+        }
+
         // todo: try to merge perceptions
         //      if many of same type then merge all with distance = centroid
         //      if distance and type == those of an old perception then merge
