@@ -2,5 +2,14 @@
   "name": "mammal",
   "type": "generic",
   "parent": {"ref": "animal"},
-  "slots": {}
+  "slots": {
+    "legs": {
+      "value": 2,
+      "constraints": [{
+        "type": "range",
+        "lo": 0,
+        "bounds": ["[", "]"]
+      }]
+    }
+  }
 }

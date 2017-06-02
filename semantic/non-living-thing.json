@@ -1,14 +1,14 @@
 {
-  "name": "living-thing",
+  "name": "non-living-thing",
   "type": "generic",
   "parent": {"ref": "thing"},
   "slots": {
     "is-alive": {
-      "value": true,
+      "value": false,
       "constraints": [{
-          "type": "type",
-          "class-name": "java.lang.Boolean"
-        }
+        "type": "type",
+        "class-name": "java.lang.Boolean"
+      }
       ]
     }
   }

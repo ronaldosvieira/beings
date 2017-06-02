@@ -2,5 +2,19 @@
   "name": "thing",
   "type": "generic",
   "parent": null,
-  "slots": {}
+  "slots": {
+    "size": {
+      "constraints": [
+        {
+          "type": "type",
+          "class-name": "java.lang.Number"
+        },
+        {
+          "type": "range",
+          "lo": 0,
+          "bounds": ["(", "]"]
+        }
+      ]
+    }
+  }
 }

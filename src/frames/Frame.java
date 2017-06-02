@@ -203,7 +203,7 @@ public abstract class Frame implements Cloneable {
                     try {
                         switch (constrType) {
                             case "type":
-                                String className = constraintObj.get("value").getAsString();
+                                String className = constraintObj.get("class-name").getAsString();
                                 constr = new TypeConstraint(Class.forName(className));
                                 break;
 
