@@ -6,7 +6,11 @@ import entity.model.mind.sense.Sense;
 import entity.model.mind.sense.TemporalPerception;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Mind {
     private Animal being;
@@ -18,29 +22,29 @@ public class Mind {
     }
 
     public void update() {
-        List<Perception> perceptions = new ArrayList<>();
+        Map<Integer, Perception> perceptions = this.being.getSenses().stream()
+                .map(Sense::perceive)
+                .flatMap(Collection::stream)
 
-        for (Sense sense : this.being.getSenses()) {
-            perceptions.addAll(sense.perceive());
-        }
+                // combines perceptions from same source
+                .collect(Collectors.toMap(p -> p.getSource().getId(), Function.identity(), Perception::combine));
 
-        for (int i = 0; i < workingMemory.size(); i++) {
-            TemporalPerception tempPerception = workingMemory.get(i);
+        // updates perceptions in working memory
+        workingMemory.stream()
+                .filter(temporalPerception -> perceptions.containsKey(temporalPerception.getSource().getId()))
+                .forEach(tP -> {
+                    int id = tP.getSource().getId();
+                    Perception p = perceptions.get(id);
 
-            perceptions.stream()
-                    .filter(perception -> perception.isSameSource(tempPerception))
-                    .findFirst()
-                    .ifPresent(perception -> {
-                        tempPerception.update(perception);
-                        perceptions.remove(perception);
-                    });
-        }
+                    tP.update(p);
+                    perceptions.remove(id);
+                });
 
         // todo: try to merge perceptions
         //      if many of same type then merge all with distance = centroid
         // todo: weigh perceptions relevance
 
-        for (Perception perception : perceptions) {
+        for (Perception perception : perceptions.values()) {
             workingMemory.add(new TemporalPerception(perception));
 
             /*System.out.println("Living thing '" + this.being.getName()

@@ -33,4 +33,16 @@ public class Perception extends InstanceFrame {
         // return this.get("distance", Vector2f.class).length() < 1;
         return this.getSource().getId() == perception.getSource().getId();
     }
+
+    public Perception merge(Perception other) {
+        Perception res = new Perception(other);
+
+        res.slots.putAll(this.slots);
+
+        return res;
+    }
+
+    public static Perception combine(Perception first, Perception second) {
+        return first.merge(second);
+    }
 }

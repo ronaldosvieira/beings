@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 public abstract class Frame implements Cloneable {
     private String name;
 	protected FrameRef parent;
-	private Map<String, Slot> slots;
+    protected Map<String, Slot> slots;
 	
 	public Frame(String name) {
 	    this.name = name;
