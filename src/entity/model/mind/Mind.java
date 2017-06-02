@@ -28,28 +28,26 @@ public class Mind {
             TemporalPerception tempPerception = workingMemory.get(i);
 
             perceptions.stream()
-                    .filter(perception -> perception.getSource().getId() == tempPerception.getSource().getId())
+                    .filter(perception -> perception.isSameSource(tempPerception))
                     .findFirst()
-                    .ifPresent(tempPerception::update);
-
-            // workingMemory.set(i, tempPerception);
+                    .ifPresent(perception -> {
+                        tempPerception.update(perception);
+                        perceptions.remove(perception);
+                    });
         }
 
         // todo: try to merge perceptions
         //      if many of same type then merge all with distance = centroid
-        //      if distance and type == those of an old perception then merge
         // todo: weigh perceptions relevance
 
         for (Perception perception : perceptions) {
-            if (!workingMemory.contains(perception)) {
-                workingMemory.add(new TemporalPerception(perception));
+            workingMemory.add(new TemporalPerception(perception));
 
-                /*System.out.println("Living thing '" + this.being.getName()
-                        + "' just saw '" + perception.name() + "'.");*/
+            /*System.out.println("Living thing '" + this.being.getName()
+                    + "' just saw '" + perception.name() + "'.");*/
 
-                while (workingMemory.size() > 4) {
-                    workingMemory.remove(0);
-                }
+            while (workingMemory.size() > 4) {
+                workingMemory.remove(0);
             }
         }
 

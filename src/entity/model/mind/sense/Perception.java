@@ -30,6 +30,7 @@ public class Perception extends InstanceFrame {
 
     public boolean isSameSource(Perception perception) {
         // todo: calc precisely (use mind frequency?)
-        return this.get("distance", Vector2f.class).length() < 1;
+        // return this.get("distance", Vector2f.class).length() < 1;
+        return this.getSource().getId() == perception.getSource().getId();
     }
 }
