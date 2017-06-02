@@ -22,7 +22,11 @@ public class Perception extends InstanceFrame {
 
     public Thing getSource() {return this.source;}
 
-    public Perception(Perception perception) {super(perception);}
+    public Perception(Perception perception) {
+        super(perception);
+
+        this.source = perception.source;
+    }
 
     public boolean isSameSource(Perception perception) {
         // todo: calc precisely (use mind frequency?)

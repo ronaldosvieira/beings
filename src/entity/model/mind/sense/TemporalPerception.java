@@ -9,8 +9,8 @@ public class TemporalPerception extends Perception {
         this.next = null;
     }
 
-    public void update(TemporalPerception next) {
-        this.next = (TemporalPerception) this.clone();
+    public void update(Perception next) {
+        this.next = new TemporalPerception(this);
         this.copy(next);
     }
 
