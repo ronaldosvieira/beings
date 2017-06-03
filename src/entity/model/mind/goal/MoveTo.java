@@ -12,7 +12,7 @@ public class MoveTo extends Goal {
         super(animal);
 
         this.perception = perception;
-        this.distance = 0.5 + (perception.get("size", Double.class) / 2)
+        this.distance = 1.5 + (perception.get("size", Double.class) / 2)
                 + (getAnimal().getSemantic().get("size", Double.class) / 2);
     }
 
@@ -24,7 +24,6 @@ public class MoveTo extends Goal {
 
     @Override
     public Vector2f getMovement(float delta) {
-        System.out.println(getAnimal().getName() + " move-to - " + perception.get("timestamp", Long.class));
         getAnimal().setMovementSpeed(5);
 
         return perception
