@@ -1,6 +1,8 @@
 package entity.model.mind;
 
 import entity.model.Animal;
+import entity.model.mind.goal.Goal;
+import entity.model.mind.goal.MoveRandomly;
 import entity.model.mind.sense.Perception;
 import entity.model.mind.sense.Sense;
 import entity.model.mind.sense.TemporalPerception;
@@ -56,5 +58,23 @@ public class Mind {
         }
 
         // todo: do stuff based on current working memory
+
+        Goal currentGoal = being.getCurrentGoal();
+
+        if (currentGoal.isCompleted()) {
+            System.out.println("completed");
+            being.setCurrentGoal(currentGoal.next());
+        }
+
+        List<Goal> preReqs = currentGoal.preReqs();
+
+        while (preReqs.size() > 0) {
+            Goal preReq = preReqs.get(0);
+            preReq.next(being.getCurrentGoal());
+
+            being.setCurrentGoal(preReq);
+
+            preReqs = being.getCurrentGoal().preReqs();
+        }
     }
 }
