@@ -117,12 +117,20 @@ public abstract class Animal extends LivingThing {
 	}
 
 	public List<Sense> getSenses() {return this.senses;}
+
 	public List<Need> getNeeds() {return this.needs;}
 
 	protected void addSense(Sense sense) {
 	    if (!this.senses.contains(sense)) this.senses.add(sense);
     }
+
 	protected void addNeed(Need need) {
 	    if (!this.needs.contains(need)) this.needs.add(need);
     }
+
+    public Goal getCurrentGoal() {return this.currentGoal;}
+
+    public void setCurrentGoal(Goal goal) {
+		this.currentGoal = goal != null? goal : new MoveRandomly(this);
+	}
 }
