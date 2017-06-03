@@ -3,34 +3,16 @@
   "type": "generic",
   "parent": {"ref": "mammal"},
   "slots": {
-    "size": {
-      "value": 1.0,
-      "if_added": null,
-      "if_needed": null,
-      "constraints": []
-    },
-    "diet": {
-      "value": "herbivorous",
-      "if_added": null,
-      "if_needed": null,
-      "constraints": []
-    },
+    "size": {"value": 1.0},
+    "diet": {"value": "herbivorous"},
     "senses": {
       "value": [
         "sight",
         "hearing",
         "smell",
         "touch"
-      ],
-      "if_added": null,
-      "if_needed": null,
-      "constraints": []
+      ]
     },
-    "traits": {
-      "value": ["group"],
-      "if_added": null,
-      "if_needed": null,
-      "constraints": []
-    }
+    "traits": {"value": ["group"]}
   }
 }
