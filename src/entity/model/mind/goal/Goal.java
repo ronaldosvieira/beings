@@ -1,6 +1,8 @@
 package entity.model.mind.goal;
 
 import entity.model.Animal;
+import entity.model.mind.sense.Perception;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
 
 import java.util.ArrayList;
@@ -14,8 +16,11 @@ public abstract class Goal {
     private List<Goal> preReqs = new ArrayList<>();
     private Goal next;
 
-    public Goal(Animal animal) {
+    protected Perception perception;
+
+    public Goal(Animal animal, Perception perception) {
         this.animal = animal;
+        this.perception = perception;
     }
 
     public Animal getAnimal() {return this.animal;}
@@ -31,6 +36,14 @@ public abstract class Goal {
     protected void addPreReq(Goal preReq) {this.preReqs.add(preReq);}
 
     public abstract boolean isCompleted();
+
+    public Goal input(Perception perception) {
+        this.perception = perception;
+
+        return this;
+    }
+
+    public Perception output() {return this.perception;}
 
     public void next(Goal next) {this.next = next;}
     public Goal next() {return this.next;}

@@ -5,13 +5,10 @@ import entity.model.mind.sense.Perception;
 import org.joml.Vector2f;
 
 public class FleeFrom extends Goal {
-    private Perception perception;
     private double distance = 10;
 
     public FleeFrom(Animal animal, Perception perception) {
-        super(animal);
-
-        this.perception = perception;
+        super(animal, perception);
     }
 
     public FleeFrom(Animal animal, Perception perception, double distance) {

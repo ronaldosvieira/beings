@@ -5,13 +5,11 @@ import entity.model.mind.sense.Perception;
 import org.joml.Vector2f;
 
 public class MoveTo extends Goal {
-    private Perception perception;
     private double distance = 3;
 
     public MoveTo(Animal animal, Perception perception) {
-        super(animal);
+        super(animal, perception);
 
-        this.perception = perception;
         this.distance = 1.5 + (perception.get("size", Double.class) / 2)
                 + (getAnimal().getSemantic().get("size", Double.class) / 2);
     }

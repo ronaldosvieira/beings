@@ -40,7 +40,7 @@ public abstract class Animal extends LivingThing {
 		this.movementSpeed = 5.0f; // default movement speed
 		this.isMoving = false;
 		
-		this.currentGoal = new MoveRandomly(this);
+		this.currentGoal = new MoveRandomly(this, null);
 		
 		for (AnimalAnim anim : AnimalAnim.values()) {
 			setAnimation(anim.index(), 
@@ -131,6 +131,6 @@ public abstract class Animal extends LivingThing {
     public Goal getCurrentGoal() {return this.currentGoal;}
 
     public void setCurrentGoal(Goal goal) {
-		this.currentGoal = goal != null? goal : new MoveRandomly(this);
+		this.currentGoal = goal != null? goal : new MoveRandomly(this, null);
 	}
 }

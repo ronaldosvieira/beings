@@ -28,6 +28,11 @@ public class Perception extends InstanceFrame {
         this.source = perception.source;
     }
 
+    @Override
+    public Perception clone() {
+        return new Perception(this);
+    }
+
     public boolean isSameSource(Perception perception) {
         // todo: calc precisely (use mind frequency?)
         // return this.get("distance", Vector2f.class).length() < 1;

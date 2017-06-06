@@ -2,6 +2,7 @@ package entity.model.mind.goal;
 
 import java.util.Random;
 
+import entity.model.mind.sense.Perception;
 import org.joml.Vector2f;
 
 import entity.model.Animal;
@@ -12,8 +13,8 @@ public class MoveRandomly extends Goal {
     private float moveTime;
     private boolean isMoving;
 	
-	public MoveRandomly(Animal animal) {
-		super(animal);
+	public MoveRandomly(Animal animal, Perception perception) {
+		super(animal, perception);
 		
 		this.direction = getRandomDirection();
 		this.isMoving = false;

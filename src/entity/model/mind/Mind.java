@@ -63,16 +63,17 @@ public class Mind {
 
         if (currentGoal.isCompleted()) {
             System.out.println("completed");
-            being.setCurrentGoal(currentGoal.next());
+            being.setCurrentGoal(currentGoal.next().input(currentGoal.output()));
         }
 
         List<Goal> preReqs = currentGoal.preReqs();
 
         while (preReqs.size() > 0) {
             Goal preReq = preReqs.get(0);
-            preReq.next(being.getCurrentGoal());
+            currentGoal = being.getCurrentGoal();
+            preReq.next(currentGoal);
 
-            being.setCurrentGoal(preReq);
+            being.setCurrentGoal(preReq.input(currentGoal.output()));
 
             preReqs = being.getCurrentGoal().preReqs();
         }
