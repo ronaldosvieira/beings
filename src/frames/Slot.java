@@ -5,24 +5,28 @@ import frames.constraint.Constraint;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Slot {
+    private Frame frame;
     private Object value;
     private Consumer<Object> if_added;
-    private Supplier<Object> if_needed;
+    private Function<Frame, Object> if_needed;
     private List<Constraint> constraints;
 
-    public Slot() {
+    public Slot(Frame frame) {
+        this.frame = frame;
         this.constraints = new ArrayList<>();
     }
 
-    public Slot(Object value) {
-        this();
+    public Slot(Frame frame, Object value) {
+        this(frame);
         this.value = value;
     }
 
-    public Slot(Slot slot) {
+    public Slot(Frame frame, Slot slot) {
+        this.frame = frame;
         this.value = slot.value;
         this.if_added = slot.if_added;
         this.if_needed = slot.if_needed;
@@ -33,7 +37,7 @@ public class Slot {
         if (value != null)
             return value;
         else if (if_needed != null)
-            return if_needed.get();
+            return if_needed.apply(frame);
         else
             return null;
     }
@@ -50,7 +54,7 @@ public class Slot {
     }
 
     public void setIfAdded(Consumer<Object> if_added) {this.if_added = if_added;}
-    public void setIfNeeded(Supplier<Object> if_needed) {this.if_needed = if_needed;}
+    public void setIfNeeded(Function<Frame, Object> if_needed) {this.if_needed = if_needed;}
 
     public void clearConstraints() {this.constraints.clear();}
 

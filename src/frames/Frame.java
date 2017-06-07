@@ -10,6 +10,7 @@ import frames.util.ClassTypeAdapterFactory;
 
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -38,7 +39,7 @@ public abstract class Frame implements Cloneable {
         this.slots = new HashMap<>();
 
         for (String slot : frame.slots.keySet()) {
-            this.slots.put(slot, new Slot(frame.slots.get(slot)));
+            this.slots.put(slot, new Slot(this, frame.slots.get(slot)));
         }
     }
 
@@ -75,7 +76,7 @@ public abstract class Frame implements Cloneable {
     }
     
     protected Slot find(String key) throws NoSuchElementException {
-	    if (this.contains(key))
+        if (this.contains(key))
 	        return slots.get(key);
 	    else if (parent() != null)
 	        return parent().find(key);
@@ -107,7 +108,7 @@ public abstract class Frame implements Cloneable {
 
 	        slots.put(key, slot);
         } catch (NoSuchElementException e) {
-            slots.put(key, new Slot(value));
+            slots.put(key, new Slot(this, value));
         }
 	}
 
@@ -117,25 +118,25 @@ public abstract class Frame implements Cloneable {
 	    try {
 	        slot = this.find(key);
         } catch (NoSuchElementException e) {
-	        slot = new Slot();
+	        slot = new Slot(this);
         }
 
 	    slot.setIfAdded(if_added);
 	    slots.put(key, slot);
     }
 
-    public void ifNeeded(String key, Supplier<Object> if_needed) {
+    public void ifNeeded(String key, Function<Frame, Object> if_needed) {
 		Slot slot;
 
 		try {
 			slot = this.find(key);
 		} catch (NoSuchElementException e) {
-			slot = new Slot();
+			slot = new Slot(this);
 		}
 
 		slot.setIfNeeded(if_needed);
 		slots.put(key, slot);
-	}
+    }
 
 	public void addConstraint(String key, Constraint constraint) {
 	    Slot slot;
@@ -143,7 +144,7 @@ public abstract class Frame implements Cloneable {
 	    try {
 	        slot = this.find(key);
         } catch (NoSuchElementException e) {
-	        slot = new Slot();
+	        slot = new Slot(this);
         }
 
         slot.addConstraint(constraint);
@@ -180,20 +181,18 @@ public abstract class Frame implements Cloneable {
             Predicate<JsonElement> exists = el -> el != null && !el.isJsonNull();
 
             JsonElement value = filler.get("value");
-            JsonElement if_added = filler.get("if_added");
-            JsonElement if_needed = filler.get("if_needed");
+            JsonElement if_added = filler.get("if-added");
+            JsonElement if_needed = filler.get("if-needed");
             JsonElement constraints = filler.get("constraints");
 
             if (exists.test(value))
                 frame.set(key, gson.fromJson(filler.get("value"), Object.class));
 
             if (exists.test(if_added))
-                frame.ifAdded(key, gson.fromJson(filler.get("if_added"),
-                        new TypeToken<Consumer<Object>>(){}.getType()));
+                frame.ifAdded(key, KnowledgeBase.retrieveIfAdded(if_added.getAsString()));
 
             if (exists.test(if_needed))
-                frame.ifNeeded(key, gson.fromJson(filler.get("if_needed"),
-                        new TypeToken<Supplier<Object>>(){}.getType()));
+                frame.ifNeeded(key, KnowledgeBase.retrieveIfNeeded(if_needed.getAsString()));
 
             if (exists.test(constraints)) {
                 for (JsonElement constraint : filler.get("constraints").getAsJsonArray()) {
