@@ -1,8 +1,7 @@
 package entity.model.mind;
 
 import entity.model.Animal;
-import entity.model.mind.goal.Goal;
-import entity.model.mind.goal.MoveRandomly;
+import entity.model.mind.goal.*;
 import entity.model.mind.sense.Perception;
 import entity.model.mind.sense.Sense;
 import entity.model.mind.sense.TemporalPerception;
@@ -63,7 +62,13 @@ public class Mind {
 
         if (currentGoal.isCompleted()) {
             System.out.println("completed");
-            being.setCurrentGoal(currentGoal.next().input(currentGoal.output()));
+
+            Goal next = currentGoal.next();
+
+            if (next != null)
+                next.input(currentGoal.output());
+
+            being.setCurrentGoal(next);
         }
 
         List<Goal> preReqs = currentGoal.preReqs();
