@@ -9,8 +9,6 @@ import java.util.Random;
 public class Attack extends Goal {
     public Attack(Animal animal, Perception perception) {
         super(animal, perception);
-
-        this.addPreReq(new MoveTo(animal, perception));
     }
 
     @Override
