@@ -19,5 +19,5 @@ public class Freeze extends Goal {
 	}
 
 	@Override
-	public boolean isCompleted() {return true;}
+	public boolean isCompleted() {return false;}
 }
