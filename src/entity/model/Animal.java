@@ -1,6 +1,7 @@
 package entity.model;
 
 import entity.model.mind.Mind;
+import entity.model.mind.goal.Freeze;
 import entity.model.mind.goal.Goal;
 import entity.model.mind.goal.MoveRandomly;
 import entity.model.mind.need.Need;
@@ -27,6 +28,8 @@ public abstract class Animal extends LivingThing {
 
 	private boolean isMoving;
 	private float movementSpeed;
+
+	private double health = 1d;
 
 	public Animal(String name, World world, Vector2f scale, Vector2f position) {
 		super(name, world, AnimalAnim.AMOUNT, scale, position);
@@ -107,8 +110,23 @@ public abstract class Animal extends LivingThing {
 
     @Override
     public void cycle(float delta) {
-		this.needs.forEach(need -> need.decay(delta));
-        this.mind.update();
+		if (health > 0) {
+            // this.needs.forEach(need -> need.decay(delta));
+
+            this.mind.update();
+        }
+    }
+
+    private void kill() {
+	    this.setCurrentGoal(new Freeze(this, null));
+	    this.semantic.set("is-alive", false);
+	    this.semantic.set("when-dead", System.currentTimeMillis());
+    }
+
+    public void attack() {
+	    this.health -= 0.1d;
+
+	    if (health <= 0) this.kill();
     }
 
 	@Override

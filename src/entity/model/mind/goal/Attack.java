@@ -17,6 +17,8 @@ public class Attack extends Goal {
 
         System.out.println(getAnimal().getName() + " attack - " + perception.get("timestamp", Long.class));
 
+        ((Animal) perception.getSource()).attack();
+
         return perception
                 .get("distance", Vector2f.class)
                 .normalize(new Vector2f());
