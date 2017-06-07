@@ -5,6 +5,7 @@ import entity.Entity;
 import entity.model.Grass;
 import entity.model.Rabbit;
 import entity.model.Fox;
+import frames.KnowledgeBase;
 import gui.GUI;
 import gui.PauseButton;
 import io.Timer;
