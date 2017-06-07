@@ -111,7 +111,7 @@ public class Game {
         Random random = new Random();
 
         try {
-            KnowledgeBase.register("check-if-alive",
+            KnowledgeBase.register("check-if-not-alive",
 					f -> !f.get("is-alive", Boolean.class));
 
             FrameLoader.load("semantic");

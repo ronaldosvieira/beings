@@ -3,6 +3,6 @@
   "type": "generic",
   "parent": {"ref": "living-thing"},
   "slots": {
-    "is-eatable": {"if-needed": "check-if-alive"}
+    "is-eatable": {"if-needed": "check-if-not-alive"}
   }
 }
