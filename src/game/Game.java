@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -109,6 +110,9 @@ public class Game {
         Random random = new Random();
 
         try {
+            KnowledgeBase.register("check-if-alive",
+					f -> !f.get("is-alive", Boolean.class));
+
             FrameLoader.load("semantic");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
