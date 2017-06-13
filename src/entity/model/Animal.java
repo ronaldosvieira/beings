@@ -43,7 +43,7 @@ public abstract class Animal extends LivingThing {
 		this.movementSpeed = 5.0f; // default movement speed
 		this.isMoving = false;
 		
-		this.currentGoal = new MoveRandomly(this, null);
+		this.currentGoal = new MoveRandomly(this);
 		
 		for (AnimalAnim anim : AnimalAnim.values()) {
 			setAnimation(anim.index(), 
@@ -118,7 +118,7 @@ public abstract class Animal extends LivingThing {
     }
 
     private void kill() {
-	    this.setCurrentGoal(new Freeze(this, null));
+        this.setCurrentGoal(new Freeze(this));
 	    this.semantic.set("is-alive", false);
 	    this.semantic.set("when-dead", System.currentTimeMillis());
     }
@@ -150,6 +150,6 @@ public abstract class Animal extends LivingThing {
     public Goal getCurrentGoal() {return this.currentGoal;}
 
     public void setCurrentGoal(Goal goal) {
-		this.currentGoal = goal != null? goal : new MoveRandomly(this, null);
+        this.currentGoal = goal != null? goal : new MoveRandomly(this);
 	}
 }

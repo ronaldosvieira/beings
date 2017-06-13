@@ -26,17 +26,16 @@ public class GoalChain {
     }
 
     public Goal get() {
-        Goal output = chain.element();
+        Goal goal = this.chain.element().input(input);
 
-        for (int i = 1; i < chain.size(); i++) {
-            Goal next = chain.get(i);
-            next.addPreReq(output);
+        for (int i = 1; i < this.chain.size(); i++) {
+            Goal next = this.chain.get(i).input(input);
+            next.addPreReq(goal);
 
-            output = next;
+            goal = next;
         }
 
-        output.input(input);
 
-        return output;
+        return goal;
     }
 }

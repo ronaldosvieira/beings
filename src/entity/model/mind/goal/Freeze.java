@@ -7,8 +7,8 @@ import org.joml.Vector2f;
 import java.util.Random;
 
 public class Freeze extends Goal {
-	public Freeze(Animal animal, Perception perception) {
-		super(animal, perception);
+	public Freeze(Animal animal) {
+		super(animal);
 
 		animal.setMovementSpeed(0);
     }

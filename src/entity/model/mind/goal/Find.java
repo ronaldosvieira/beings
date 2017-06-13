@@ -8,15 +8,12 @@ import org.joml.Vector2f;
 public class Find extends Goal {
     private double distance = 3;
 
-    public Find(Animal animal, Perception perception) {
-        super(animal, perception);
-
-        this.distance = 1.5 + (perception.get("size", Double.class) / 2)
-                + (getAnimal().getSemantic().get("size", Double.class) / 2);
+    public Find(Animal animal) {
+        super(animal);
     }
 
-    public Find(Animal animal, Perception perception, double distance) {
-        this(animal, perception);
+    public Find(Animal animal, double distance) {
+        this(animal);
 
         this.distance = distance;
     }

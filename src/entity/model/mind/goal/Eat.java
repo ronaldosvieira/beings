@@ -7,8 +7,8 @@ import org.joml.Vector2f;
 import java.util.Random;
 
 public class Eat extends Goal {
-    public Eat(Animal animal, Perception perception) {
-        super(animal, perception);
+    public Eat(Animal animal) {
+        super(animal);
     }
 
     @Override

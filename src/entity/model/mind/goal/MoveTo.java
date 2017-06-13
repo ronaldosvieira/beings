@@ -7,17 +7,16 @@ import org.joml.Vector2f;
 public class MoveTo extends Goal {
     private double distance = 3;
 
-    public MoveTo(Animal animal, Perception perception) {
-        super(animal, perception);
-
-        this.distance = 1.5 + (perception.get("size", Double.class) / 2)
-                + (getAnimal().getSemantic().get("size", Double.class) / 2);
+    public MoveTo(Animal animal) {
+        super(animal);
     }
 
-    public MoveTo(Animal animal, Perception perception, double distance) {
-        this(animal, perception);
+    @Override
+    public Goal input(Perception perception) {
+        this.distance = 1.5 + (perception.get("size", Double.class) / 2)
+                + (getAnimal().getSemantic().get("size", Double.class) / 2);
 
-        this.distance = distance;
+        return super.input(perception);
     }
 
     @Override

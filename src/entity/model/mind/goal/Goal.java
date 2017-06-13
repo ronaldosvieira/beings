@@ -18,9 +18,8 @@ public abstract class Goal {
 
     protected Perception perception;
 
-    public Goal(Animal animal, Perception perception) {
+    public Goal(Animal animal) {
         this.animal = animal;
-        this.perception = perception;
     }
 
     public Animal getAnimal() {return this.animal;}

@@ -7,12 +7,12 @@ import org.joml.Vector2f;
 public class FleeFrom extends Goal {
     private double distance = 10;
 
-    public FleeFrom(Animal animal, Perception perception) {
-        super(animal, perception);
+    public FleeFrom(Animal animal) {
+        super(animal);
     }
 
-    public FleeFrom(Animal animal, Perception perception, double distance) {
-        this(animal, perception);
+    public FleeFrom(Animal animal, double distance) {
+        this(animal);
 
         this.distance = distance;
     }

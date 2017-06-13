@@ -13,8 +13,8 @@ public class MoveRandomly extends Goal {
     private float moveTime;
     private boolean isMoving;
 	
-	public MoveRandomly(Animal animal, Perception perception) {
-		super(animal, perception);
+	public MoveRandomly(Animal animal) {
+		super(animal);
 		
 		this.direction = getRandomDirection();
 		this.isMoving = false;
