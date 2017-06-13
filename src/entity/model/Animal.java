@@ -123,6 +123,7 @@ public abstract class Animal extends LivingThing {
 	    this.semantic.set("when-dead", System.currentTimeMillis());
     }
 
+    @Override
     public void attack() {
 	    this.health--;
 

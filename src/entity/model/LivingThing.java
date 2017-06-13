@@ -13,4 +13,5 @@ public abstract class LivingThing extends Thing {
 	}
 
 	public boolean isAlive() {return this.isAlive;}
+	abstract public void attack();
 }

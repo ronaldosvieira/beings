@@ -1,13 +1,9 @@
 package entity.model;
 
-import entity.model.mind.sense.Sense;
 import io.Window;
 import org.joml.Vector2f;
 import render.Camera;
 import world.World;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Plant extends LivingThing {
 
@@ -26,4 +22,9 @@ public class Plant extends LivingThing {
 
 	}
 
+	@Override
+	public void attack() {
+        this.semantic.set("is-alive", false);
+		this.semantic.set("when-dead", System.currentTimeMillis());
+	}
 }

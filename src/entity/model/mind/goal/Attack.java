@@ -1,6 +1,7 @@
 package entity.model.mind.goal;
 
 import entity.model.Animal;
+import entity.model.LivingThing;
 import entity.model.mind.sense.Perception;
 import org.joml.Vector2f;
 
@@ -17,7 +18,7 @@ public class Attack extends Goal {
 
         System.out.println(getAnimal().getName() + " attack - " + perception.get("timestamp", Long.class));
 
-        ((Animal) perception.getSource()).attack();
+        ((LivingThing) perception.getSource()).attack();
 
         return perception
                 .get("distance", Vector2f.class)
