@@ -30,7 +30,7 @@ public class MoveTo extends Goal {
     }
 
     @Override
-    public boolean isCompleted() {
+    public boolean check() {
         return perception
                 .get("distance", Vector2f.class)
                 .length() <= this.distance;

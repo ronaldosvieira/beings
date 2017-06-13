@@ -42,7 +42,7 @@ public class MoveRandomly extends Goal {
 	}
 
 	@Override
-	public boolean isCompleted() {return false;}
+	public boolean check() {return false;}
 
 	private Vector2f getRandomDirection() {
 		Random random = new Random();

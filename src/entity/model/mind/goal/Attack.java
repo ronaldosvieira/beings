@@ -26,7 +26,7 @@ public class Attack extends Goal {
     }
 
     @Override
-    public boolean isCompleted() {
+    public boolean check() {
         return perception.get("is-eatable", Boolean.class);
     }
 }

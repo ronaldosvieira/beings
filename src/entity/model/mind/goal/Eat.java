@@ -23,7 +23,7 @@ public class Eat extends Goal {
     }
 
     @Override
-    public boolean isCompleted() {
+    public boolean check() {
         return !perception.get("is-alive", Boolean.class);
     }
 }

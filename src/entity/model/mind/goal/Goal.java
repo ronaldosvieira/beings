@@ -35,7 +35,11 @@ public abstract class Goal {
 
     protected void addPreReq(Goal preReq) {this.preReqs.add(preReq);}
 
-    public abstract boolean isCompleted();
+    public final boolean isCompleted() {
+        return this.preReqs.stream().allMatch(Goal::isCompleted) && check();
+    }
+
+    abstract public boolean check();
 
     public Goal input(Perception perception) {
         this.perception = perception;
