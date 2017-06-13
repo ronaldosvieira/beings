@@ -18,8 +18,8 @@ public class FleeFrom extends Goal {
     }
 
     @Override
-    public Vector2f getMovement(float delta) {
-        return perception
+    public void cycle() {
+        direction = perception
                 .get("distance", Vector2f.class)
                 .negate(new Vector2f())
                 .normalize();

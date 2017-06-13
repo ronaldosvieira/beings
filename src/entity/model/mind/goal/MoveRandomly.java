@@ -8,26 +8,25 @@ import org.joml.Vector2f;
 import entity.model.Animal;
 
 public class MoveRandomly extends Goal {
-	private Vector2f direction;
-    private float lastMove;
-    private float moveTime;
+    private long lastMove;
+    private long moveTime;
     private boolean isMoving;
 	
 	public MoveRandomly(Animal animal) {
 		super(animal);
 		
-		this.direction = getRandomDirection();
-		this.isMoving = false;
-		this.lastMove = 0.0f;
-		this.moveTime = getRandomMoveTime();
-    }
+		direction = getRandomDirection();
+		isMoving = false;
+		lastMove = System.currentTimeMillis();
+		moveTime = getRandomMoveTime();
+	}
 
 	@Override
-	public Vector2f getMovement(float delta) {
-		lastMove += delta;
+	public void cycle() {
+		long current = System.currentTimeMillis();
 
-        if (lastMove >= moveTime) {
-			lastMove = 0.0f;
+        if (current - lastMove >= moveTime) {
+            lastMove = current;
             moveTime = getRandomMoveTime();
 
             if (isMoving) direction = getRandomDirection();
@@ -37,8 +36,6 @@ public class MoveRandomly extends Goal {
 		
 		if (isMoving) getAnimal().setMovementSpeed(0);
         else getAnimal().setMovementSpeed(5);
-
-        return direction;
 	}
 
 	@Override
@@ -53,10 +50,10 @@ public class MoveRandomly extends Goal {
 		return dir.normalize();
 	}
 
-    private float getRandomMoveTime() {
+    private long getRandomMoveTime() {
 	    float base = 0.5f;
 	    float modifier = (new Random().nextFloat() * 0.2f) - 0.1f;
 
-	    return base + modifier;
+        return (long) ((base + modifier) * 1000L);
     }
 }

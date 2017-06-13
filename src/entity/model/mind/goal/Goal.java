@@ -18,13 +18,18 @@ public abstract class Goal {
 
     protected Perception perception;
 
+    protected Vector2f direction;
+
     public Goal(Animal animal) {
         this.animal = animal;
+        this.direction = new Vector2f(1, 0);
     }
+
+    public abstract void cycle();
 
     public Animal getAnimal() {return this.animal;}
 
-    public abstract Vector2f getMovement(float delta);
+    public Vector2f getDirection() {return this.direction;}
 
     public List<Goal> preReqs() {
         return this.preReqs.stream()

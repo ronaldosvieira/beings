@@ -113,6 +113,7 @@ public abstract class Animal extends LivingThing {
 		if (health > 0) {
             // this.needs.forEach(need -> need.decay(delta));
 
+			this.currentGoal.cycle();
             this.mind.update();
         }
     }
@@ -127,12 +128,14 @@ public abstract class Animal extends LivingThing {
     public void attack() {
 	    this.health--;
 
+		System.out.println(getName() + " health: " + health);
+
 	    if (health <= 0) this.kill();
     }
 
 	@Override
 	public void update(float delta, Window window, Camera camera) {
-		move(delta, this.currentGoal.getMovement(delta));
+		move(delta, this.currentGoal.getDirection());
 	}
 
 	public List<Sense> getSenses() {return this.senses;}

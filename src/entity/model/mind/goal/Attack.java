@@ -13,14 +13,14 @@ public class Attack extends Goal {
     }
 
     @Override
-    public Vector2f getMovement(float delta) {
+    public void cycle() {
         getAnimal().setMovementSpeed(0);
 
         System.out.println(getAnimal().getName() + " attack - " + perception.get("timestamp", Long.class));
 
         ((LivingThing) perception.getSource()).attack();
 
-        return perception
+        direction = perception
                 .get("distance", Vector2f.class)
                 .normalize(new Vector2f());
     }

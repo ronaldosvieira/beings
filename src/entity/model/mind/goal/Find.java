@@ -19,10 +19,10 @@ public class Find extends Goal {
     }
 
     @Override
-    public Vector2f getMovement(float delta) {
+    public void cycle() {
         getAnimal().setMovementSpeed(5);
 
-        return perception
+        direction = perception
                 .get("distance", Vector2f.class)
                 .normalize(new Vector2f());
     }

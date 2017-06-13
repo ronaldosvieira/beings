@@ -11,12 +11,12 @@ public class Freeze extends Goal {
 		super(animal);
 
 		animal.setMovementSpeed(0);
+
+		direction = animal.getCurrentDirection();
     }
 
 	@Override
-	public Vector2f getMovement(float delta) {
-        return getAnimal().getCurrentDirection();
-	}
+	public void cycle() {}
 
 	@Override
 	public boolean check() {return false;}
