@@ -1,6 +1,7 @@
 package entity.model.mind.goal;
 
 import entity.model.mind.sense.Perception;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 
@@ -8,17 +9,17 @@ public class GoalBuilder {
     private LinkedList<Goal> chain = new LinkedList<>();
     private Perception input;
 
-    public GoalBuilder(Goal first) {
+    public GoalBuilder(@NotNull Goal first) {
         this.chain.add(first);
     }
 
-    public GoalBuilder input(Perception perception) {
+    public GoalBuilder input(@NotNull Perception perception) {
         this.input = perception;
 
         return this;
     }
 
-    public GoalBuilder then(Goal next) {
+    public GoalBuilder then(@NotNull Goal next) {
         this.chain.add(next);
 
         return this;
