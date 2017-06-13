@@ -47,7 +47,7 @@ public class Slot {
     }
 
     public void setValue(Object value) throws IllegalArgumentException {
-        boolean fails = constraints.parallelStream()
+        boolean fails = constraints.stream()
                 .anyMatch(constraint -> !constraint.check(value));
 
         if (fails) throw new IllegalArgumentException("Value '" + value + "' fails a constraint check.");
