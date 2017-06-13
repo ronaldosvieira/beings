@@ -113,7 +113,6 @@ public abstract class Animal extends LivingThing {
 		if (health > 0) {
             // this.needs.forEach(need -> need.decay(delta));
 
-			this.currentGoal.cycle();
             this.mind.update();
         }
     }

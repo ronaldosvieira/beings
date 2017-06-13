@@ -2,9 +2,13 @@ package game;
 
 import assets.Assets;
 import entity.Entity;
+import entity.model.Animal;
 import entity.model.Grass;
 import entity.model.Rabbit;
 import entity.model.Fox;
+import entity.model.mind.goal.*;
+import entity.model.mind.sense.Perception;
+import frames.Frame;
 import frames.KnowledgeBase;
 import gui.GUI;
 import gui.PauseButton;
@@ -132,7 +136,7 @@ public class Game {
 		this.world = new World(map);
 		this.world.calculateView(camera);
 
-		for (int i = 0; i < 45; i++) {
+		/*for (int i = 0; i < 45; i++) {
 			this.world.addEntity(new Rabbit(this.world,
                     new Vector2f(
                             random.nextFloat() * worldSize,
@@ -145,7 +149,24 @@ public class Game {
                     new Vector2f(
                             random.nextFloat() * worldSize,
                             -random.nextFloat() * worldSize)));
-		}
+		}*/
+
+		Animal rabbit = new Rabbit(this.world,
+                new Vector2f(20, -20));
+		rabbit.setCurrentDirection(new Vector2f(0, 1));
+
+		Animal fox = new Fox(this.world,
+                new Vector2f(5, -10));
+		fox.setCurrentDirection(new Vector2f(1, 0));
+		fox.setCurrentGoal(new GoalChain(new FindFood(fox))
+                .then(new MoveTo(fox))
+                .then(new Attack(fox))
+                .get());
+
+		this.world.addEntity(rabbit);
+        this.world.addEntity(fox);
+        this.world.addEntity(new Grass(this.world,
+                new Vector2f(10, -5)));
 
         GUI pauseButton = new PauseButton();
 		

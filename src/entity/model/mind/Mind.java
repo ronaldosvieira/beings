@@ -60,6 +60,8 @@ public class Mind {
 
         Goal currentGoal = being.getCurrentGoal();
 
+        currentGoal.cycle(workingMemory);
+
         if (currentGoal.isCompleted()) {
             System.out.println("completed");
 

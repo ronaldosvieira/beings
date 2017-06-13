@@ -2,7 +2,10 @@ package entity.model.mind.goal;
 
 import entity.model.Animal;
 import entity.model.mind.sense.Perception;
+import entity.model.mind.sense.TemporalPerception;
 import org.joml.Vector2f;
+
+import java.util.List;
 
 public class MoveTo extends Goal {
     private double distance = 3;
@@ -13,8 +16,10 @@ public class MoveTo extends Goal {
 
     @Override
     public Goal input(Perception perception) {
-        this.distance = 1.5 + (perception.get("size", Double.class) / 2)
-                + (getAnimal().getSemantic().get("size", Double.class) / 2);
+        if (perception != null)
+            this.distance = 1.5 + (perception.get("size", Double.class) / 2)
+                    + (getAnimal().getSemantic().get("size", Double.class) / 2);
+        else this.distance = 3;
 
         return super.input(perception);
     }

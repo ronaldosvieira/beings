@@ -1,8 +1,10 @@
 package entity.model.mind.goal;
 
+import java.util.List;
 import java.util.Random;
 
 import entity.model.mind.sense.Perception;
+import entity.model.mind.sense.TemporalPerception;
 import org.joml.Vector2f;
 
 import entity.model.Animal;
@@ -22,7 +24,7 @@ public class MoveRandomly extends Goal {
 	}
 
 	@Override
-	public void cycle() {
+	public void cycle(List<TemporalPerception> workingMemory) {
 		long current = System.currentTimeMillis();
 
         if (current - lastMove >= moveTime) {

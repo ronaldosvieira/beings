@@ -2,6 +2,7 @@ package entity.model.mind.goal;
 
 import entity.model.Animal;
 import entity.model.mind.sense.Perception;
+import entity.model.mind.sense.TemporalPerception;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
 
@@ -25,7 +26,7 @@ public abstract class Goal {
         this.direction = new Vector2f(1, 0);
     }
 
-    public abstract void cycle();
+    public abstract void cycle(List<TemporalPerception> workingMemory);
 
     public Animal getAnimal() {return this.animal;}
 
