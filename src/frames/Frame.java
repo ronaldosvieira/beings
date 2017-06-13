@@ -75,7 +75,7 @@ public abstract class Frame implements Cloneable {
 	    return slots.containsKey(key);
     }
     
-    protected Slot find(String key) throws NoSuchElementException {
+    public Slot find(String key) throws NoSuchElementException {
         if (this.contains(key))
 	        return slots.get(key);
 	    else if (parent() != null)
