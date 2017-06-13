@@ -5,21 +5,21 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 
-public class GoalBuilder {
+public class GoalChain {
     private LinkedList<Goal> chain = new LinkedList<>();
     private Perception input;
 
-    public GoalBuilder(@NotNull Goal first) {
+    public GoalChain(@NotNull Goal first) {
         this.chain.add(first);
     }
 
-    public GoalBuilder input(@NotNull Perception perception) {
+    public GoalChain input(@NotNull Perception perception) {
         this.input = perception;
 
         return this;
     }
 
-    public GoalBuilder then(@NotNull Goal next) {
+    public GoalChain then(@NotNull Goal next) {
         this.chain.add(next);
 
         return this;
