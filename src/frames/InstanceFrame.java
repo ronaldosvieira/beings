@@ -9,7 +9,15 @@ public class InstanceFrame extends Frame {
 
 	public InstanceFrame(String name, GenericFrame parent) {
 		super(name, parent);
-	}
+
+		for (Frame i = parent(); i != null; i = i.parent()) {
+		    i.slots.forEach((key, slot) -> {
+                if (slots.containsKey(key)) slot = slots.get(key).merge(slot);
+
+                slots.put(key, slot);
+            });
+        }
+    }
 
     public int id() {return this.id;}
 

@@ -102,8 +102,8 @@ public abstract class Frame implements Cloneable {
 	}
 
 	public <T> void set(String key, T value) {
-	    try {
-	        Slot slot = this.find(key);
+        try {
+	        Slot slot = new Slot(this, this.find(key));
 	        slot.setValue(value);
 
 	        slots.put(key, slot);
@@ -116,7 +116,7 @@ public abstract class Frame implements Cloneable {
 	    Slot slot;
 
 	    try {
-	        slot = this.find(key);
+	        slot = new Slot(this, this.find(key));
         } catch (NoSuchElementException e) {
 	        slot = new Slot(this);
         }
@@ -129,7 +129,7 @@ public abstract class Frame implements Cloneable {
 		Slot slot;
 
 		try {
-			slot = this.find(key);
+			slot = new Slot(this, this.find(key));
 		} catch (NoSuchElementException e) {
 			slot = new Slot(this);
 		}
