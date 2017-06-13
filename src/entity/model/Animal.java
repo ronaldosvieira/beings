@@ -29,7 +29,7 @@ public abstract class Animal extends LivingThing {
 	private boolean isMoving;
 	private float movementSpeed;
 
-	private double health = 1d;
+	private int health = 100;
 
 	public Animal(String name, World world, Vector2f scale, Vector2f position) {
 		super(name, world, AnimalAnim.AMOUNT, scale, position);
@@ -124,7 +124,7 @@ public abstract class Animal extends LivingThing {
     }
 
     public void attack() {
-	    this.health -= 0.1d;
+	    this.health--;
 
 	    if (health <= 0) this.kill();
     }
