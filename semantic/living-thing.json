@@ -10,6 +10,7 @@
           "class-name": "java.lang.Boolean"
         }
       ]
-    }
+    },
+    "is-eatable": {"if-needed": "check-if-not-alive"}
   }
 }

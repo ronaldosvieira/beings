@@ -2,7 +2,5 @@
   "name": "plant",
   "type": "generic",
   "parent": {"ref": "living-thing"},
-  "slots": {
-    "is-eatable": {"value": true}
-  }
+  "slots": {}
 }
