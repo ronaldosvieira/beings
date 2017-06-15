@@ -1,6 +1,5 @@
 package entity;
 
-import entity.Entity;
 import frames.GenericFrame;
 import frames.InstanceFrame;
 import frames.KnowledgeBase;

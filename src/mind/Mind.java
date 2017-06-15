@@ -2,20 +2,19 @@ package mind;
 
 import entity.Animal;
 import mind.goal.*;
+import mind.need.Need;
 import mind.sense.Perception;
 import mind.sense.Sense;
 import mind.sense.TemporalPerception;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Mind {
     private Animal being;
     private List<TemporalPerception> workingMemory;
+    private Need currentNeed;
 
     public Mind(Animal being) {
         this.being = being;
@@ -77,14 +76,23 @@ public class Mind {
             }
         }*/
 
-        Goal currentGoal = being.getCurrentGoal();
+        Need mostIntenseNeed = being.getNeeds().stream()
+                .sorted(Comparator.comparingDouble(Need::getIntensity))
+                .findFirst()
+                .orElse(null);
 
-        currentGoal.cycle(workingMemory);
+        if (mostIntenseNeed != currentNeed)
+            being.setCurrentGoal(mostIntenseNeed.getGoal());
+
+        currentNeed = mostIntenseNeed;
 
         //if (being.getName().equals("rabbit")) {
             boolean tavivo = being.getSemantic().get("is-alive", Boolean.class);
             if (!tavivo) System.out.println(being.getName() + " ta morto gente");
         //}
+
+        Goal currentGoal = being.getCurrentGoal();
+        currentGoal.cycle(workingMemory);
 
         if (currentGoal.isCompleted()) {
             System.out.println(being.getName() + " " + currentGoal + " completed");

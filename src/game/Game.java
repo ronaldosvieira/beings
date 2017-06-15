@@ -155,11 +155,6 @@ public class Game {
 		Animal fox = new Fox(this.world,
                 new Vector2f(5, -10));
 		fox.setCurrentDirection(new Vector2f(1, 0));
-		fox.setCurrentGoal(new GoalChain(new FindFood(fox))
-                .then(new MoveTo(fox))
-                .then(new Attack(fox))
-				.then(new Eat(fox))
-                .get());
 
 		this.world.addEntity(rabbit);
         this.world.addEntity(fox);

@@ -111,7 +111,7 @@ public abstract class Animal extends LivingThing {
     @Override
     public void cycle(float delta) {
 		if (health > 0) {
-            // this.needs.forEach(need -> need.decay(delta));
+            this.needs.forEach(need -> need.decay(delta));
 
             this.mind.update();
         }
