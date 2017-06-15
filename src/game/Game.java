@@ -158,6 +158,7 @@ public class Game {
 		fox.setCurrentGoal(new GoalChain(new FindFood(fox))
                 .then(new MoveTo(fox))
                 .then(new Attack(fox))
+				.then(new Eat(fox))
                 .get());
 
 		this.world.addEntity(rabbit);
