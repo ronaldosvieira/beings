@@ -1,6 +1,7 @@
 package mind.goal;
 
 import entity.Animal;
+import entity.LivingThing;
 import mind.sense.TemporalPerception;
 import org.joml.Vector2f;
 
@@ -15,7 +16,11 @@ public class Eat extends Goal {
     public void cycle(List<TemporalPerception> workingMemory) {
         getAnimal().setMovementSpeed(0);
 
+        if (perception == null) return;
+
         System.out.println(getAnimal().getName() + " eat - " + perception.get("timestamp", Long.class));
+
+        perception.getSource().destroy();
 
         direction = perception
                 .get("distance", Vector2f.class)
@@ -24,6 +29,6 @@ public class Eat extends Goal {
 
     @Override
     public boolean check() {
-        return !perception.get("is-alive", Boolean.class);
+        return perception.get("is-eatable", Boolean.class);
     }
 }
