@@ -2,6 +2,7 @@ package mind.need;
 
 import entity.Animal;
 import mind.goal.*;
+import mind.sense.Perception;
 
 public class Hunger extends Need {
     public Hunger(Animal animal, double decayPerMinute, double value) {
@@ -29,5 +30,10 @@ public class Hunger extends Need {
                 .then(new Attack(getAnimal()))
                 .then(new Eat(getAnimal()))
                 .get();
+    }
+
+    @Override
+    public double evaluate(Perception perception) {
+        return 0;
     }
 }

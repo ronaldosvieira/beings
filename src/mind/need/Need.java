@@ -2,6 +2,7 @@ package mind.need;
 
 import entity.Animal;
 import mind.goal.Goal;
+import mind.sense.Perception;
 
 public abstract class Need {
     private Animal animal;
@@ -33,4 +34,6 @@ public abstract class Need {
     }
 
     public abstract Goal getGoal();
+
+    public abstract double evaluate(Perception perception);
 }
