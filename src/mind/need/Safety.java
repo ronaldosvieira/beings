@@ -21,6 +21,9 @@ public class Safety extends Need {
 
     @Override
     public double evaluate(Perception perception) {
-        return 0;
+        return perception.isA("animal")
+                && perception.get("size", Double.class)
+                > getAnimal().getSemantic().get("size", Double.class)?
+                1 : 0;
     }
 }
