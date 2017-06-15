@@ -15,6 +15,7 @@
           "bounds": ["(", "]"]
         }
       ]
-    }
+    },
+    "exists": {"value": true}
   }
 }

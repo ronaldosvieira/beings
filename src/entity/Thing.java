@@ -21,4 +21,11 @@ public abstract class Thing extends Entity {
 
 	public String getName() {return this.name;}
 	public InstanceFrame getSemantic() {return this.semantic;}
+
+    @Override
+    public void destroy() {
+        super.destroy();
+
+        this.semantic.set("exists", false);
+    }
 }

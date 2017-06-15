@@ -76,6 +76,8 @@ public class World {
         quad.clear();
 		collisions.clear();
 
+        entities.removeIf(Entity::isDestroyed);
+
         for (Entity entity : entities) {
 			entity.update(delta, window, camera);
 

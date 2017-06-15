@@ -28,6 +28,8 @@ public abstract class Entity {
 	
 	private boolean isSolid;
 	private boolean isWalkable;
+
+	private boolean isDestroyed = false;
 	
 	public Entity(World world, int maxAnimations, Vector2f scale, Vector2f position) {
 	    this.id = nextId.incrementAndGet();
@@ -182,6 +184,7 @@ public abstract class Entity {
 
 	public boolean isSolid() {return this.isSolid;}
 	public boolean isWalkable() {return this.isWalkable;}
+    public boolean isDestroyed() {return this.isDestroyed;}
 	
 	public Entity setSolid(boolean isSolid) {
 		this.isSolid = isSolid;
@@ -192,6 +195,8 @@ public abstract class Entity {
 		this.isWalkable = isWalkable;
 		return this;
 	}
+
+	public void destroy() {this.isDestroyed = true;}
 
     @Override
     public boolean equals(Object o) {
