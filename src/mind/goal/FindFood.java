@@ -5,6 +5,7 @@ import mind.sense.Perception;
 import mind.sense.TemporalPerception;
 import org.joml.Vector2f;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class FindFood extends MoveRandomly {
@@ -23,10 +24,9 @@ public class FindFood extends MoveRandomly {
         workingMemory.stream()
                 .filter(p -> p.isA("animal"))
                 .filter(p -> p.get("size", Double.class)
-                        <= getAnimal().getSemantic().get("size", Double.class))
-                .sorted((o1, o2) ->
-                        (int) (o1.get("distance", Vector2f.class).length()
-                                - o2.get("distance", Vector2f.class).length()))
+                        < getAnimal().getSemantic().get("size", Double.class))
+                .sorted(Comparator.comparingDouble(
+                        (Perception p) -> p.get("distance", Vector2f.class).length()))
                 .findFirst()
                 .ifPresent(this::found);
     }
