@@ -31,13 +31,14 @@ public class MoveRandomly extends Goal {
             lastMove = current;
             moveTime = getRandomMoveTime();
 
-            if (isMoving) direction = getRandomDirection();
+            if (!isMoving) direction = getRandomDirection();
 
             isMoving = !isMoving;
 		}
 		
-		if (isMoving) getAnimal().setMovementSpeed(0);
-        else getAnimal().setMovementSpeed(5);
+		if (isMoving) {
+            getAnimal().setMovementSpeed(5);
+        } else getAnimal().setMovementSpeed(0);
 	}
 
 	@Override
