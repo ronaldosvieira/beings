@@ -6,6 +6,7 @@ import mind.need.Need;
 import mind.sense.Perception;
 import mind.sense.Sense;
 import mind.sense.TemporalPerception;
+import org.joml.Vector2f;
 
 import java.util.*;
 import java.util.function.Function;
@@ -85,7 +86,22 @@ public class Mind {
         }*/
 
         Need mostIntenseNeed = being.getNeeds().stream()
-                .sorted(Comparator.comparingDouble(Need::getIntensity).reversed())
+                .sorted(Comparator.comparingDouble((Need n) -> {
+                    double intensity = n.getIntensity();
+                    double sources = workingMemory.stream()
+                            .mapToDouble(tP -> {
+                                double relevance = tP.get(n.getName(), Double.class);
+                                double distance = tP.get("distance", Vector2f.class)
+                                        .length() / 2;
+
+                                return relevance * (1d / distance);
+                            })
+                            .sum();
+
+                    /*System.out.println(being.getName() + ": " + n.getName() + " -> "
+                            + (intensity * (1 + sources)));*/
+                    return intensity * (1 + sources);
+                }).reversed())
                 .findFirst()
                 .orElse(null);
 
