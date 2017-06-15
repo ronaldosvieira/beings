@@ -36,6 +36,9 @@ public class Mind {
                 being.getNeeds().forEach(need ->
                         p.set(need.getName(), need.evaluate(p))));
 
+        // todo: try to merge perceptions
+        //      if many of same type then merge all with distance = centroid
+
         // updates perceptions in working memory
         workingMemory.stream()
                 .filter(tP -> perceptions.containsKey(tP.getSource().getId()))
@@ -47,9 +50,7 @@ public class Mind {
                     perceptions.remove(id);
                 });
 
-        // todo: try to merge perceptions
-        //      if many of same type then merge all with distance = centroid
-        // todo: weigh perceptions relevance
+        workingMemory.removeIf(tP -> !tP.get("exists", Boolean.class));
 
         for (Perception perception : perceptions.values()) {
             workingMemory.add(new TemporalPerception(perception));
