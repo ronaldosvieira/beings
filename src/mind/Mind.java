@@ -27,11 +27,13 @@ public class Mind {
                 .flatMap(Collection::stream)
 
                 // combines perceptions from same source
-                .collect(Collectors.toMap(p -> p.getSource().getId(), Function.identity(), Perception::combine));
+                .collect(Collectors.toMap(p -> p.getSource().getId(),
+                        Function.identity(),
+                        Perception::combine));
 
         // updates perceptions in working memory
         workingMemory.stream()
-                .filter(temporalPerception -> perceptions.containsKey(temporalPerception.getSource().getId()))
+                .filter(tP -> perceptions.containsKey(tP.getSource().getId()))
                 .forEach(tP -> {
                     int id = tP.getSource().getId();
                     Perception p = perceptions.get(id);
