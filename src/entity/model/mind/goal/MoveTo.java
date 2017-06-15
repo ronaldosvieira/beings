@@ -25,7 +25,7 @@ public class MoveTo extends Goal {
     }
 
     @Override
-    public void cycle() {
+    public void cycle(List<TemporalPerception> workingMemory) {
         getAnimal().setMovementSpeed(5);
 
         direction = perception
