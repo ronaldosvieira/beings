@@ -5,7 +5,6 @@ import collision.QuadTree;
 import entity.Entity;
 import game.Shader;
 import io.Window;
-import knowledge.FrameLoader;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -13,7 +12,6 @@ import render.Camera;
 import render.TileRenderer;
 import util.Pair;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
