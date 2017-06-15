@@ -77,7 +77,7 @@ public class Mind {
         }*/
 
         Need mostIntenseNeed = being.getNeeds().stream()
-                .sorted(Comparator.comparingDouble(Need::getIntensity))
+                .sorted(Comparator.comparingDouble(Need::getIntensity).reversed())
                 .findFirst()
                 .orElse(null);
 
