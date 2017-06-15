@@ -159,11 +159,11 @@ public class Game {
 		}*/
 
 		Animal rabbit = new Rabbit(this.world,
-                new Vector2f(20, -20));
+                new Vector2f(5, -15));
 		rabbit.setCurrentDirection(new Vector2f(0, 1));
 
 		Animal fox = new Fox(this.world,
-                new Vector2f(5, -10));
+                new Vector2f(5, -5));
 		fox.setCurrentDirection(new Vector2f(1, 0));
 
 		this.world.addEntity(rabbit);

@@ -6,7 +6,7 @@ import mind.sense.Perception;
 
 public class Safety extends Need {
     public Safety(Animal animal) {
-        super(animal, 0d, .1d);
+        super(animal, 0d, .3d);
     }
 
     @Override

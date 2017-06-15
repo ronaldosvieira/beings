@@ -12,7 +12,7 @@ public class Fox extends Mammal {
 		super("fox", world, new Vector2f(3, 3), position);
 
 		this.addSense(new Sight.SightBuilder(this).angle(120).range(25).build());
-        this.addNeed(new Hunger(this, 1.0 / 5.0, 0.15));
+        this.addNeed(new Hunger(this, 1.0 / 5.0, 0.25));
         this.addNeed(new Safety(this));
 	}
 }
