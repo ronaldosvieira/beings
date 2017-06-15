@@ -9,6 +9,9 @@ public class Safety extends Need {
     }
 
     @Override
+    public String getName() {return "safety";}
+
+    @Override
     public Goal getGoal() {
         return new GoalChain(new FindThreat(getAnimal()))
                 .then(new FleeFrom(getAnimal()))

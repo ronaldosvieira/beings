@@ -13,6 +13,9 @@ public class Hunger extends Need {
     }
 
     @Override
+    public String getName() {return "hunger";}
+
+    @Override
     public void decay(float delta) {
         super.decay(delta);
 

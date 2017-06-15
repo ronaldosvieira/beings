@@ -20,6 +20,8 @@ public abstract class Need {
 
     public Animal getAnimal() {return animal;}
 
+    public abstract String getName();
+
     public void decay(float delta) {
         value = Math.min(value + decayRate * delta, 1.0);
     }
