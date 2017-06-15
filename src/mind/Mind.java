@@ -31,6 +31,11 @@ public class Mind {
                         Function.identity(),
                         Perception::combine));
 
+        // weigh perceptions relevance
+        perceptions.forEach((id, p) ->
+                being.getNeeds().forEach(need ->
+                        p.set(need.getName(), need.evaluate(p))));
+
         // updates perceptions in working memory
         workingMemory.stream()
                 .filter(tP -> perceptions.containsKey(tP.getSource().getId()))
