@@ -13,6 +13,7 @@ import gui.GUI;
 import gui.PauseButton;
 import io.Timer;
 import io.Window;
+import mind.sense.Perception;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.opengl.GL;
@@ -114,6 +115,15 @@ public class Game {
         try {
             KnowledgeBase.register("check-if-not-alive",
 					f -> !f.get("is-alive", Boolean.class));
+            KnowledgeBase.register("check-if-exists", f -> {
+                try {
+                    Perception p = (Perception) f;
+
+                    return !p.getSource().isDestroyed();
+                } catch (ClassCastException e) {
+                    return false;
+                }
+            });
 
             FrameLoader.load("semantic");
         } catch (FileNotFoundException e) {

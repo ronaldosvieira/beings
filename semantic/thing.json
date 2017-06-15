@@ -16,6 +16,6 @@
         }
       ]
     },
-    "exists": {"value": true}
+    "exists": {"if-needed": "check-if-exists"}
   }
 }
