@@ -27,9 +27,9 @@ public class MoveTo extends Goal {
     @Override
     public void cycle(List<TemporalPerception> workingMemory) {
         if (perception == null) System.out.println(getAnimal().getName() + " move-to null");
-        System.out.println(getAnimal().getName() + " move-to - "
+        /*System.out.println(getAnimal().getName() + " move-to - "
                 + perception.get("timestamp", Long.class) + " "
-                + perception.get("distance", Vector2f.class).length());
+                + perception.get("distance", Vector2f.class).length());*/
         getAnimal().setMovementSpeed(5);
 
         direction = perception

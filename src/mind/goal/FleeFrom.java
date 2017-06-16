@@ -33,6 +33,11 @@ public class FleeFrom extends Goal {
 
     @Override
     public boolean check() {
+        /*System.out.println(getAnimal().getName() + " flee-from - "
+                + perception + " "
+                + perception.get("timestamp", Long.class) + " "
+                + perception.get("distance", Vector2f.class).length() + " "
+                + perception.get("from", String.class) + " ");*/
         return perception
                 .get("distance", Vector2f.class)
                 .length() > this.distance;
