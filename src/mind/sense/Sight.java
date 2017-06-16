@@ -29,6 +29,11 @@ public class Sight extends Sense {
 
                     return angle <= this.angle;
                 })
+                .map(perception -> {
+                    perception.set("from", "sight");
+
+                    return perception;
+                })
                 .collect(Collectors.toList());
     }
 
