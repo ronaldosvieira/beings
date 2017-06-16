@@ -26,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -210,6 +211,13 @@ public class Game {
 
                 if (window.getInput().isKeyPressed(GLFW_KEY_P)) paused = !paused;
                 if (window.getInput().isKeyPressed(GLFW_KEY_F)) showFPS = !showFPS;
+                if (window.getInput().isKeyPressed(GLFW_KEY_G))
+                    System.out.println(world.getEntities().stream()
+                            .filter(entity -> entity instanceof Animal)
+                            .map(entity -> ((Animal) entity))
+                            .map(animal -> animal.getName() + animal.getId()
+                                    + " -> " + animal.getCurrentGoal())
+                            .collect(Collectors.toList()));
 
 				handleInput((float) frameCap, window, camera, this.world);
 				
