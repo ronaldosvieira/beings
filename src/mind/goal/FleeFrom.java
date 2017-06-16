@@ -23,6 +23,8 @@ public class FleeFrom extends Goal {
     public void cycle(List<TemporalPerception> workingMemory) {
         if (perception == null) return;
 
+        getAnimal().setMovementSpeed(5);
+
         direction = perception
                 .get("distance", Vector2f.class)
                 .negate(new Vector2f())
