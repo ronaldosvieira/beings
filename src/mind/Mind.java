@@ -57,17 +57,20 @@ public class Mind {
 
         workingMemory.removeIf(tP -> !tP.get("exists", Boolean.class));
 
-        for (Perception perception : perceptions.values()) {
-            workingMemory.add(new TemporalPerception(perception));
+        // add new perceptions to working memory
+        workingMemory.addAll(perceptions.values().stream()
+                .map(TemporalPerception::new)
+                .collect(Collectors.toList()));
 
-            /*System.out.println("Living thing '" + this.being.getName()
-                    + "' just saw perceived '" + perception.name() + "' with "
-                    + perception.get("from", String.class) + ".");*/
-
-            while (workingMemory.size() > 4) {
-                workingMemory.remove(0);
-            }
-        }
+        // then remove all but the 4 most relevant ones
+        workingMemory = workingMemory.stream()
+                .sorted(Comparator.comparingDouble((TemporalPerception tP) ->
+                        being.getNeeds().stream()
+                                .mapToDouble(need -> tP.get(need.getName(), Double.class))
+                                .sum())
+                        .reversed())
+                .limit(4)
+                .collect(Collectors.toList());
 
 //        System.out.println(being.getName() + being.getId() + ": " + workingMemory);
 
