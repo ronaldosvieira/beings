@@ -37,21 +37,21 @@ public class Sight extends Sense {
                 .collect(Collectors.toList());
     }
 
-    public static class SightBuilder {
+    public static class Builder {
         private Animal animal;
         private float range = 10;
         private float angle = 120;
 
-        public SightBuilder(Animal animal) {
+        public Builder(Animal animal) {
             this.animal = animal;
         }
 
-        public SightBuilder range(float range) {
+        public Builder range(float range) {
             this.range = range;
             return this;
         }
 
-        public SightBuilder angle(float angle) {
+        public Builder angle(float angle) {
             this.angle = angle;
             return this;
         }

@@ -38,15 +38,15 @@ public class Hearing extends Sense {
                 .collect(Collectors.toList());
     }
 
-    public static class HearingBuilder {
+    public static class Builder {
         private Animal animal;
         private float range = 20;
 
-        public HearingBuilder(Animal animal) {
+        public Builder(Animal animal) {
             this.animal = animal;
         }
 
-        public HearingBuilder range(float range) {
+        public Builder range(float range) {
             this.range = range;
             return this;
         }
