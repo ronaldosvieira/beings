@@ -127,6 +127,8 @@ public class Mind {
                 next.input(currentGoal.output());
 
             being.setCurrentGoal(next);
+
+            if (next == null) currentNeed = null;
         }
 
         List<Goal> preReqs = currentGoal.preReqs();
