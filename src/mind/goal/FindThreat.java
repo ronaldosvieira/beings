@@ -25,6 +25,7 @@ public class FindThreat extends MoveRandomly {
                 .filter(p -> p.isA("animal"))
                 .filter(p -> p.get("size", Double.class)
                         > getAnimal().getSemantic().get("size", Double.class))
+                .filter(p -> p.get("distance", Vector2f.class).length() <= 10)
                 .sorted(Comparator.comparingDouble(
                         (Perception p) -> p.get("distance", Vector2f.class).length())
                             .reversed())
