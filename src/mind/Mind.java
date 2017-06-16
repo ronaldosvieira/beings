@@ -23,6 +23,7 @@ public class Mind {
     }
 
     public void update() {
+        // get perceptions from senses
         Map<Integer, Perception> perceptions = this.being.getSenses().stream()
                 .map(Sense::perceive)
                 .flatMap(Collection::stream)
@@ -38,11 +39,11 @@ public class Mind {
                         p.set(need.getName(), need.evaluate(p))));
 
         // todo: try to merge perceptions
-        //      if many of same type then merge all with distance = centroid
+        // if many of same type then merge all with distance = centroid
 
 //        System.out.println(being.getName() + " before -> " + perceptions);
 
-        // updates perceptions in working memory
+        // updates perceptions from sources already in working memory
         workingMemory.stream()
                 .filter(tP -> perceptions.containsKey(tP.getSource().getId()))
                 .forEach(tP -> {
@@ -55,6 +56,7 @@ public class Mind {
 
 //        System.out.println(being.getName() + " after -> " + perceptions);
 
+        // removes destroyed perceptions
         workingMemory.removeIf(tP -> !tP.get("exists", Boolean.class));
 
         // add new perceptions to working memory
@@ -74,6 +76,7 @@ public class Mind {
 
 //        System.out.println(being.getName() + being.getId() + ": " + workingMemory);
 
+        // find out which need demands most priority
         Need mostIntenseNeed = being.getNeeds().stream()
                 .sorted(Comparator.comparingDouble((Need n) -> {
                     double intensity = n.getIntensity();
@@ -111,9 +114,11 @@ public class Mind {
             if (!tavivo) System.out.println(being.getName() + " ta morto gente");
         //}
 
+        // executes current goal
         Goal currentGoal = being.getCurrentGoal();
         currentGoal.cycle(workingMemory);
 
+        // handles goal switching
         if (currentGoal.isCompleted()) {
             System.out.println(being.getName() + " " + currentGoal + " completed");
 
