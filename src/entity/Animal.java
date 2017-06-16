@@ -3,7 +3,7 @@ package entity;
 import mind.Mind;
 import mind.goal.Freeze;
 import mind.goal.Goal;
-import mind.goal.MoveRandomly;
+import mind.goal.Explore;
 import mind.need.Need;
 import mind.sense.Sense;
 import entity.util.AnimalAnim;
@@ -43,7 +43,7 @@ public abstract class Animal extends LivingThing {
 		this.movementSpeed = 5.0f; // default movement speed
 		this.isMoving = false;
 		
-		this.currentGoal = new MoveRandomly(this);
+		this.currentGoal = new Explore(this);
 		
 		for (AnimalAnim anim : AnimalAnim.values()) {
 			setAnimation(anim.index(), 
@@ -154,6 +154,6 @@ public abstract class Animal extends LivingThing {
 
     public void setCurrentGoal(Goal goal) {
         System.out.println(getName() + " new goal: " + goal);
-        this.currentGoal = goal != null? goal : new MoveRandomly(this);
+        this.currentGoal = goal != null? goal : new Explore(this);
 	}
 }

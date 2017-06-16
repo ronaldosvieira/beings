@@ -8,12 +8,12 @@ import org.joml.Vector2f;
 
 import entity.Animal;
 
-public class MoveRandomly extends Goal {
+public class Explore extends Goal {
     private long lastMove;
     private long moveTime;
     private boolean isMoving;
 	
-	public MoveRandomly(Animal animal) {
+	public Explore(Animal animal) {
 		super(animal);
 		
 		direction = getRandomDirection();

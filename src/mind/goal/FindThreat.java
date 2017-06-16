@@ -8,7 +8,7 @@ import org.joml.Vector2f;
 import java.util.Comparator;
 import java.util.List;
 
-public class FindThreat extends MoveRandomly {
+public class FindThreat extends Explore {
     private boolean found = false;
 
     public FindThreat(Animal animal) {

@@ -8,7 +8,7 @@ import org.joml.Vector2f;
 import java.util.Comparator;
 import java.util.List;
 
-public class FindFood extends MoveRandomly {
+public class FindFood extends Explore {
     private boolean found = false;
 
     public FindFood(Animal animal) {
