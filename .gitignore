@@ -29,8 +29,5 @@
 # SFML files
 SFML/
 
-# CLion files
-.idea/
-
 # Photoshop files
 *.psd
