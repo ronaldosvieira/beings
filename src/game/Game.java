@@ -1,11 +1,7 @@
 package game;
 
 import assets.Assets;
-import entity.Entity;
-import entity.Animal;
-import entity.Grass;
-import entity.Rabbit;
-import entity.Fox;
+import entity.*;
 import io.FrameLoader;
 import mind.goal.*;
 import frames.KnowledgeBase;
@@ -171,6 +167,8 @@ public class Game {
         this.world.addEntity(fox);
         this.world.addEntity(new Grass(this.world,
                 new Vector2f(10, -5)));
+		this.world.addEntity(new Rock(this.world,
+                new Vector2f(10, -10)));
 
         GUI pauseButton = new PauseButton();
 		

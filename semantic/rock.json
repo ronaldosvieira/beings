@@ -1,0 +1,10 @@
+{
+  "name": "rock",
+  "type": "generic",
+  "parent": {"ref": "non-living-thing"},
+  "slots": {
+    "size": {
+      "value": 0.5
+    }
+  }
+}
