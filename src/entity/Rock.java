@@ -12,6 +12,8 @@ public class Rock extends Thing {
 		
 		setAnimation(0, new Animation(1, 1,
 				"entities/" + getName()));
+
+		this.setSolid(true);
 	}
 
 	@Override
