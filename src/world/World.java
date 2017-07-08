@@ -74,6 +74,8 @@ public class World {
 	}
 	
 	public void update(float delta, Window window, Camera camera) {
+	    if (debug > 0) System.out.println("\n##### Timestamp " + System.currentTimeMillis());
+
         quad.clear();
 		collisions.clear();
 

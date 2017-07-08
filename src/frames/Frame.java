@@ -13,6 +13,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public abstract class Frame implements Cloneable {
     private String name;
@@ -152,6 +153,24 @@ public abstract class Frame implements Cloneable {
     }
 
     public FrameRef ref() {return new FrameRef(this);}
+
+    public String toString() {
+        StringBuilder s = new StringBuilder("[");
+        List<Map.Entry<String, Slot>> entries = slots.entrySet().stream()
+                .sorted(Comparator.comparing(Map.Entry::getKey))
+                .collect(Collectors.toList());
+
+        for (Map.Entry<String, Slot> entry : entries) {
+            s.append(" ")
+                    .append(entry.getKey())
+                    .append(": ")
+                    .append(entry.getValue().getValue())
+                    .append(";");
+
+        }
+
+        return s.append("]").toString();
+    }
 
     public String toJson() {
         GsonBuilder builder = new GsonBuilder();

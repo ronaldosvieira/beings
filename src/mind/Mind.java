@@ -38,6 +38,16 @@ public class Mind {
                 being.getNeeds().forEach(need ->
                         p.set(need.getName(), need.evaluate(p))));
 
+        if (being.getWorld().checkDebugMode(1)) {
+            System.out.println("perceptions of " + being.getName() + ": [");
+
+            for (Perception p : perceptions.values()) {
+                System.out.println("\t" + p);
+            }
+
+            System.out.println("]");
+        }
+
         // todo: try to merge perceptions
         // if many of same type then merge all with distance = centroid
 

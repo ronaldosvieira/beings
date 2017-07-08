@@ -217,8 +217,8 @@ public class Game {
                                     + " -> " + animal.getCurrentGoal())
                             .collect(Collectors.toList()));
 
-                if (window.getInput().isKeyPressed(GLFW_KEY_I)) {
-                    this.world.toggleDebugMode(0);
+                if (window.getInput().isKeyPressed(GLFW_KEY_1)) {
+                    this.world.toggleDebugMode(1);
                 }
 
 				handleInput((float) frameCap, window, camera, this.world);
