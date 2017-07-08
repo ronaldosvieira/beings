@@ -28,7 +28,8 @@ public class World {
 
 	private QuadTree quad;
 	private HashSet<Pair<Integer, Integer>> collisions;
-	
+	private int debug = 0;
+
 	public World() {
 		this.width = 64;
 		this.height = 64;
@@ -263,4 +264,12 @@ public class World {
 
 	public int getWidth() {return this.width;}
 	public int getHeight() {return this.height;}
+
+    public void toggleDebugMode(int mode) {
+        debug += (1 << mode) * (checkDebugMode(mode)? -1 : 1);
+    }
+
+    public boolean checkDebugMode(int mode) {
+	    return ((debug >>> mode) & 1) > 0;
+    }
 }

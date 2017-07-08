@@ -217,6 +217,10 @@ public class Game {
                                     + " -> " + animal.getCurrentGoal())
                             .collect(Collectors.toList()));
 
+                if (window.getInput().isKeyPressed(GLFW_KEY_I)) {
+                    this.world.toggleDebugMode(0);
+                }
+
 				handleInput((float) frameCap, window, camera, this.world);
 				
 				if (!paused) this.world.update((float) frameCap, window, camera);
