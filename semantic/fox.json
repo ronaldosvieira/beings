@@ -4,17 +4,6 @@
   "parent": {"ref": "mammal"},
   "slots": {
     "size": {"value": 2.0},
-    "diet": {"value": "carnivorous"},
-    "senses": {
-      "value": [
-        "sight",
-        "hearing",
-        "smell",
-        "touch"
-      ]
-    },
-    "traits": {
-      "value": ["loner"]
-    }
+    "diet": {"value": "carnivorous"}
   }
 }
