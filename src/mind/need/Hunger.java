@@ -5,8 +5,16 @@ import mind.goal.*;
 import mind.sense.Perception;
 
 public class Hunger extends Need {
+    private String diet;
+
     public Hunger(Animal animal, double decayPerMinute, double value) {
         super(animal, decayPerMinute, value);
+
+        diet = getAnimal().getSemantic().get("diet", String.class);
+
+        if (diet.equals("herbivorous")) diet = "plant";
+        else if (diet.equals("carnivorous")) diet = "animal";
+        else diet = "thing";
     }
 
     public Hunger(Animal animal, double decayRate) {
@@ -34,7 +42,7 @@ public class Hunger extends Need {
 
     @Override
     public double evaluate(Perception perception) {
-        return perception.isA("animal")
+        return perception.isA(diet)
                 && perception.get("size", Double.class)
                     < getAnimal().getSemantic().get("size", Double.class)?
                 1 : 0;
