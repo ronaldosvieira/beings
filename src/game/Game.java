@@ -221,6 +221,10 @@ public class Game {
                     this.world.toggleDebugMode(1);
                 }
 
+                if (window.getInput().isKeyPressed(GLFW_KEY_2)) {
+                	this.world.toggleDebugMode(2);
+				}
+
 				handleInput((float) frameCap, window, camera, this.world);
 				
 				if (!paused) this.world.update((float) frameCap, window, camera);

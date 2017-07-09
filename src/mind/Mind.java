@@ -84,7 +84,24 @@ public class Mind {
                 .limit(4)
                 .collect(Collectors.toList());
 
-//        System.out.println(being.getName() + being.getId() + ": " + workingMemory);
+//        System.out.println(being.getName() + being.getId() + ": " +
+
+        if (being.getWorld().checkDebugMode(2)) {
+            StringBuilder s = new StringBuilder("needs of ")
+                    .append(being.getName())
+                    .append(": [");
+
+            for (Need need : being.getNeeds()) {
+                s.append(" ")
+                        .append(need.getName())
+                        .append(": ")
+                        .append(need.getIntensity())
+                        .append(";");
+
+            }
+
+            System.out.println(s.append("]"));
+        }
 
         // find out which need demands most priority
         Need mostIntenseNeed = being.getNeeds().stream()
