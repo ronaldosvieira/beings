@@ -15,7 +15,7 @@ public class Fox extends Mammal {
 		this.addSense(new Sight.Builder(this).angle(120).range(25).build());
 		this.addSense(new Hearing.Builder(this).range(20).build());
 
-        this.addNeed(new Hunger(this, 1.0 / 5.0, 0.25));
+        this.addNeed(new Hunger(this, 1.0 / 5.0, 0.15));
         this.addNeed(new Safety(this));
 	}
 }

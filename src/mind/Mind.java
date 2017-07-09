@@ -93,8 +93,8 @@ public class Mind {
                     double sources = workingMemory.stream()
                             .mapToDouble(tP -> {
                                 double relevance = tP.get(n.getName(), Double.class);
-                                double distance = tP.get("distance", Vector2f.class)
-                                        .length() / 2;
+                                double distance = Math.log(tP.get("distance", Vector2f.class)
+                                        .length()) + 1;
 
                                 return relevance * (1d / distance);
                             })
