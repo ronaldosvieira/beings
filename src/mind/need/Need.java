@@ -27,10 +27,10 @@ public abstract class Need {
         value = Math.min(value + decayRate * delta, 1.0);
     }
 
-    public double getIntensity() {
+    public double getIntensity() {return value;/*
         double normalizedValue = 10 * (value - 0.5);
 
-        return (1 / (1 + Math.pow(Math.E,(-1 * normalizedValue))));
+        return (1 / (1 + Math.pow(Math.E,(-1 * normalizedValue))));*/
     }
 
     public abstract Goal getGoal();
