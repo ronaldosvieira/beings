@@ -141,9 +141,7 @@ public class Mind {
             if (!tavivo) System.out.println(being.getName() + " ta morto gente");
         //}
 
-        // executes current goal
         Goal currentGoal = being.getCurrentGoal();
-        currentGoal.cycle(workingMemory);
 
         // handles goal switching
         if (currentGoal.isCompleted()) {
@@ -170,5 +168,8 @@ public class Mind {
 
             preReqs = being.getCurrentGoal().preReqs();
         }
+
+        // executes current goal
+        being.getCurrentGoal().cycle(workingMemory);
     }
 }
