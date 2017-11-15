@@ -27,6 +27,10 @@ public abstract class Need {
         value = Math.min(value + decayRate * delta, 1.0);
     }
 
+    public void satisfy(double amount) {
+        this.value = Math.max(0d, Math.min(1d, value - amount));
+    }
+
     public double getIntensity() {return value;/*
         double normalizedValue = 10 * (value - 0.5);
 
