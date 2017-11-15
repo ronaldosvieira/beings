@@ -1,6 +1,7 @@
 package entity;
 
 import mind.need.Hunger;
+import mind.need.Reproduction;
 import mind.need.Safety;
 import mind.sense.Hearing;
 import mind.sense.Sight;
@@ -17,5 +18,6 @@ public class Rabbit extends Mammal {
 
 		this.addNeed(new Hunger(this, 1.0 / 5.0, 0.15));
 		this.addNeed(new Safety(this));
+		this.addNeed(new Reproduction(this, 1.0 / 10.0, 0.10));
 	}
 }
