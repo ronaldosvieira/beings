@@ -21,8 +21,17 @@ public class FindFood extends Explore {
 
         found = false;
 
+        /* otimizar isso */
+        String diet = getAnimal().getSemantic().get("diet", String.class);
+
+        if (diet.equals("herbivorous")) diet = "plant";
+        else if (diet.equals("carnivorous")) diet = "animal";
+        else diet = "thing";
+        final String finalDiet = diet;
+        /* */
+
         workingMemory.stream()
-                .filter(p -> p.isA("animal"))
+                .filter(p -> p.isA(finalDiet))
                 .filter(p -> p.get("size", Double.class)
                         < getAnimal().getSemantic().get("size", Double.class))
                 .sorted(Comparator.comparingDouble(
